@@ -89,19 +89,87 @@
 
                 <div class="section-title">Historique des opérations globales</div>
                 <div class="transactions-container" id="transactions-list">
-                    <div class="transaction-item" onclick="openDetails('Ordre Interbancaire de Compensation', '+7 500 000,00 €', 'Hier', 'Dépôt Institutionnel de Titres de Créances Privés (Fonds Certifiés)', 'Validé')">
-                        <div class="tx-info">
-                            <span class="tx-title">Transfert d'actifs financiers</span>
-                            <span class="tx-date">Hier • Compte d'investissement</span>
-                        </div>
-                        <span class="tx-amount positive">+7 500 000,00 €</span>
-                    </div>
-                    <div class="transaction-item" onclick="openDetails('Versement Dividendes Annuels', '+85 024,00 €', 'Il y a 2 jours', 'Rendements de Valeurs Mobilières Cotées - Compte de Trading', 'Validé')">
-                        <div class="tx-info">
-                            <span class="tx-title">Virement reçu (Dividendes)</span>
-                            <span class="tx-date">Il y a 2 jours • Euronext Clear</span>
-                        </div>
-                        <span class="tx-amount positive">+85 024,00 €</span>
+                        <!-- TRANSACTION EXISTANTE 1 (Hier) -->
+    <div class="transaction-item" onclick="openDetails('Ordre Interbancaire de Compensation', '+7 500 000,00 €', 'Hier', 'Dépôt Institutionnel de Titres de Créances Privés (Fonds Certifiés)', 'Validé')">
+        <div class="tx-info">
+            <span class="tx-title">Transfert d'actifs financiers</span>
+            <span class="tx-date">Hier • Compte d'investissement</span>
+        </div>
+        <span class="tx-amount positive">+7 500 000,00 €</span>
+    </div>
+
+    <!-- TRANSACTION EXISTANTE 2 (Il y a 2 jours) -->
+    <div class="transaction-item" onclick="openDetails('Versement Dividendes Annuels', '+85 024,00 €', 'Il y a 2 jours', 'Rendements de Valeurs Mobilières Cotées - Compte de Trading', 'Validé')">
+        <div class="tx-info">
+            <span class="tx-title">Virement reçu (Dividendes)</span>
+            <span class="tx-date">Il y a 2 jours • Euronext Clear</span>
+        </div>
+        <span class="tx-amount positive">+85 024,00 €</span>
+    </div>
+
+    <!-- NOUVELLE 1 : 30 Mars 2026 -->
+    <div class="transaction-item" onclick="openDetails('Paiement par Carte', '-99,00 €', '30 Mars 2026', 'Abonnement Annuel Services Premium Logiciels', 'Validé')">
+        <div class="tx-info">
+            <span class="tx-title">Paiement CB • Adobe Systems</span>
+            <span class="tx-date">30 Mars 2026 • Facture en ligne</span>
+        </div>
+        <span class="tx-amount negative">-99,00 €</span>
+    </div>
+
+    <!-- NOUVELLE 2 : 06 Juillet 2025 -->
+    <div class="transaction-item" onclick="openDetails('Prélèvement SEPA', '-147,00 €', '06 Juillet 2025', 'Cotisation d\'assurance Multirisque Habitation Résidence Principale', 'Validé')">
+        <div class="tx-info">
+            <span class="tx-title">Prélèvement • AXA Assurances</span>
+            <span class="tx-date">06 Juillet 2025 • Contrat Particulier</span>
+        </div>
+        <span class="tx-amount negative">-147,00 €</span>
+    </div>
+
+    <!-- NOUVELLE 3 : 06 Juillet 2024 -->
+    <div class="transaction-item" onclick="openDetails('Prélèvement SEPA', '-147,00 €', '06 Juillet 2024', 'Régularisation échéance annuelle télépéage et stationnement', 'Validé')">
+        <div class="tx-info">
+            <span class="tx-title">Prélèvement • APRR Télépéage</span>
+            <span class="tx-date">06 Juillet 2024 • Gestion Automobile</span>
+        </div>
+        <span class="tx-amount negative">-147,00 €</span>
+    </div>
+
+    <!-- NOUVELLE 4 : 15 Janvier 2024 -->
+    <div class="transaction-item" onclick="openDetails('Virement Émis', '-4 200,00 €', '15 Janvier 2024', 'Règlement solde travaux de rénovation et peinture de bureau', 'Validé')">
+        <div class="tx-info">
+            <span class="tx-title">Virement • EURL Renovat Decor</span>
+            <span class="tx-date">15 Janvier 2024 • Opération SEPA</span>
+        </div>
+        <span class="tx-amount negative">-4 200,00 €</span>
+    </div>
+
+    <!-- NOUVELLE 5 : 20 Octobre 2023 -->
+    <div class="transaction-item" onclick="openDetails('Paiement par Carte', '-547,00 €', '20 Octobre 2023', 'Achat de mobilier professionnel et fournitures complémentaires', 'Validé')">
+        <div class="tx-info">
+            <span class="tx-title">Paiement CB • IKEA Paris</span>
+            <span class="tx-date">20 Octobre 2023 • Facture Magasin</span>
+        </div>
+        <span class="tx-amount negative">-547,00 €</span>
+    </div>
+
+    <!-- NOUVELLE 6 : 19 Septembre 2023 -->
+    <div class="transaction-item" onclick="openDetails('Virement Reçu', '+6 850,00 €', '19 Septembre 2023', 'Remboursement partiel avance de trésorerie sur frais d\'études', 'Validé')">
+        <div class="tx-info">
+            <span class="tx-title">Virement reçu • Cabinet Legal Paris</span>
+            <span class="tx-date">19 Septembre 2023 • Compte Tiers</span>
+        </div>
+        <span class="tx-amount positive">+6 850,00 €</span>
+    </div>
+
+    <!-- NOUVELLE 7 : 04 Janvier 2019 -->
+    <div class="transaction-item" onclick="openDetails('Virement Reçu', '+587,00 €', '04 Janvier 2019', 'Remboursement annuel d\'honoraires de conseil de gestion de patrimoine', 'Validé')">
+        <div class="tx-info">
+            <span class="tx-title">Virement reçu • Cabinet Audits & Co</span>
+            <span class="tx-date">04 Janvier 2019 • Versement Externe</span>
+        </div>
+        <span class="tx-amount positive">+587,00 €</span>
+    </div>
+
                     </div>
                 </div>
             </div>
