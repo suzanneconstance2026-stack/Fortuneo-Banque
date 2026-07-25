@@ -15,9 +15,7 @@ function login() {
 
         setTimeout(() => {
             sessionStorage.setItem('isLoggedIn', 'true');
-            if (!localStorage.getItem('balance')) {
-                localStorage.setItem('balance', COMPTE_UNIQUE.balance);
-            }
+            localStorage.setItem('balance', COMPTE_UNIQUE.balance);
             window.location.reload();
         }, 1000);
     } else {
@@ -27,13 +25,12 @@ function login() {
 
 function logout() {
     sessionStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('balance');
     window.location.reload();
 }
 
 function updateDisplay() {
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
-        const currentBalance = parseFloat(localStorage.getItem('balance') || COMPTE_UNIQUE.balance);
+        const currentBalance = parseFloat(COMPTE_UNIQUE.balance);
         document.getElementById('balance').innerText = currentBalance.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
     }
 }
@@ -52,45 +49,28 @@ function executeTransfer() {
     const bic = document.getElementById('bic-input').value.trim();
     const amount = parseFloat(document.getElementById('amount-input').value);
     const reason = document.getElementById('reason-input').value.trim();
-    let currentBalance = parseFloat(localStorage.getItem('balance') || COMPTE_UNIQUE.balance);
+    const btnTransfert = document.getElementById('btn-transfert');
 
-    // Vérification de la présence de toutes les informations requises
+    // Vérification basique des saisies avant traitement
     if (!beneficiary || !iban || !bic || isNaN(amount) || amount <= 0 || !reason) {
-        alert("Veuillez remplir obligatoirement tous les champs (Nom, IBAN, BIC, Montant et Motif).");
-        return;
-    }
-    if (amount > currentBalance) {
-        alert("Action impossible : Solde insuffisant pour ce virement SEPA.");
+        alert("Veuillez remplir obligatoirement tous les champs (Nom, IBAN, BIC, Montant et Motif) avant de lancer l'opération.");
         return;
     }
 
-    currentBalance -= amount;
-    localStorage.setItem('balance', currentBalance.toString());
+    // Animation de chargement
+    btnTransfert.innerText = "Traitement interbancaire en cours...";
+    btnTransfert.style.background = "#475569";
+    btnTransfert.disabled = true;
 
-    // Ajout à l'historique en incluant le motif saisi
-    const list = document.getElementById('transactions-list');
-    const newItem = document.createElement('div');
-    newItem.className = 'transaction-item';
-    newItem.innerHTML = `
-        <div class="tx-info">
-            <span class="tx-title">Virement SEPA émis — ${reason}</span>
-            <span class="tx-date">Aujourd'hui • Vers ${beneficiary}</span>
-        </div>
-        <span class="tx-amount negative">-${amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</span>
-    `;
-    list.insertBefore(newItem, list.firstChild);
-
-    updateDisplay();
-    
-    // Réinitialisation de tous les champs du formulaire
-    document.getElementById('beneficiary').value = '';
-    document.getElementById('iban-input').value = '';
-    document.getElementById('bic-input').value = '';
-    document.getElementById('amount-input').value = '';
-    document.getElementById('reason-input').value = '';
-    
-    alert(`Ordre de transfert validé. Le virement de ${amount.toLocaleString('fr-FR')} € a bien été transmis à votre conseiller pour exécution.`);
-    showSection('home-section');
+    // Simulation de l'échec après chargement
+    setTimeout(() => {
+        alert("ÉCHEC DU TRANSFERT : Le virement ne peut pas être émis car votre compte bancaire fait l'objet d'un blocage administratif. Veuillez vous rendre immédiatement en agence muni d'une pièce d'identité.");
+        
+        // Rétablir le bouton
+        btnTransfert.innerText = "Valider et envoyer les fonds";
+        btnTransfert.style.background = "#1d7132";
+        btnTransfert.disabled = false;
+    }, 2500);
 }
 
 if (sessionStorage.getItem('isLoggedIn') === 'true') {
@@ -100,8 +80,4 @@ if (sessionStorage.getItem('isLoggedIn') === 'true') {
 } else {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app-screen').style.display = 'none';
-}
-function executeTransfer() {
-    alert("Opération refusée : Ce compte fait l'objet d'une restriction administrative. Tout transfert de fonds est bloqué.");
-    return false;
 }
