@@ -43,7 +43,7 @@
     <!-- INTERFACE BANQUE RÉELLE BLOQUÉE -->
     <div class="app-container" id="app-screen" style="display: none;">
         
-        <!-- Barre supérieure de l'application avec Identification Claire -->
+        <!-- Barre supérieure de l'application -->
         <header class="app-header" style="background: #fff5f5; border-bottom: 2px solid #fecaca;">
             <div class="header-user">
                 <div class="avatar" style="background: #dc2626; color: white;">EG</div>
@@ -55,7 +55,7 @@
             <button onclick="logout()" class="btn-logout-icon">Déconnexion</button>
         </header>
 
-        <!-- BANDEAU DE BLOCAGE CRUCIAL -->
+        <!-- BANDEAU DE BLOCAGE GENERAL -->
         <div class="alert-blocked-bar">
             <span class="alert-icon">⚠️</span>
             <div>
@@ -102,39 +102,39 @@
                 </div>
             </div>
 
-            <!-- SECTION 2 : VIREMENTS (DÉSACTIVÉ) -->
+            <!-- SECTION 2 : VIREMENTS ACTIFS MAIS REJETÉS APRÈS CHARGEMENT -->
             <div id="transfer-section" class="app-section">
-                <div class="section-title" style="color: #dc2626;">Émettre un virement (Désactivé)</div>
-                <div class="form-card" style="opacity: 0.6; background: #f8fafc;">
+                <div class="section-title">Émettre un virement SEPA / International</div>
+                <div class="form-card">
                     <div class="form-field">
                         <label>Compte à débiter</label>
-                        <select disabled><option>Compte Courant (*094) - BLOQUÉ</option></select>
+                        <select disabled><option>Compte Courant Premium (*094) - 7 585 024,00 €</option></select>
                     </div>
                     <div class="form-field">
                         <label>Nom du bénéficiaire</label>
-                        <input type="text" disabled placeholder="Saisie impossible...">
+                        <input type="text" id="beneficiary" placeholder="Ex: Cabinet Jean Dupont">
                     </div>
                     <div class="form-field">
                         <label>IBAN</label>
-                        <input type="text" disabled placeholder="Saisie impossible...">
+                        <input type="text" id="iban-input" placeholder="FR76 0000 0000 0000 0000 0000 000">
                     </div>
                     <div class="form-field">
                         <label>BIC / SWIFT</label>
-                        <input type="text" disabled placeholder="Saisie impossible...">
+                        <input type="text" id="bic-input" placeholder="Ex: BARCFRPPXXX">
                     </div>
                     <div class="form-field">
                         <label>Montant (€)</label>
-                        <input type="number" disabled placeholder="0.00">
+                        <input type="number" id="amount-input" placeholder="0.00">
                     </div>
                     <div class="form-field">
                         <label>Motif du virement</label>
-                        <input type="text" disabled placeholder="Saisie impossible...">
+                        <input type="text" id="reason-input" placeholder="Ex: Facture, Prestation...">
                     </div>
-                    <button class="btn-action" style="background: #64748b; cursor: not-allowed;" disabled onclick="return false;">Virement impossible (Compte restreint)</button>
+                    <button class="btn-action" id="btn-transfert" onclick="executeTransfer()">Valider et envoyer les fonds</button>
                 </div>
             </div>
 
-            <!-- SECTION 3 : CARTES BANCAIRES (DÉSACTIVÉE) -->
+            <!-- SECTION 3 : CARTES BANCAIRES -->
             <div id="card-section" class="app-section">
                 <div class="section-title">Vos moyens de paiement</div>
                 <div class="credit-card-ui" style="background: linear-gradient(135deg, #334155, #475569); filter: grayscale(100%);">
