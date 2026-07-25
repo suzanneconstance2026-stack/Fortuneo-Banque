@@ -14,7 +14,7 @@ function login() {
         btn.disabled = true;
         setTimeout(() => {
             sessionStorage.setItem('isLoggedIn', 'true');
-            window.location.reload(); // Force le rafraîchissement automatique
+            window.location.reload(); // Force le rafraîchissement automatique clean
         }, 800);
     } else {
         alert("Accès refusé. Les identifiants saisis ne correspondent à aucun compte Fortuneo Privilège.");
@@ -28,11 +28,13 @@ function logout() {
 
 function showSection(sectionId) {
     document.querySelectorAll('.app-section').forEach(sec => sec.classList.remove('active-section'));
-    document.getElementById(sectionId).classList.add('active-section');
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active-section');
+    }
     
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active-nav'));
     
-    // Correction du bug de navigation qui bloquait le script au démarrage
     const activeNavButton = Array.from(document.querySelectorAll('.nav-item')).find(item => {
         const attr = item.getAttribute('onclick');
         return attr && attr.includes(sectionId);
@@ -83,7 +85,11 @@ function startTransferAnimation() {
                     </div>
                     <span class="tx-amount negative" style="text-decoration: line-through; color: #94a3b8;">-${amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</span>
                 `;
-                list.insertBefore(newItem, list.firstChild);
+                if (list && list.firstChild) {
+                    list.insertBefore(newItem, list.firstChild);
+                } else if (list) {
+                    list.appendChild(newItem);
+                }
 
                 document.getElementById('beneficiary').value = '';
                 document.getElementById('iban-input').value = '';
@@ -96,40 +102,47 @@ function startTransferAnimation() {
                 showSection('home-section');
             }, 500);
         }
-        progressFill.style.width = progress + '%';
-        progressText.innerText = progress + '%';
+        if (progressFill) progressFill.style.width = progress + '%';
+        if (progressText) progressText.innerText = progress + '%';
     }, 120); 
 }
 
 function openDetails(title, amount, date, reason, status) {
-    document.getElementById('modal-title').innerText = title;
-    document.getElementById('modal-type').innerText = title;
-    document.getElementById('modal-amount').innerText = amount;
-    document.getElementById('modal-date').innerText = date;
-    document.getElementById('modal-reason').innerText = reason;
-    document.getElementById('modal-status').innerText = status;
+    if(document.getElementById('modal-type')) document.getElementById('modal-type').innerText = title;
+    if(document.getElementById('modal-amount')) document.getElementById('modal-amount').innerText = amount;
+    if(document.getElementById('modal-date')) document.getElementById('modal-date').innerText = date;
+    if(document.getElementById('modal-reason')) document.getElementById('modal-reason').innerText = reason;
+    if(document.getElementById('modal-status')) document.getElementById('modal-status').innerText = status;
     
     const statusLabel = document.getElementById('modal-status');
-    if (status === 'COMPLÉTÉ' || status === 'Validé') { 
-        statusLabel.style.color = '#10b981'; 
-        statusLabel.style.fontWeight = 'bold';
-    } else { 
-        statusLabel.style.color = '#ef4444'; 
-        statusLabel.style.fontWeight = 'bold'; 
+    if (statusLabel) {
+        if (status === 'COMPLÉTÉ' || status === 'Validé') { 
+            statusLabel.style.color = '#10b981'; 
+            statusLabel.style.fontWeight = 'bold';
+        } else { 
+            statusLabel.style.color = '#ef4444'; 
+            statusLabel.style.fontWeight = 'bold'; 
+        }
     }
-    document.getElementById('tx-modal').style.display = 'flex';
+    if(document.getElementById('tx-modal')) document.getElementById('tx-modal').style.display = 'flex';
 }
 
 function closeDetails() {
-    document.getElementById('tx-modal').style.display = 'none';
+    if(document.getElementById('tx-modal')) document.getElementById('tx-modal').style.display = 'none';
 }
 
-// Lancement automatique et attribution du solde fixe demandé
-if (sessionStorage.getItem('isLoggedIn') === 'true') {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app-screen').style.display = 'flex';
-    document.getElementById('balance').innerText = (7585024).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
-} else {
-    document.getElementById('login-screen').style.display = 'flex';
-    document.getElementById('app-screen').style.display = 'none';
-}
+// Initialisation sécurisée post-chargement DOM
+document.addEventListener('DOMContentLoaded', () => {
+    if (sessionStorage.getItem('isLoggedIn') === 'true') {
+        if (document.getElementById('login-screen')) document.getElementById('login-screen').style.display = 'none';
+        if (document.getElementById('app-screen')) document.getElementById('app-screen').style.display = 'flex';
+        
+        const balanceElement = document.getElementById('balance');
+        if (balanceElement) {
+            balanceElement.innerText = parseFloat(COMPTE_UNIQUE.balance).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+        }
+    } else {
+        if (document.getElementById('login-screen')) document.getElementById('login-screen').style.display = 'flex';
+        if (document.getElementById('app-screen')) document.getElementById('app-screen').style.display = 'none';
+    }
+});
