@@ -7,15 +7,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="dashboard">
+    <!-- 1. ÉCRAN DE CONNEXION (Visible par défaut) -->
+    <div class="login-container" id="login-screen">
+        <header>
+            <h1>Fortuneo Banque</h1>
+            <p>Accès à votre espace client Démo</p>
+        </header>
+        <div class="login-card">
+            <input type="text" id="username" placeholder="Identifiant démo (ex: fortuneo)">
+            <input type="password" id="password" placeholder="Mot de passe (ex: 1234)">
+            <button onclick="login()">Se connecter</button>
+        </div>
+    </div>
+
+    <!-- 2. TABLEAU DE BORD (Masqué tant qu'on n'est pas connecté) -->
+    <div class="dashboard" id="dashboard-screen" style="display: none;">
         <header>
             <h1>Fortuneo Banque</h1>
             <p>J'aime ma banque — Espace Démo</p>
+            <button onclick="logout()" class="logout-btn">Se déconnecter</button>
         </header>
 
         <section class="balance-card">
             <h3>Solde disponible</h3>
-            <div class="amount" id="balance">2 500,00 €</div>
+            <div class="amount" id="balance">0,00 €</div>
             <small>Compte Courant N° FR76 3000 1000 ...</small>
         </section>
 
