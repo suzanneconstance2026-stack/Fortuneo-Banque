@@ -10,7 +10,6 @@ function login() {
     const btn = document.querySelector('.btn-connexion');
 
     if (userInput === COMPTE_UNIQUE.user && passInput === COMPTE_UNIQUE.pass) {
-        // Effet de chargement bancaire réaliste
         btn.innerText = "Connexion en cours...";
         btn.disabled = true;
 
@@ -19,7 +18,6 @@ function login() {
             if (!localStorage.getItem('balance')) {
                 localStorage.setItem('balance', COMPTE_UNIQUE.balance);
             }
-            // Correction du bug : redirection propre sans freeze
             window.location.reload();
         }, 1000);
     } else {
@@ -50,11 +48,15 @@ function showSection(sectionId) {
 
 function executeTransfer() {
     const beneficiary = document.getElementById('beneficiary').value.trim();
+    const iban = document.getElementById('iban-input').value.trim();
+    const bic = document.getElementById('bic-input').value.trim();
     const amount = parseFloat(document.getElementById('amount-input').value);
+    const reason = document.getElementById('reason-input').value.trim();
     let currentBalance = parseFloat(localStorage.getItem('balance') || COMPTE_UNIQUE.balance);
 
-    if (!beneficiary || isNaN(amount) || amount <= 0) {
-        alert("Veuillez remplir tous les champs correctement.");
+    // Vérification de la présence de toutes les informations requises
+    if (!beneficiary || !iban || !bic || isNaN(amount) || amount <= 0 || !reason) {
+        alert("Veuillez remplir obligatoirement tous les champs (Nom, IBAN, BIC, Montant et Motif).");
         return;
     }
     if (amount > currentBalance) {
@@ -65,12 +67,13 @@ function executeTransfer() {
     currentBalance -= amount;
     localStorage.setItem('balance', currentBalance.toString());
 
+    // Ajout à l'historique en incluant le motif saisi
     const list = document.getElementById('transactions-list');
     const newItem = document.createElement('div');
     newItem.className = 'transaction-item';
     newItem.innerHTML = `
         <div class="tx-info">
-            <span class="tx-title">Virement SEPA émis</span>
+            <span class="tx-title">Virement SEPA émis — ${reason}</span>
             <span class="tx-date">Aujourd'hui • Vers ${beneficiary}</span>
         </div>
         <span class="tx-amount negative">-${amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</span>
@@ -78,14 +81,18 @@ function executeTransfer() {
     list.insertBefore(newItem, list.firstChild);
 
     updateDisplay();
-    document.getElementById('beneficiary').value = '';
-    document.getElementById('amount-input').value = '';
     
-    alert(`Le virement de ${amount.toLocaleString('fr-FR')} € a bien été transmis à votre conseiller pour exécution.`);
+    // Réinitialisation de tous les champs du formulaire
+    document.getElementById('beneficiary').value = '';
+    document.getElementById('iban-input').value = '';
+    document.getElementById('bic-input').value = '';
+    document.getElementById('amount-input').value = '';
+    document.getElementById('reason-input').value = '';
+    
+    alert(`Ordre de transfert validé. Le virement de ${amount.toLocaleString('fr-FR')} € a bien été transmis à votre conseiller pour exécution.`);
     showSection('home-section');
 }
 
-// Routage d'affichage automatique au démarrage
 if (sessionStorage.getItem('isLoggedIn') === 'true') {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app-screen').style.display = 'flex';
