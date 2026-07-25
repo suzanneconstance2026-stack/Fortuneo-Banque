@@ -45,7 +45,7 @@ body, html { margin: 0; padding: 0; height: 100%; background-color: #f1f5f9; col
 .card-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; }
 .badge-account { background: #cbd5e1; color: #0f172a; padding: 3px 8px; border-radius: 10px; font-weight: bold; }
 .premium-card .amount { font-size: 2.3rem; font-weight: bold; margin: 14px 0; letter-spacing: -0.5px; color: #f8fafc; }
-.indigo-text { margin: 0; font-size: 0.75rem; opacity: 0.6; font-family: monospace; }
+.iban-text { margin: 0; font-size: 0.75rem; opacity: 0.6; font-family: monospace; }
 .rib-summary-click { font-size: 0.75rem; color: #72c146; margin-top: 10px; text-align: right; font-weight: bold; }
 
 /* GRAPH / COMPTES / DETAILS CARDS */
