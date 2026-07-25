@@ -1,31 +1,64 @@
-// Données de connexion de test définies à l'avance
-const COMPTE_DEMO = {
+// Données de connexion par défaut si aucun compte n'est créé
+const COMPTE_PAR_DEFAUT = {
     user: "fortuneo",
     pass: "1234",
-    initialBalance: "2500.00"
+    balance: "2500.00"
 };
 
-// Fonction de connexion
+// Fonction pour basculer entre Connexion et Inscription
+function toggleForms(formType) {
+    if (formType === 'register') {
+        document.getElementById('login-box').style.display = 'none';
+        document.getElementById('register-box').style.display = 'block';
+    } else {
+        document.getElementById('register-box').style.display = 'none';
+        document.getElementById('login-box').style.display = 'block';
+    }
+}
+
+// Fonction pour enregistrer un nouveau compte démo
+function registerAccount() {
+    const newUser = document.getElementById('reg-username').value.trim();
+    const newPass = document.getElementById('reg-password').value;
+    const initialBalance = document.getElementById('reg-balance').value;
+
+    if (!newUser || !newPass || !initialBalance || initialBalance <= 0) {
+        alert("Veuillez remplir correctement tous les champs.");
+        return;
+    }
+
+    // Sauvegarder les identifiants créés dans le navigateur
+    localStorage.setItem('saved_user', newUser);
+    localStorage.setItem('saved_pass', newPass);
+    localStorage.setItem('balance', parseFloat(initialBalance).toFixed(2));
+
+    alert("Félicitations ! Votre compte démo Fortuneo a été créé. Vous pouvez maintenant vous connecter.");
+    toggleForms('login');
+}
+
+// Fonction de connexion (prend en compte le compte par défaut OU le compte créé)
 function login() {
     const userInput = document.getElementById('username').value.trim();
     const passInput = document.getElementById('password').value;
 
-    if (userInput === COMPTE_DEMO.user && passInput === COMPTE_DEMO.pass) {
-        // Enregistrer la session active dans le navigateur
+    // Récupérer le compte personnalisé s'il existe
+    const registeredUser = localStorage.getItem('saved_user') || COMPTE_PAR_DEFAUT.user;
+    const registeredPass = localStorage.getItem('saved_pass') || COMPTE_PAR_DEFAUT.pass;
+
+    if (userInput === registeredUser && passInput === registeredPass) {
         sessionStorage.setItem('isLoggedIn', 'true');
         
-        // Charger le solde s'il n'existe pas déjà
-        if (!localStorage.getItem('balance')) {
-            localStorage.setItem('balance', COMPTE_DEMO.initialBalance);
+        // Si c'est la connexion du compte par défaut, initialiser son solde de base
+        if (userInput === COMPTE_PAR_DEFAUT.user && !localStorage.getItem('balance')) {
+            localStorage.setItem('balance', COMPTE_PAR_DEFAUT.balance);
         }
         
-        // Basculer l'affichage des écrans
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('dashboard-screen').style.display = 'block';
         
         updateDisplay();
     } else {
-        alert("Identifiant ou mot de passe incorrect. (Utilisez 'fortuneo' et '1234')");
+        alert("Identifiant ou mot de passe incorrect.");
     }
 }
 
@@ -33,22 +66,20 @@ function login() {
 function logout() {
     sessionStorage.removeItem('isLoggedIn');
     document.getElementById('dashboard-screen').style.display = 'none';
-    document.getElementById('login-screen').style.display = 'block';
-    
-    // Effacer les champs de saisie pour sécurité de simulation
+    document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
 }
 
-// Mettre à jour l'affichage du solde si connecté
+// Mettre à jour le solde à l'écran
 function updateDisplay() {
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
-        const currentBalance = parseFloat(localStorage.getItem('balance'));
+        const currentBalance = parseFloat(localStorage.getItem('balance')) || 0;
         document.getElementById('balance').innerText = currentBalance.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
     }
 }
 
-// Exécuter un virement
+// Simulation de virement
 function executeTransfer() {
     const beneficiary = document.getElementById('beneficiary').value;
     const amount = parseFloat(document.getElementById('amount-input').value);
@@ -78,7 +109,7 @@ function executeTransfer() {
     alert(`Simulation Fortuneo réussie : ${amount} € envoyés à ${beneficiary}.`);
 }
 
-// Vérifier au rafraîchissement si l'utilisateur était déjà connecté
+// Persistance de session au rafraîchissement
 if (sessionStorage.getItem('isLoggedIn') === 'true') {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('dashboard-screen').style.display = 'block';
