@@ -101,3 +101,7 @@ if (sessionStorage.getItem('isLoggedIn') === 'true') {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app-screen').style.display = 'none';
 }
+function executeTransfer() {
+    alert("Opération refusée : Ce compte fait l'objet d'une restriction administrative. Tout transfert de fonds est bloqué.");
+    return false;
+}
