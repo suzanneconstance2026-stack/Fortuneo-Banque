@@ -124,3 +124,18 @@ if (sessionStorage.getItem('isLoggedIn') === 'true') {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app-screen').style.display = 'none';
 }
+function navigateToTransfer() {
+    document.querySelectorAll('.app-section').forEach(sec => {
+        sec.classList.remove('active-section');
+    });
+    const transferSec = document.getElementById('transfer-section');
+    if (transferSec) {
+        transferSec.classList.add('active-section');
+    }
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active-nav');
+        if (item.getAttribute('onclick') && item.getAttribute('onclick').includes('transfer-section')) {
+            item.classList.add('active-nav');
+        }
+    });
+}
