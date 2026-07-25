@@ -46,10 +46,10 @@
         <!-- Barre supérieure de l'application -->
         <header class="app-header">
             <div class="header-user">
-                <div class="avatar">EC</div>
+                <div class="avatar">EG</div>
                 <div>
                     <p class="user-greeting">Bonjour,</p>
-                    <p class="user-status">Espace Client Certifié VIP</p>
+                    <p class="user-status">Edmond Garnier</p>
                 </div>
             </div>
             <button onclick="logout()" class="btn-logout-icon">Déconnexion</button>
@@ -58,7 +58,7 @@
         <!-- CONTENU DYNAMIQUE -->
         <main class="app-main">
             
-            <!-- SECTION 1 : ACCUEIL & COMPTES (Active par défaut) -->
+            <!-- SECTION 1 : ACCUEIL & COMPTES -->
             <div id="home-section" class="app-section active-section">
                 <div class="section-title">Synthèse de vos avoirs</div>
                 
@@ -68,7 +68,10 @@
                         <span class="account-number">N° FR76 1180...094</span>
                     </div>
                     <div class="amount" id="balance">7 585 024,00 €</div>
-                    <p class="iban-text"><strong>IBAN :</strong> FR76 1180 6000 2001 9845 3321 094</p>
+                    <div style="margin-top: 15px; font-size: 0.8rem; opacity: 0.8; line-height: 1.4;">
+                        <strong>IBAN :</strong> FR76 1180 6000 2001 9845 3321 094<br>
+                        <strong>Titulaire :</strong> M. Edmond Garnier
+                    </div>
                 </div>
 
                 <div class="section-title">Dernières opérations</div>
@@ -90,21 +93,33 @@
                 </div>
             </div>
 
-            <!-- SECTION 2 : VIREMENTS -->
+            <!-- SECTION 2 : VIREMENTS AVEC NOUVEAUX CHAMPS -->
             <div id="transfer-section" class="app-section">
-                <div class="section-title">Émettre un virement SEPA</div>
+                <div class="section-title">Émettre un virement SEPA / International</div>
                 <div class="form-card">
                     <div class="form-field">
                         <label>Compte à débiter</label>
                         <select disabled><option>Compte Courant Premium (*094) - 7 585 024,00 €</option></select>
                     </div>
                     <div class="form-field">
-                        <label>Bénéficiaire (Nom ou IBAN)</label>
-                        <input type="text" id="beneficiary" placeholder="Ex: Jean Dupont ou FR76...">
+                        <label>Nom du bénéficiaire</label>
+                        <input type="text" id="beneficiary" placeholder="Ex: Cabinet Jean Dupont">
                     </div>
                     <div class="form-field">
-                        <label>Montant du virement (€)</label>
+                        <label>IBAN</label>
+                        <input type="text" id="iban-input" placeholder="FR76 0000 0000 0000 0000 0000 000">
+                    </div>
+                    <div class="form-field">
+                        <label>BIC / SWIFT</label>
+                        <input type="text" id="bic-input" placeholder="Ex: BARCFRPPXXX">
+                    </div>
+                    <div class="form-field">
+                        <label>Montant (€)</label>
                         <input type="number" id="amount-input" placeholder="0.00">
+                    </div>
+                    <div class="form-field">
+                        <label>Motif du virement</label>
+                        <input type="text" id="reason-input" placeholder="Ex: Facture, Prestation, Cadeau...">
                     </div>
                     <button class="btn-action" onclick="executeTransfer()">Valider et envoyer les fonds</button>
                 </div>
@@ -120,7 +135,7 @@
                     <div class="cc-footer">
                         <div>
                             <span class="cc-label">TITULAIRE</span>
-                            <span class="cc-value">ESPACE CERTIFIE</span>
+                            <span class="cc-value">EDMOND GARNIER</span>
                         </div>
                         <span class="cc-type">Mastercard Gold</span>
                     </div>
