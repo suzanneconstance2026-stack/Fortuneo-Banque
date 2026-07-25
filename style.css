@@ -16,3 +16,30 @@ li { display: flex; justify-content: space-between; padding: 12px 0; border-bott
 li:last-child { border: none; }
 .positive { color: #00cc66; font-weight: bold; }
 .negative { color: #ff3333; font-weight: bold; }
+/* Styles pour l'écran de connexion initial */
+.login-container { 
+    max-width: 400px; 
+    margin: 60px auto; 
+    padding: 20px; 
+    text-align: center; 
+}
+
+.login-card { 
+    background: white; 
+    padding: 30px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+}
+
+/* Bouton de déconnexion dans le tableau de bord */
+.logout-btn { 
+    background: #ff3333 !important; 
+    width: auto !important; 
+    padding: 6px 12px !important; 
+    font-size: 0.8rem !important; 
+    margin-top: 10px; 
+}
+
+.logout-btn:hover { 
+    background: #cc0000 !important; 
+}
