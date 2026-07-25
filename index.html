@@ -7,21 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- L'ÉCRAN DE CONNEXION PRINCIPAL REPRODUIT -->
+    <!-- L'ÉCRAN PRINCIPAL -->
     <div class="login-wrapper" id="login-screen">
-        <!-- Colonne Gauche : Image et message de bienvenue -->
+        <!-- Colonne Gauche : Message de bienvenue -->
         <div class="left-banner">
             <div class="banner-content">
                 <h1>Bienvenue<br>dans votre<br>espace client.</h1>
             </div>
         </div>
 
-        <!-- Colonne Droite : Formulaire officiel -->
+        <!-- Colonne Droite : Formulaires -->
         <div class="right-form-container">
-            <div class="form-box">
-                <!-- Logo officiel Fortuneo fonctionnel -->
-                <img src="https://githubusercontent.com" alt="Fortuneo Banque" class="main-logo" id="logo-pictogramme" style="display:none;">
-                <h2 style="color: #72c146; font-weight: bold; margin-bottom: 5px; font-size: 2.2rem;">fortuneo</h2>
+            
+            <!-- FORMULAIRE DE CONNEXION (Visible par défaut) -->
+            <div class="form-box" id="login-box">
+                <h2 style="color: #72c146; font-weight: bold; margin-bottom: 5px; font-size: 2.2rem; font-family: sans-serif;">fortuneo</h2>
                 <p style="color: #1a3b1e; font-weight: bold; margin: 0 0 30px 0; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">banque</p>
                 
                 <h2>Saisissez votre identifiant et mot de passe</h2>
@@ -42,6 +42,35 @@
                 </div>
 
                 <button class="btn-connexion" onclick="login()">Connexion</button>
+                
+                <p class="switch-form-text">Nouveau client ? <a href="#" onclick="toggleForms('register')">Créer un compte démo</a></p>
+            </div>
+
+            <!-- FORMULAIRE DE CRÉATION DE COMPTE (Masqué par défaut) -->
+            <div class="form-box" id="register-box" style="display: none;">
+                <h2 style="color: #72c146; font-weight: bold; margin-bottom: 5px; font-size: 2.2rem; font-family: sans-serif;">fortuneo</h2>
+                <p style="color: #1a3b1e; font-weight: bold; margin: 0 0 30px 0; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">banque</p>
+                
+                <h2>Devenir client Démo Fortuneo</h2>
+                
+                <div class="input-group">
+                    <label for="reg-username">Choisissez un Identifiant</label>
+                    <input type="text" id="reg-username" placeholder="Ex: mon_pseudo">
+                </div>
+                
+                <div class="input-group">
+                    <label for="reg-password">Choisissez un Mot de passe</label>
+                    <input type="password" id="reg-password" placeholder="••••••••••••">
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-balance">Dépôt initial fictif (€)</label>
+                    <input type="number" id="reg-balance" value="1500" placeholder="Ex: 1500">
+                </div>
+
+                <button class="btn-connexion" style="background-color: #1a3b1e; color: white; margin-top: 15px;" onclick="registerAccount()">Créer mon compte bancaire</button>
+                
+                <p class="switch-form-text">Déjà un compte ? <a href="#" onclick="toggleForms('login')">Retour à la connexion</a></p>
             </div>
         </div>
     </div>
