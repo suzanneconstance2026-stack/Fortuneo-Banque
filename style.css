@@ -1,71 +1,97 @@
-/* Styles Généraux */
-* { box-sizing: border-box; font-family: Arial, sans-serif; }
-body, html { margin: 0; padding: 0; height: 100%; background-color: #f7f7f7; }
+/* Reset global */
+* { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body, html { margin: 0; padding: 0; height: 100%; background-color: #f4f6f8; color: #1a1a1a; overflow-x: hidden; }
 
-/* Conteneur Plein Écran */
+/* --- INTERFACE DE CONNEXION --- */
 .login-wrapper { display: flex; height: 100vh; width: 100vw; }
-
-/* Colonne Gauche - Bannière avec la vraie image Fortuneo de fond */
 .left-banner {
-    flex: 1;
-    background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url('https://unsplash.com') no-repeat center center;
-    background-size: cover;
-    display: flex;
-    align-items: flex-end;
-    padding: 60px;
+    flex: 12;
+    background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('https://unsplash.com') no-repeat center center;
+    background-size: cover; display: flex; align-items: flex-end; padding: 60px;
 }
-.banner-content h1 { color: white; font-size: 3.5rem; font-weight: bold; line-height: 1.2; margin: 0; }
-
-/* Colonne Droite - Formulaire */
-.right-form-container { flex: 1; display: flex; align-items: center; justify-content: center; background: white; padding: 40px; }
-.form-box { max-width: 420px; width: 100%; }
-.form-box h2 { font-size: 1.8rem; font-weight: normal; color: #333; margin-bottom: 30px; line-height: 1.3; }
-
-/* Champs de Saisie stylisés */
-.input-group { background: #f0f0f2; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
-.input-group label { display: block; font-size: 0.8rem; color: #666; margin-bottom: 2px; }
-.input-group input { border: none; background: transparent; width: 100%; font-size: 1.1rem; color: #333; outline: none; padding: 4px 0; }
-
-/* Case à cocher */
-.remember-me { display: flex; align-items: center; margin: 20px 0 30px 0; }
-.remember-me input { margin-right: 10px; width: 18px; height: 18px; cursor: pointer; }
-.remember-me label { color: #333; font-size: 0.95rem; cursor: pointer; }
-
-/* Bouton Vert Fortuneo */
+.banner-content h1 { color: white; font-size: 3.5rem; font-weight: 700; line-height: 1.2; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+.right-form-container { flex: 10; display: flex; align-items: center; justify-content: center; background: white; padding: 40px; }
+.form-box { max-width: 380px; width: 100%; }
+.brand-logo-text { font-size: 2.4rem; font-weight: 800; color: #72c146; margin: 0 0 5px 0; letter-spacing: -1px; }
+.brand-logo-text span { font-size: 0.9rem; text-transform: uppercase; color: #144f23; letter-spacing: 2px; font-weight: 700; display: block; margin-top: -5px; }
+.form-box h3 { font-size: 1.2rem; font-weight: 400; color: #666; margin-bottom: 30px; line-height: 1.4; }
+.input-group { background: #f5f5f7; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; border: 1px solid transparent; transition: 0.2s; }
+.input-group:focus-within { border-color: #72c146; background: white; box-shadow: 0 0 0 3px rgba(114, 193, 70, 0.15); }
+.input-group label { display: block; font-size: 0.75rem; color: #777; font-weight: 600; text-transform: uppercase; margin-bottom: 4px; }
+.input-group input { border: none; background: transparent; width: 100%; font-size: 1.1rem; color: #1a1a1a; outline: none; }
+.remember-me { display: flex; align-items: center; margin: 24px 0; }
+.remember-me input { width: 18px; height: 18px; margin-right: 10px; cursor: pointer; accent-color: #72c146; }
+.remember-me label { font-size: 0.9rem; color: #444; cursor: pointer; }
 .btn-connexion {
-    width: 100%;
-    background-color: #72c146;
-    color: white;
-    border: none;
-    padding: 16px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: background 0.2s;
+    width: 100%; background-color: #72c146; color: white; border: none; padding: 16px;
+    font-size: 1.05rem; font-weight: 700; border-radius: 30px; cursor: pointer; transition: 0.2s;
 }
-.btn-connexion:hover { background-color: #61ab39; }
+.btn-connexion:hover { background-color: #5fa538; }
 
-/* Mode Mobile */
-@media (max-width: 900px) {
-    .login-wrapper { flex-direction: column; }
-    .left-banner { display: none; }
-    .right-form-container { height: 100vh; }
-}
+/* Responsive Mobile Connexion */
+@media (max-width: 900px) { .left-banner { display: none; } .right-form-container { flex: 1; } }
 
-/* Tableau de bord intérieur */
-.dashboard { max-width: 500px; margin: 40px auto; padding: 20px; }
-.dashboard header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.balance-card { background: linear-gradient(135deg, #1d7132, #144f23); color: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; }
-.amount { font-size: 2.2rem; font-weight: bold; margin-top: 10px; }
-.transfer-box, .history { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
-.transfer-box input { display: block; width: 100%; margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 6px; }
-.transfer-box button { width: 100%; padding: 12px; background: #1d7132; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-ul { list-style: none; padding: 0; }
-li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
-.positive { color: #72c146; font-weight: bold; }
-.negative { color: #ff3333; font-weight: bold; }
-.logout-btn { background: #ff3333; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; }
-.switch-form-text { margin-top: 20px; font-size: 0.9rem; color: #555; text-align: center; }
-.switch-form-text a { color: #72c146; font-weight: bold; text-decoration: none; }
-.switch-form-text a:hover { text-decoration: underline; }
+/* --- COEUR DE L'APPLICATION (MOBILE-FIRST PRINCIPLE) --- */
+.app-container { max-width: 480px; margin: 0 auto; height: 100vh; background: #f8fafc; display: flex; flex-direction: column; box-shadow: 0 0 30px rgba(0,0,0,0.05); position: relative; }
+.app-header { background: white; padding: 16px 20px; border-bottom: 1px solid #eef2f6; display: flex; justify-content: space-between; align-items: center; }
+.header-user { display: flex; align-items: center; }
+.avatar { width: 40px; height: 40px; background: #e8f5e9; color: #1d7132; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-right: 12px; font-size: 0.9rem; }
+.user-greeting { margin: 0; font-size: 0.8rem; color: #777; }
+.user-status { margin: 0; font-size: 0.9rem; font-weight: 700; color: #1d7132; }
+.btn-logout-icon { background: #fee2e2; color: #ef4444; border: none; padding: 8px 14px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; cursor: pointer; }
+
+/* Corps principal scrollable */
+.app-main { flex: 1; overflow-y: auto; padding: 20px; padding-bottom: 90px; }
+.app-section { display: none; }
+.active-section { display: block; }
+.section-title { font-size: 1.1rem; font-weight: 700; color: #334155; margin: 24px 0 12px 0; }
+.section-title:first-child { margin-top: 0; }
+
+/* Carte Premium Verte */
+.premium-card { background: linear-gradient(135deg, #1d7132, #11471f); color: white; padding: 24px; border-radius: 16px; box-shadow: 0 10px 20px rgba(29, 113, 50, 0.15); }
+.card-header { display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; opacity: 0.8; }
+.badge-account { background: rgba(255,255,255,0.15); padding: 4px 8px; border-radius: 12px; font-weight: 600; }
+.premium-card .amount { font-size: 2.2rem; font-weight: 800; margin: 16px 0; letter-spacing: -0.5px; }
+.iban-text { margin: 0; font-size: 0.8rem; opacity: 0.7; font-family: monospace; }
+
+/* Liste Transactions Épurée */
+.transactions-container { background: white; border-radius: 16px; padding: 8px 16px; border: 1px solid #e2e8f0; }
+.transaction-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #f1f5f9; }
+.transaction-item:last-child { border-bottom: none; }
+.tx-info { display: flex; flex-direction: column; }
+.tx-title { font-size: 0.95rem; font-weight: 600; color: #1e293b; }
+.tx-date { font-size: 0.75rem; color: #94a3b8; margin-top: 2px; }
+.tx-amount { font-size: 0.95rem; font-weight: 700; }
+.positive { color: #10b981; }
+.negative { color: #f43f5e; }
+
+/* Formulaires et Onglets secondaires */
+.form-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e2e8f0; }
+.form-field { margin-bottom: 16px; }
+.form-field label { display: block; font-size: 0.8rem; font-weight: 600; color: #64748b; margin-bottom: 6px; }
+.form-field input, .form-field select { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.95rem; outline: none; background: #f8fafc; }
+.form-field input:focus { border-color: #1d7132; background: white; }
+.btn-action { width: 100%; background: #1d7132; color: white; border: none; padding: 14px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; }
+
+/* Interface Carte de crédit Visa/Mastercard */
+.credit-card-ui { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; padding: 24px; border-radius: 16px; height: 200px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 10px 25px rgba(0,0,0,0.1); position: relative; overflow: hidden; }
+.credit-card-ui::before { content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(255,255,255,0.03); border-radius: 50%; }
+.cc-brand { font-weight: 800; font-style: italic; font-size: 1.1rem; color: #72c146; }
+.cc-chip { width: 40px; height: 30px; background: #e2ba6e; border-radius: 6px; margin-top: 10px; }
+.cc-number { font-size: 1.25rem; letter-spacing: 3px; font-family: monospace; margin: 15px 0; }
+.cc-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+.cc-label { display: block; font-size: 0.6rem; opacity: 0.5; }
+.cc-value { font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; }
+.cc-type { font-weight: 700; font-size: 0.9rem; color: #cbd5e1; }
+.card-status-box { background: white; border-radius: 16px; padding: 16px; border: 1px solid #e2e8f0; margin-top: 16px; }
+.status-row { display: flex; justify-content: space-between; padding: 12px 0; font-size: 0.9rem; border-bottom: 1px solid #f1f5f9; }
+.status-row:last-child { border-bottom: none; }
+.status-badge { font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; }
+.status-badge.green { background: #d1fae5; color: #065f46; }
+
+/* Barre de Navigation mobile inférieure animée */
+.app-nav { position: absolute; bottom: 0; left: 0; right: 0; height: 72px; background: white; border-top: 1px solid #eef2f6; display: flex; justify-content: space-around; align-items: center; padding-bottom: 4px; }
+.nav-item { background: none; border: none; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; color: #64748b; transition: 0.2s; width: 25%; height: 100%; }
+.nav-icon { font-size: 1.4rem; margin-bottom: 2px; }
+.nav-label { font-size: 0.75rem; font-weight: 600; }
+.active-nav { color: #1d7132; }
