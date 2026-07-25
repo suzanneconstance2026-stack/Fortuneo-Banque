@@ -1,45 +1,70 @@
-body { font-family: 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; color: #333; }
-.dashboard { max-width: 500px; margin: 0 auto; }
-header { text-align: center; margin-bottom: 20px; }
-h1 { color: #1d7132; margin: 0; }
+/* Styles Généraux */
+* { box-sizing: border-box; font-family: Arial, sans-serif; }
+body, html { margin: 0; padding: 0; height: 100%; background-color: #f7f7f7; }
 
-.balance-card, .transfer-box, .history { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
-.balance-card { background: linear-gradient(135deg, #1d7132, #144f23); color: white; }
-.amount { font-size: 2rem; font-weight: bold; margin: 10px 0; }
+/* Conteneur Plein Écran */
+.login-wrapper { display: flex; height: 100vh; width: 100vw; }
 
-input { display: block; width: 100%; margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
-button { width: 100%; padding: 12px; background: #1d7132; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
-button:hover { background: #144f23; }
+/* Colonne Gauche - Bannière Image */
+.left-banner {
+    flex: 1;
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://unsplash.com') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: flex-end;
+    padding: 60px;
+}
+.banner-content h1 { color: white; font-size: 3.5rem; font-weight: bold; line-height: 1.2; margin: 20px 0 0 0; }
+.white-logo { height: 50px; filter: brightness(0) invert(1); }
 
-ul { list-style: none; padding: 0; margin: 0; }
+/* Colonne Droite - Formulaire */
+.right-form-container { flex: 1; display: flex; align-items: center; justify-content: center; background: white; padding: 40px; }
+.form-box { max-width: 420px; width: 100%; }
+.main-logo { height: 45px; margin-bottom: 40px; display: block; }
+.form-box h2 { font-size: 1.8rem; font-weight: normal; color: #333; margin-bottom: 30px; line-height: 1.3; }
+
+/* Champs de Saisie stylisés comme Fortuneo */
+.input-group { background: #f0f0f2; padding: 10px 15px; border-radius: 4px; margin-bottom: 15px; }
+.input-group label { display: block; font-size: 0.8rem; color: #666; margin-bottom: 2px; }
+.input-group input { border: none; background: transparent; width: 100%; font-size: 1.1rem; color: #333; outline: none; padding: 4px 0; }
+
+/* Case à cocher */
+.remember-me { display: flex; align-items: center; margin: 20px 0 30px 0; }
+.remember-me input { margin-right: 10px; width: 18px; height: 18px; cursor: pointer; }
+.remember-me label { color: #333; font-size: 0.95rem; cursor: pointer; }
+
+/* Bouton Vert Fortuneo Arrondi */
+.btn-connexion {
+    width: 100%;
+    background-color: #72c146; /* Vert clair officiel Fortuneo */
+    color: #1a3b1e;
+    border: none;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-connexion:hover { background-color: #61ab39; }
+
+/* Mode Mobile : Empiler les colonnes si l'écran est petit */
+@media (max-width: 900px) {
+    .login-wrapper { flex-direction: column; }
+    .left-banner { display: none; }
+    .right-form-container { height: 100vh; }
+}
+
+/* Styles Intérieurs du Tableau de Bord (après connexion) */
+.dashboard { max-width: 500px; margin: 40px auto; padding: 20px; }
+.dashboard header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.balance-card { background: linear-gradient(135deg, #1d7132, #144f23); color: white; padding: 25px; border-radius: 12px; margin-bottom: 20px; }
+.amount { font-size: 2.2rem; font-weight: bold; margin-top: 10px; }
+.transfer-box, .history { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-bottom: 20px; }
+.transfer-box input { display: block; width: 100%; margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 6px; }
+.transfer-box button { width: 100%; padding: 12px; background: #1d7132; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+ul { list-style: none; padding: 0; }
 li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
-li:last-child { border: none; }
-.positive { color: #00cc66; font-weight: bold; }
+.positive { color: #72c146; font-weight: bold; }
 .negative { color: #ff3333; font-weight: bold; }
-/* Styles pour l'écran de connexion initial */
-.login-container { 
-    max-width: 400px; 
-    margin: 60px auto; 
-    padding: 20px; 
-    text-align: center; 
-}
-
-.login-card { 
-    background: white; 
-    padding: 30px; 
-    border-radius: 12px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-}
-
-/* Bouton de déconnexion dans le tableau de bord */
-.logout-btn { 
-    background: #ff3333 !important; 
-    width: auto !important; 
-    padding: 6px 12px !important; 
-    font-size: 0.8rem !important; 
-    margin-top: 10px; 
-}
-
-.logout-btn:hover { 
-    background: #cc0000 !important; 
-}
+.logout-btn { background: #ff3333; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; }
