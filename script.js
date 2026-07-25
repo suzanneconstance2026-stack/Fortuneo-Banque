@@ -1,21 +1,31 @@
 const COMPTE_UNIQUE = {
     user: "450893127",
-    pass: "K9#pZ!m7$",
-    balance: "7585024.00"
+    pass: "K9#pZ!m7$"
 };
 
 function login() {
     const userInput = document.getElementById('username').value.trim();
-    const passInput = document.getElementById('password').value;
+    const passInput = document.getElementById('password').value.trim();
     const btn = document.querySelector('.btn-connexion');
 
+    // Vérification directe et sans blocage
     if (userInput === COMPTE_UNIQUE.user && passInput === COMPTE_UNIQUE.pass) {
         btn.innerText = "Chiffrement AES-256...";
         btn.disabled = true;
+        
+        // Enregistre la connexion de session
+        sessionStorage.setItem('isLoggedIn', 'true');
+        
         setTimeout(() => {
-            sessionStorage.setItem('isLoggedIn', 'true');
-            window.location.reload(); // Force le rafraîchissement automatique clean
-        }, 800);
+            // Cache l'écran de connexion et affiche le tableau de bord
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('app-screen').style.display = 'flex';
+            
+            // Initialise le montant exact demandé à l'écran
+            if (document.getElementById('balance')) {
+                document.getElementById('balance').innerText = (7585024).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+            }
+        }, 600);
     } else {
         alert("Accès refusé. Les identifiants saisis ne correspondent à aucun compte Fortuneo Privilège.");
     }
@@ -23,7 +33,10 @@ function login() {
 
 function logout() {
     sessionStorage.removeItem('isLoggedIn');
-    window.location.reload();
+    document.getElementById('app-screen').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
 }
 
 function showSection(sectionId) {
@@ -35,13 +48,13 @@ function showSection(sectionId) {
     
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active-nav'));
     
-    const activeNavButton = Array.from(document.querySelectorAll('.nav-item')).find(item => {
-        const attr = item.getAttribute('onclick');
-        return attr && attr.includes(sectionId);
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        const onclickAttr = item.getAttribute('onclick');
+        if (onclickAttr && onclickAttr.includes(sectionId)) {
+            item.classList.add('active-nav');
+        }
     });
-    if (activeNavButton) {
-        activeNavButton.classList.add('active-nav');
-    }
 }
 
 function startTransferAnimation() {
@@ -85,10 +98,8 @@ function startTransferAnimation() {
                     </div>
                     <span class="tx-amount negative" style="text-decoration: line-through; color: #94a3b8;">-${amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</span>
                 `;
-                if (list && list.firstChild) {
+                if (list) {
                     list.insertBefore(newItem, list.firstChild);
-                } else if (list) {
-                    list.appendChild(newItem);
                 }
 
                 document.getElementById('beneficiary').value = '';
@@ -131,18 +142,13 @@ function closeDetails() {
     if(document.getElementById('tx-modal')) document.getElementById('tx-modal').style.display = 'none';
 }
 
-// Initialisation sécurisée post-chargement DOM
+// Vérification initiale
 document.addEventListener('DOMContentLoaded', () => {
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
         if (document.getElementById('login-screen')) document.getElementById('login-screen').style.display = 'none';
         if (document.getElementById('app-screen')) document.getElementById('app-screen').style.display = 'flex';
-        
-        const balanceElement = document.getElementById('balance');
-        if (balanceElement) {
-            balanceElement.innerText = parseFloat(COMPTE_UNIQUE.balance).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+        if (document.getElementById('balance')) {
+            document.getElementById('balance').innerText = (7585024).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
         }
-    } else {
-        if (document.getElementById('login-screen')) document.getElementById('login-screen').style.display = 'flex';
-        if (document.getElementById('app-screen')) document.getElementById('app-screen').style.display = 'none';
     }
 });
