@@ -139,3 +139,10 @@ function navigateToTransfer() {
         }
     });
 }
+function openRibModal() {
+    document.getElementById('rib-modal').style.display = 'flex';
+}
+
+function closeRibModal() {
+    document.getElementById('rib-modal').style.display = 'none';
+}
