@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion - Fortuneo Banque</title>
+    <title>Fortuneo Banque - Espace Privé</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- L'ÉCRAN PRINCIPAL -->
+
+    <!-- INTERFACE DE CONNEXION -->
     <div class="login-wrapper" id="login-screen">
         <div class="left-banner">
             <div class="banner-content">
                 <h1>Bienvenue<br>dans votre<br>espace client.</h1>
             </div>
         </div>
-
         <div class="right-form-container">
-            <div class="form-box" id="login-box">
-                <h2 style="color: #72c146; font-weight: bold; margin-bottom: 5px; font-size: 2.2rem; font-family: sans-serif;">fortuneo</h2>
-                <p style="color: #1a3b1e; font-weight: bold; margin: 0 0 30px 0; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">banque</p>
-                
-                <h2>Saisissez votre identifiant et mot de passe</h2>
+            <div class="form-box">
+                <h2 class="brand-logo-text">fortuneo <span>banque</span></h2>
+                <h3>Saisissez votre identifiant et mot de passe</h3>
                 
                 <div class="input-group">
                     <label for="username">Identifiant</label>
-                    <input type="text" id="username" placeholder="000000">
+                    <input type="text" id="username" placeholder="000000" autocomplete="off">
                 </div>
                 
                 <div class="input-group">
@@ -42,47 +40,113 @@
         </div>
     </div>
 
-    <!-- LE TABLEAU DE BORD MODERNE ET DÉTAILLÉ -->
-    <div class="dashboard" id="dashboard-screen" style="display: none;">
-        <header>
-            <h2 style="color: #1d7132; font-weight: bold; margin: 0; text-transform: lowercase;">fortuneo <span style="font-size:0.8rem; letter-spacing:1px; color:#333; text-transform:uppercase;">banque</span></h2>
-            <button onclick="logout()" class="logout-btn">Se déconnecter</button>
-        </header>
+    <!-- INTERFACE BANQUE RÉELLE (Mobile-First / Premium) -->
+    <div class="app-container" id="app-screen" style="display: none;">
         
-        <section class="balance-card">
-            <span style="font-size: 0.8rem; text-transform: uppercase; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 20px;">Compte Courant Premium</span>
-            <div class="amount" id="balance">7 585 024,00 €</div>
-            <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.9;">
-                <strong>IBAN :</strong> FR76 1180 6000 2001 9845 3321 094<br>
-                <strong>Titulaire :</strong> Espace Client Certifié
-            </div>
-        </section>
-
-        <section class="transfer-box" style="background: #1a3b1e; color: white;">
-            <h3 style="margin-top:0;">Ma Carte Associée</h3>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+        <!-- Barre supérieure de l'application -->
+        <header class="app-header">
+            <div class="header-user">
+                <div class="avatar">EC</div>
                 <div>
-                    <p style="margin: 0; font-weight: bold;">Fosfo Mastercard</p>
-                    <p style="margin: 5px 0 0 0; font-size: 0.8rem; opacity: 0.7;">**** **** **** 8842</p>
+                    <p class="user-greeting">Bonjour,</p>
+                    <p class="user-status">Espace Client Certifié VIP</p>
                 </div>
-                <span style="color: #72c146; font-weight: bold; font-size: 0.8rem; border: 1px solid #72c146; padding: 2px 6px; border-radius: 4px;">ACTIVE</span>
             </div>
-        </section>
+            <button onclick="logout()" class="btn-logout-icon">Déconnexion</button>
+        </header>
 
-        <section class="transfer-box">
-            <h3>Émettre un virement SEPA</h3>
-            <input type="text" id="beneficiary" placeholder="Nom du bénéficiaire ou IBAN">
-            <input type="number" id="amount-input" placeholder="Montant en €">
-            <button onclick="executeTransfer()">Envoyer les fonds</button>
-        </section>
+        <!-- CONTENU DYNAMIQUE -->
+        <main class="app-main">
+            
+            <!-- SECTION 1 : ACCUEIL & COMPTES (Active par défaut) -->
+            <div id="home-section" class="app-section active-section">
+                <div class="section-title">Synthèse de vos avoirs</div>
+                
+                <div class="premium-card">
+                    <div class="card-header">
+                        <span class="badge-account">Compte Courant Premium</span>
+                        <span class="account-number">N° FR76 1180...094</span>
+                    </div>
+                    <div class="amount" id="balance">7 585 024,00 €</div>
+                    <p class="iban-text"><strong>IBAN :</strong> FR76 1180 6000 2001 9845 3321 094</p>
+                </div>
 
-        <section class="history">
-            <h3>Historique des opérations</h3>
-            <ul id="transactions-list">
-                <li><span>Transfert d'actifs financiers</span> <span class="positive">+7 500 000,00 €</span></li>
-                <li><span>Virement reçu (Dividendes)</span> <span class="positive">+85 024,00 €</span></li>
-            </ul>
-        </section>
+                <div class="section-title">Dernières opérations</div>
+                <div class="transactions-container" id="transactions-list">
+                    <div class="transaction-item">
+                        <div class="tx-info">
+                            <span class="tx-title">Transfert d'actifs financiers</span>
+                            <span class="tx-date">Hier • Compte de dépôt</span>
+                        </div>
+                        <span class="tx-amount positive">+7 500 000,00 €</span>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="tx-info">
+                            <span class="tx-title">Virement reçu (Dividendes)</span>
+                            <span class="tx-date">Il y a 2 jours • Euronext</span>
+                        </div>
+                        <span class="tx-amount positive">+85 024,00 €</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 2 : VIREMENTS -->
+            <div id="transfer-section" class="app-section">
+                <div class="section-title">Émettre un virement SEPA</div>
+                <div class="form-card">
+                    <div class="form-field">
+                        <label>Compte à débiter</label>
+                        <select disabled><option>Compte Courant Premium (*094) - 7 585 024,00 €</option></select>
+                    </div>
+                    <div class="form-field">
+                        <label>Bénéficiaire (Nom ou IBAN)</label>
+                        <input type="text" id="beneficiary" placeholder="Ex: Jean Dupont ou FR76...">
+                    </div>
+                    <div class="form-field">
+                        <label>Montant du virement (€)</label>
+                        <input type="number" id="amount-input" placeholder="0.00">
+                    </div>
+                    <button class="btn-action" onclick="executeTransfer()">Valider et envoyer les fonds</button>
+                </div>
+            </div>
+
+            <!-- SECTION 3 : CARTES BANCAIRES -->
+            <div id="card-section" class="app-section">
+                <div class="section-title">Vos moyens de paiement</div>
+                <div class="credit-card-ui">
+                    <div class="cc-brand">fortuneo</div>
+                    <div class="cc-chip"></div>
+                    <div class="cc-number">**** **** **** 8842</div>
+                    <div class="cc-footer">
+                        <div>
+                            <span class="cc-label">TITULAIRE</span>
+                            <span class="cc-value">ESPACE CERTIFIE</span>
+                        </div>
+                        <span class="cc-type">Mastercard Gold</span>
+                    </div>
+                </div>
+                <div class="card-status-box">
+                    <div class="status-row"><span>Statut de la carte</span><span class="status-badge green">ACTIVE</span></div>
+                    <div class="status-row"><span>Paiement sans contact</span><span class="status-badge green">ACTIVÉ</span></div>
+                    <div class="status-row"><span>Plafond de retrait hebdomadaire</span><strong>50 000 €</strong></div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- BARRE DE NAVIGATION INFÉRIEURE APPLICATIVE -->
+        <nav class="app-nav">
+            <button class="nav-item active-nav" onclick="showSection('home-section')">
+                <span class="nav-icon">📊</span><span class="nav-label">Comptes</span>
+            </button>
+            <button class="nav-item" onclick="showSection('transfer-section')">
+                <span class="nav-icon">💸</span><span class="nav-label">Virements</span>
+            </button>
+            <button class="nav-item" onclick="showSection('card-section')">
+                <span class="nav-icon">💳</span><span class="nav-label">Cartes</span>
+            </button>
+        </nav>
+
     </div>
 
     <script src="script.js"></script>
