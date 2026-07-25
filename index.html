@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortuneo Banque - Espace Restreint</title>
+    <title>Fortuneo Banque - Espace Privé Haute Richesse</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,158 +19,151 @@
             <div class="form-box">
                 <h2 class="brand-logo-text">fortuneo <span>banque</span></h2>
                 <h3>Saisissez votre identifiant et mot de passe</h3>
-                
                 <div class="input-group">
                     <label for="username">Identifiant</label>
                     <input type="text" id="username" placeholder="000000" autocomplete="off">
                 </div>
-                
                 <div class="input-group">
                     <label for="password">Mot de passe</label>
                     <input type="password" id="password" placeholder="••••••••••••">
                 </div>
-
                 <div class="remember-me">
                     <input type="checkbox" id="remember">
                     <label for="remember">Mémoriser l'identifiant</label>
                 </div>
-
                 <button class="btn-connexion" onclick="login()">Connexion</button>
             </div>
         </div>
     </div>
 
-    <!-- INTERFACE BANQUE RÉELLE BLOQUÉE -->
+    <!-- INTERFACE APPLICATIVE COMPLÈTE -->
     <div class="app-container" id="app-screen" style="display: none;">
-        
-        <!-- Barre supérieure de l'application -->
-        <header class="app-header" style="background: #fff5f5; border-bottom: 2px solid #fecaca;">
+        <header class="app-header">
             <div class="header-user">
-                <div class="avatar" style="background: #dc2626; color: white;">EG</div>
+                <div class="avatar">EG</div>
                 <div>
-                    <p class="user-greeting" style="color: #991b1b; font-weight: bold;">PROFIL CLIENT :</p>
-                    <p class="user-status" style="color: #dc2626; font-size: 1.1rem; font-weight: 800;">M. Edmond Garnier</p>
+                    <p class="user-greeting">Espace Gestion Privée</p>
+                    <p class="user-status">M. Edmond Garnier</p>
                 </div>
             </div>
             <button onclick="logout()" class="btn-logout-icon">Déconnexion</button>
         </header>
 
-        <!-- BANDEAU DE BLOCAGE GENERAL -->
         <div class="alert-blocked-bar">
-            <span class="alert-icon">⚠️</span>
+            <span class="alert-icon">🚨</span>
             <div>
-                <strong>COMPTE EN BANQUE BLOQUÉ</strong>
-                <p>Les opérations sortantes et l'accès aux fonds sont temporairement gelés.</p>
+                <strong>COMPTE SOUS COUP DE RESTRICTION ADMINISTRATIVE</strong>
+                <p>Certaines fonctionnalités de transfert et de retrait sont limitées.</p>
             </div>
         </div>
 
-        <!-- CONTENU DYNAMIQUE -->
         <main class="app-main">
-            
-            <!-- SECTION 1 : ACCUEIL & COMPTES -->
+            <!-- ACCUEIL ULTRA RÉEL -->
             <div id="home-section" class="app-section active-section">
-                <div class="section-title">Synthèse de vos avoirs</div>
-                
-                <div class="premium-card" style="background: linear-gradient(135deg, #475569, #1e293b); box-shadow: none; position: relative;">
+                <div class="section-title">Vos Comptes & Épargne</div>
+                <div class="premium-card">
                     <div class="card-header">
-                        <span class="badge-account" style="background: #dc2626; color: white;">STATUT : GELÉ</span>
+                        <span class="badge-account">Compte Courant d'Excellence</span>
                         <span class="account-number">N° FR76 1180...094</span>
                     </div>
-                    <div class="amount" id="balance" style="opacity: 0.85;">7 585 024,00 €</div>
-                    <div style="margin-top: 15px; font-size: 0.8rem; opacity: 0.8; line-height: 1.4;">
-                        <strong>IBAN :</strong> FR76 1180 6000 2001 9845 3321 094<br>
-                        <strong>Titulaire Législatif :</strong> M. Edmond Garnier
+                    <div class="amount" id="balance">7 585 024,00 €</div>
+                    <p class="iban-text">IBAN: FR76 1180 6000 2001 9845 3321 094</p>
+                </div>
+
+                <!-- Répartition graphique simulée -->
+                <div class="financial-summary-card">
+                    <h4>Répartition de vos actifs</h4>
+                    <div class="chart-simulation-bar">
+                        <div class="bar-segment liquid" style="width: 85%;">Liquidités (85%)</div>
+                        <div class="bar-segment bonds" style="width: 15%;">Titres (15%)</div>
+                    </div>
+                    <div class="financial-stats">
+                        <div><span>Conseiller Privé :</span> <strong>Cabinet Élite Paris</strong></div>
+                        <div><span>Dernière Connexion :</span> <strong id="current-date">Aujourd'hui</strong></div>
                     </div>
                 </div>
 
-                <div class="section-title">Dernières opérations enregistrées</div>
+                <div class="section-title">Historique des opérations globales</div>
                 <div class="transactions-container" id="transactions-list">
-                    <div class="transaction-item">
+                    <div class="transaction-item" onclick="openDetails('Ordre Interbancaire de Compensation', '+7 500 000,00 €', 'Hier', 'Dépôt Institutionnel de Titres de Créances Privés (Fonds Certifiés)', 'Validé')">
                         <div class="tx-info">
                             <span class="tx-title">Transfert d'actifs financiers</span>
-                            <span class="tx-date">Dépôt initial</span>
+                            <span class="tx-date">Hier • Compte d'investissement</span>
                         </div>
                         <span class="tx-amount positive">+7 500 000,00 €</span>
                     </div>
-                    <div class="transaction-item">
+                    <div class="transaction-item" onclick="openDetails('Versement Dividendes Annuels', '+85 024,00 €', 'Il y a 2 jours', 'Rendements de Valeurs Mobilières Cotées - Compte de Trading', 'Validé')">
                         <div class="tx-info">
                             <span class="tx-title">Virement reçu (Dividendes)</span>
-                            <span class="tx-date">Euronext</span>
+                            <span class="tx-date">Il y a 2 jours • Euronext Clear</span>
                         </div>
                         <span class="tx-amount positive">+85 024,00 €</span>
                     </div>
                 </div>
             </div>
 
-            <!-- SECTION 2 : VIREMENTS ACTIFS MAIS REJETÉS APRÈS CHARGEMENT -->
+            <!-- VIREMENTS INTERACTIFS -->
             <div id="transfer-section" class="app-section">
-                <div class="section-title">Émettre un virement SEPA / International</div>
-                <div class="form-card">
-                    <div class="form-field">
-                        <label>Compte à débiter</label>
-                        <select disabled><option>Compte Courant Premium (*094) - 7 585 024,00 €</option></select>
-                    </div>
-                    <div class="form-field">
-                        <label>Nom du bénéficiaire</label>
-                        <input type="text" id="beneficiary" placeholder="Ex: Cabinet Jean Dupont">
-                    </div>
-                    <div class="form-field">
-                        <label>IBAN</label>
-                        <input type="text" id="iban-input" placeholder="FR76 0000 0000 0000 0000 0000 000">
-                    </div>
-                    <div class="form-field">
-                        <label>BIC / SWIFT</label>
-                        <input type="text" id="bic-input" placeholder="Ex: BARCFRPPXXX">
-                    </div>
-                    <div class="form-field">
-                        <label>Montant (€)</label>
-                        <input type="number" id="amount-input" placeholder="0.00">
-                    </div>
-                    <div class="form-field">
-                        <label>Motif du virement</label>
-                        <input type="text" id="reason-input" placeholder="Ex: Facture, Prestation...">
-                    </div>
-                    <button class="btn-action" id="btn-transfert" onclick="executeTransfer()">Valider et envoyer les fonds</button>
+                <div class="section-title">Émettre un virement de capitaux</div>
+                <div class="form-card" id="form-container">
+                    <div class="form-field"><label>Débiteur</label><select disabled><option>Compte Courant Excellence (*094)</option></select></div>
+                    <div class="form-field"><label>Nom complet du bénéficiaire</label><input type="text" id="beneficiary" placeholder="Ex: Cabinet Notarial Garnier"></div>
+                    <div class="form-field"><label>IBAN National ou International</label><input type="text" id="iban-input" placeholder="FR76..."></div>
+                    <div class="form-field"><label>Code BIC / SWIFT</label><input type="text" id="bic-input" placeholder="Ex: FORFRPPXXX"></div>
+                    <div class="form-field"><label>Montant du transfert (€)</label><input type="number" id="amount-input" placeholder="0.00"></div>
+                    <div class="form-field"><label>Libellé de l'opération</label><input type="text" id="reason-input" placeholder="Motif officiel obligatoire"></div>
+                    <button class="btn-action" id="btn-transfert" onclick="startTransferAnimation()">Signer et envoyer les fonds</button>
+                </div>
+
+                <!-- JAUGE DE CHARGEMENT PROGRESSIVE -->
+                <div id="loader-container" class="loader-box" style="display: none;">
+                    <h4>SÉCURISATION DU TRANSFERT EN COURS...</h4>
+                    <p>Contrôle de conformité réglementaire SEPA/TRACFIN</p>
+                    <div class="progress-bar-bg"><div id="progress-bar-fill" class="progress-bar-fill"></div></div>
+                    <div id="progress-text" class="progress-text">0%</div>
                 </div>
             </div>
 
-            <!-- SECTION 3 : CARTES BANCAIRES -->
+            <!-- CARTES DE CRÉDIT -->
             <div id="card-section" class="app-section">
-                <div class="section-title">Vos moyens de paiement</div>
-                <div class="credit-card-ui" style="background: linear-gradient(135deg, #334155, #475569); filter: grayscale(100%);">
+                <div class="section-title">Moyens de paiement Élite</div>
+                <div class="credit-card-ui">
                     <div class="cc-brand">fortuneo</div>
                     <div class="cc-chip"></div>
                     <div class="cc-number">**** **** **** 8842</div>
                     <div class="cc-footer">
-                        <div>
-                            <span class="cc-label">TITULAIRE</span>
-                            <span class="cc-value">EDMOND GARNIER</span>
-                        </div>
-                        <span class="cc-type">Mastercard Gold</span>
+                        <div><span class="cc-label">TITULAIRE</span><span class="cc-value">EDMOND GARNIER</span></div>
+                        <span class="cc-type">Mastercard World Elite</span>
                     </div>
                 </div>
                 <div class="card-status-box">
-                    <div class="status-row"><span>Statut de la carte</span><span class="status-badge" style="background: #fee2e2; color: #991b1b; font-weight: bold;">SUSPENDUE</span></div>
-                    <div class="status-row"><span>Paiement sans contact</span><span class="status-badge" style="background: #fee2e2; color: #991b1b;">BLOQUÉ</span></div>
-                    <div class="status-row"><span>Plafond de retrait autorisé</span><strong>0 € (Restriction)</strong></div>
+                    <div class="status-row"><span>Statut Global</span><span class="status-badge" style="background:#fee2e2; color:#ef4444; font-weight:700;">GELÉE TEMPORAIREMENT</span></div>
+                    <div class="status-row"><span>Plafond de Virement Élevé</span><strong>Indéterminé</strong></div>
                 </div>
             </div>
-
         </main>
 
-        <!-- BARRE DE NAVIGATION INFÉRIEURE APPLICATIVE -->
-        <nav class="app-nav">
-            <button class="nav-item active-nav" onclick="showSection('home-section')">
-                <span class="nav-icon">📊</span><span class="nav-label">Comptes</span>
-            </button>
-            <button class="nav-item" onclick="showSection('transfer-section')">
-                <span class="nav-icon">💸</span><span class="nav-label">Virements</span>
-            </button>
-            <button class="nav-item" onclick="showSection('card-section')">
-                <span class="nav-icon">💳</span><span class="nav-label">Cartes</span>
-            </button>
-        </nav>
+        <!-- MODAL DÉTAILS TRANSACTIONS -->
+        <div class="modal-overlay" id="tx-modal" style="display: none;">
+            <div class="modal-card">
+                <h3 id="modal-title">Détails du transfert</h3>
+                <hr>
+                <div class="modal-body">
+                    <p><strong>Type:</strong> <span id="modal-type"></span></p>
+                    <p><strong>Montant:</strong> <span id="modal-amount"></span></p>
+                    <p><strong>Date d'émission:</strong> <span id="modal-date"></span></p>
+                    <p><strong>Motif de la transaction:</strong> <span id="modal-reason"></span></p>
+                    <p><strong>Statut de conformité:</strong> <span id="modal-status"></span></p>
+                </div>
+                <button class="btn-action" style="background:#475569;" onclick="closeDetails()">Fermer la fiche</button>
+            </div>
+        </div>
 
+        <nav class="app-nav">
+            <button class="nav-item active-nav" onclick="showSection('home-section')"><span class="nav-icon">📊</span><span class="nav-label">Portefeuille</span></button>
+            <button class="nav-item" onclick="showSection('transfer-section')"><span class="nav-icon">💸</span><span class="nav-label">Virements</span></button>
+            <button class="nav-item" onclick="showSection('card-section')"><span class="nav-icon">💳</span><span class="nav-label">Gestion Cartes</span></button>
+        </nav>
     </div>
 
     <script src="script.js"></script>
