@@ -247,3 +247,23 @@ body, html { margin: 0; padding: 0; height: 100%; background-color: #f1f5f9; col
     border-radius: 20px;
     font-size: 0.75rem;
 }
+/* Alignement du logo Mastercard sur la carte */
+.cc-type-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.mastercard-logo {
+    width: 36px;
+    height: auto;
+    object-fit: contain;
+    margin-top: 2px;
+}
+
+.cc-type {
+    font-size: 0.65rem;
+    color: #cbd5e1;
+    font-weight: bold;
+}
