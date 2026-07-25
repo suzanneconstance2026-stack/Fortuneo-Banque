@@ -133,3 +133,92 @@ body, html { margin: 0; padding: 0; height: 100%; background-color: #f1f5f9; col
     transform: scale(1.05); /* Grossit légèrement au survol */
     background-color: #e2e8f0; /* Change subtilement de couleur */
 }
+/* DESIGN DE LA CARTE BANCAIRE PREMUM */
+.credit-card-ui {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: white;
+    padding: 24px;
+    border-radius: 16px;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cc-brand {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #72c146;
+    text-align: right;
+    font-style: italic;
+}
+
+.cc-chip {
+    width: 45px;
+    height: 35px;
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    border-radius: 6px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    border: 1px solid #d97706;
+}
+
+.cc-number {
+    font-size: 1.3rem;
+    font-family: monospace;
+    word-spacing: 4px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.cc-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.cc-label {
+    font-size: 0.65rem;
+    color: #94a3b8;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.cc-value {
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.cc-type {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #f1f5f9;
+}
+
+/* CADRE DE STATUT SOUS LA CARTE */
+.card-status-box {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    font-size: 0.85rem;
+}
+
+.status-row:first-child {
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+}
