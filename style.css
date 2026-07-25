@@ -66,3 +66,6 @@ li { display: flex; justify-content: space-between; padding: 12px 0; border-bott
 .positive { color: #72c146; font-weight: bold; }
 .negative { color: #ff3333; font-weight: bold; }
 .logout-btn { background: #ff3333; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; }
+.switch-form-text { margin-top: 20px; font-size: 0.9rem; color: #555; text-align: center; }
+.switch-form-text a { color: #72c146; font-weight: bold; text-decoration: none; }
+.switch-form-text a:hover { text-decoration: underline; }
