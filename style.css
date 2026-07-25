@@ -95,3 +95,27 @@ body, html { margin: 0; padding: 0; height: 100%; background-color: #f4f6f8; col
 .nav-icon { font-size: 1.4rem; margin-bottom: 2px; }
 .nav-label { font-size: 0.75rem; font-weight: 600; }
 .active-nav { color: #1d7132; }
+/* Style du bandeau d'alerte compte bloqué */
+.alert-blocked-bar {
+    background-color: #dc2626;
+    color: white;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    border-bottom: 3px solid #991b1b;
+}
+.alert-blocked-bar .alert-icon {
+    font-size: 1.6rem;
+    margin-right: 15px;
+}
+.alert-blocked-bar strong {
+    font-size: 0.95rem;
+    display: block;
+    letter-spacing: 0.5px;
+}
+.alert-blocked-bar p {
+    margin: 2px 0 0 0;
+    opacity: 0.9;
+}
