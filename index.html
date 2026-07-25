@@ -12,7 +12,6 @@
         <!-- Colonne Gauche : Image et message de bienvenue -->
         <div class="left-banner">
             <div class="banner-content">
-                <img src="https://fortuneo.fr" alt="Fortuneo" class="white-logo" onerror="this.src='https://wikimedia.org'">
                 <h1>Bienvenue<br>dans votre<br>espace client.</h1>
             </div>
         </div>
@@ -20,7 +19,11 @@
         <!-- Colonne Droite : Formulaire officiel -->
         <div class="right-form-container">
             <div class="form-box">
-                <img src="https://wikimedia.org" alt="Fortuneo Banque" class="main-logo">
+                <!-- Logo officiel Fortuneo fonctionnel -->
+                <img src="https://githubusercontent.com" alt="Fortuneo Banque" class="main-logo" id="logo-pictogramme" style="display:none;">
+                <h2 style="color: #72c146; font-weight: bold; margin-bottom: 5px; font-size: 2.2rem;">fortuneo</h2>
+                <p style="color: #1a3b1e; font-weight: bold; margin: 0 0 30px 0; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">banque</p>
+                
                 <h2>Saisissez votre identifiant et mot de passe</h2>
                 
                 <div class="input-group">
@@ -46,7 +49,7 @@
     <!-- LE TABLEAU DE BORD (Masqué par défaut) -->
     <div class="dashboard" id="dashboard-screen" style="display: none;">
         <header>
-            <img src="https://wikimedia.org" alt="Fortuneo" style="height: 40px;">
+            <h2 style="color: #1d7132; font-weight: bold; margin: 0;">fortuneo banque</h2>
             <button onclick="logout()" class="logout-btn">Se déconnecter</button>
         </header>
         <section class="balance-card">
