@@ -9,17 +9,13 @@
 <body>
     <!-- L'ÉCRAN PRINCIPAL -->
     <div class="login-wrapper" id="login-screen">
-        <!-- Colonne Gauche : Message de bienvenue -->
         <div class="left-banner">
             <div class="banner-content">
                 <h1>Bienvenue<br>dans votre<br>espace client.</h1>
             </div>
         </div>
 
-        <!-- Colonne Droite : Formulaires -->
         <div class="right-form-container">
-            
-            <!-- FORMULAIRE DE CONNEXION (Visible par défaut) -->
             <div class="form-box" id="login-box">
                 <h2 style="color: #72c146; font-weight: bold; margin-bottom: 5px; font-size: 2.2rem; font-family: sans-serif;">fortuneo</h2>
                 <p style="color: #1a3b1e; font-weight: bold; margin: 0 0 30px 0; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">banque</p>
@@ -42,61 +38,74 @@
                 </div>
 
                 <button class="btn-connexion" onclick="login()">Connexion</button>
-                
                 <p class="switch-form-text">Nouveau client ? <a href="#" onclick="toggleForms('register')">Créer un compte démo</a></p>
             </div>
 
-            <!-- FORMULAIRE DE CRÉATION DE COMPTE (Masqué par défaut) -->
             <div class="form-box" id="register-box" style="display: none;">
                 <h2 style="color: #72c146; font-weight: bold; margin-bottom: 5px; font-size: 2.2rem; font-family: sans-serif;">fortuneo</h2>
                 <p style="color: #1a3b1e; font-weight: bold; margin: 0 0 30px 0; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">banque</p>
-                
                 <h2>Devenir client Démo Fortuneo</h2>
-                
                 <div class="input-group">
                     <label for="reg-username">Choisissez un Identifiant</label>
                     <input type="text" id="reg-username" placeholder="Ex: mon_pseudo">
                 </div>
-                
                 <div class="input-group">
                     <label for="reg-password">Choisissez un Mot de passe</label>
                     <input type="password" id="reg-password" placeholder="••••••••••••">
                 </div>
-
                 <div class="input-group">
                     <label for="reg-balance">Dépôt initial fictif (€)</label>
-                    <input type="number" id="reg-balance" value="1500" placeholder="Ex: 1500">
+                    <input type="number" id="reg-balance" value="1500">
                 </div>
-
                 <button class="btn-connexion" style="background-color: #1a3b1e; color: white; margin-top: 15px;" onclick="registerAccount()">Créer mon compte bancaire</button>
-                
                 <p class="switch-form-text">Déjà un compte ? <a href="#" onclick="toggleForms('login')">Retour à la connexion</a></p>
             </div>
         </div>
     </div>
 
-    <!-- LE TABLEAU DE BORD (Masqué par défaut) -->
+    <!-- LE TABLEAU DE BORD MODERNE ET DÉTAILLÉ -->
     <div class="dashboard" id="dashboard-screen" style="display: none;">
         <header>
-            <h2 style="color: #1d7132; font-weight: bold; margin: 0;">fortuneo banque</h2>
+            <h2 style="color: #1d7132; font-weight: bold; margin: 0; text-transform: lowercase;">fortuneo <span style="font-size:0.8rem; letter-spacing:1px; color:#333; text-transform:uppercase;">banque</span></h2>
             <button onclick="logout()" class="logout-btn">Se déconnecter</button>
         </header>
+        
+        <!-- Carte Bancaire et Infos de compte réelles -->
         <section class="balance-card">
-            <h3>Solde disponible</h3>
-            <div class="amount" id="balance">0,00 €</div>
-            <small>Compte Courant N° FR76 3000 1000 ...</small>
+            <span style="font-size: 0.8rem; text-transform: uppercase; background: rgba(255,255,255,0.2); padding: 3px 8px; border-radius: 20px;">Compte Courant Premium</span>
+            <div class="amount" id="balance">7 585 024,00 €</div>
+            <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.9;">
+                <strong>IBAN :</strong> FR76 1180 6000 2001 9845 3321 094<br>
+                <strong>Titulaire :</strong> Espace Client Certifié
+            </div>
         </section>
+
+        <!-- Moyen de paiement associé -->
+        <section class="transfer-box" style="background: #1a3b1e; color: white;">
+            <h3 style="margin-top:0;">Ma Carte Associée</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <p style="margin: 0; font-weight: bold;">Fosfo Mastercard</p>
+                    <p style="margin: 5px 0 0 0; font-size: 0.8rem; opacity: 0.7;">**** **** **** 8842</p>
+                </div>
+                <span style="color: #72c146; font-weight: bold; font-size: 0.8rem; border: 1px solid #72c146; padding: 2px 6px; border-radius: 4px;">ACTIVE</span>
+            </div>
+        </section>
+
+        <!-- Formulaire de virement -->
         <section class="transfer-box">
-            <h3>Faire un virement simulation</h3>
-            <input type="text" id="beneficiary" placeholder="Nom du bénéficiaire">
+            <h3>Émettre un virement SEPA</h3>
+            <input type="text" id="beneficiary" placeholder="Nom du bénéficiaire ou IBAN">
             <input type="number" id="amount-input" placeholder="Montant en €">
-            <button onclick="executeTransfer()">Valider le virement</button>
+            <button onclick="executeTransfer()">Envoyer les fonds</button>
         </section>
+
+        <!-- Historique de Fortuneo -->
         <section class="history">
-            <h3>Dernières opérations</h3>
+            <h3>Historique des opérations</h3>
             <ul id="transactions-list">
-                <li><span>Virement reçu (Salaire)</span> <span class="positive">+2 200,00 €</span></li>
-                <li><span>Paiement Supermarché</span> <span class="negative">-85,50 €</span></li>
+                <li><span>Transfert d'actifs financiers</span> <span class="positive">+7 500 000,00 €</span></li>
+                <li><span>Virement reçu (Dividendes)</span> <span class="positive">+85 024,00 €</span></li>
             </ul>
         </section>
     </div>
