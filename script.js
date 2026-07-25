@@ -32,6 +32,12 @@ function executeTransfer() {
     updateDisplay();
     document.getElementById('beneficiary').value = '';
     document.getElementById('amount-input').value = '';
+    /* Styles pour l'écran de connexion */
+.login-container { max-width: 400px; margin: 60px auto; padding: 20px; text-align: center; }
+.login-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.logout-btn { background: #ff3333 !important; width: auto !important; padding: 6px 12px !important; font-size: 0.8rem !important; margin-top: 10px; }
+.logout-btn:hover { background: #cc0000 !important; }
+
     
     alert(`Simulation Fortuneo réussie : ${amount} € envoyés à ${beneficiary}.`);
 }
