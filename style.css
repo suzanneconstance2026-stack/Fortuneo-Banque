@@ -111,3 +111,17 @@ body, html { margin: 0; padding: 0; height: 100%; background-color: #f1f5f9; col
 .premium-card:active {
     transform: translateY(1px);
 }
+/* Effet visuel au survol de la carte premium cliquable */
+.premium-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.premium-card:hover {
+    transform: translateY(-3px); /* Soulève légèrement la carte */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); /* Accentue l'ombre sous la carte */
+    filter: brightness(1.08); /* Augmente discrètement la luminosité */
+}
+
+.premium-card:active {
+    transform: translateY(1px); /* Effet d'enfoncement au clic */
+}
