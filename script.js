@@ -10,14 +10,14 @@ function login() {
     const btn = document.querySelector('.btn-connexion');
 
     if (userInput === COMPTE_UNIQUE.user && passInput === COMPTE_UNIQUE.pass) {
-        btn.innerText = "Authentification Cryptée...";
+        btn.innerText = "Chiffrement AES-256...";
         btn.disabled = true;
         setTimeout(() => {
             sessionStorage.setItem('isLoggedIn', 'true');
             window.location.reload();
-        }, 1000);
+        }, 800);
     } else {
-        alert("Identifiant ou mot de passe incorrect.");
+        alert("Accès refusé. Les identifiants saisis ne correspondent à aucun compte Fortuneo Privilège.");
     }
 }
 
@@ -29,11 +29,15 @@ function logout() {
 function showSection(sectionId) {
     document.querySelectorAll('.app-section').forEach(sec => sec.classList.remove('active-section'));
     document.getElementById(sectionId).classList.add('active-section');
+    
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active-nav'));
-    event.currentTarget.classList.add('active-nav');
+    
+    const activeNavButton = Array.from(document.querySelectorAll('.nav-item')).find(item => item.getAttribute('onclick').includes(sectionId));
+    if(activeNavButton) {
+        activeNavButton.classList.add('active-nav');
+    }
 }
 
-// LOGIQUE DU CHARGEMENT À 100% AVEC ERREUR ADMINISTRATIVE
 function startTransferAnimation() {
     const beneficiary = document.getElementById('beneficiary').value.trim();
     const iban = document.getElementById('iban-input').value.trim();
@@ -42,11 +46,10 @@ function startTransferAnimation() {
     const reason = document.getElementById('reason-input').value.trim();
 
     if (!beneficiary || !iban || !bic || isNaN(amount) || amount <= 0 || !reason) {
-        alert("Contrôle système : Veuillez renseigner l'intégralité des informations requises.");
+        alert("Régulation bancaire : Veuillez remplir l'intégralité des variables (Nom, IBAN, BIC, Montant et Motif) avant de signer l'ordre.");
         return;
     }
 
-    // Basculer du formulaire vers la jauge de chargement
     document.getElementById('form-container').style.display = 'none';
     document.getElementById('loader-container').style.display = 'block';
 
@@ -55,32 +58,29 @@ function startTransferAnimation() {
     const progressText = document.getElementById('progress-text');
 
     const interval = setInterval(() => {
-        progress += Math.floor(Math.random() * 8) + 2; // Avancement irrégulier pour faire vrai
+        progress += Math.floor(Math.random() * 9) + 3;
         if (progress >= 100) {
             progress = 100;
             clearInterval(interval);
             
-            // Une fois à 100%, déclencher la boîte d'échec
             setTimeout(() => {
-                alert(`⚠️ ÉCHEC CRITIQUE DE TRANSMISSION INTERBANCAIRE\n\nVotre virement de ${amount.toLocaleString('fr-FR')} € vers ${beneficiary} a été REJETÉ.\n\nMotif : Compte bancaire bloqué par mesure de sécurité administrative nationale. Vous devez impérativement vous rendre dans votre agence Fortuneo Haute Gestion muni d'un justificatif d'identité original.`);
+                alert(`⚠️ TRANSACTION COMPROMISE - BLOCK REJET SYSTÈME\n\nL'ordre d'émission de ${amount.toLocaleString('fr-FR')} € à destination de "${beneficiary}" n'a pas pu aboutir.\n\nRaison administrative : Ce compte fait l'objet d'un gel conservatoire des fonds. Aucun virement sortant ne peut être signé en ligne. Rendez-vous dans votre agence Arkéa Direct Bank avec vos documents d'identité pour lever la restriction.`);
                 
-                // Ajouter l'opération en échec dans l'historique
                 const list = document.getElementById('transactions-list');
                 const newItem = document.createElement('div');
-                newItem.className = 'transaction-item blocked-tx';
+                newItem.className = 'transaction-item';
                 newItem.onclick = function() {
-                    openDetails(`Virement Rejeté (${reason})`, `-${amount.toLocaleString('fr-FR')} €`, 'Aujourd\'hui', `Échec d'envoi vers ${beneficiary} (Motif: ${reason}) - Compte sous restrictions administratives graves. Présentation physique requise.`, 'REFUSÉ PAR LA BANQUE');
+                    openDetails(`Virement SEPA Rejeté`, `-${amount.toLocaleString('fr-FR')} €`, 'Aujourd\'hui', `Tentative de transfert vers ${beneficiary} (IBAN: ${iban}). Libellé: ${reason}. Bloqué par l'autorité de contrôle bancaire (Mesure Conservatoire).`, 'REFUSÉ PAR L\'ÉTABLISSEMENT');
                 };
                 newItem.innerHTML = `
                     <div class="tx-info">
-                        <span class="tx-title" style="color:#ef4444;">❌ Virement Bloqué — ${reason}</span>
-                        <span class="tx-date">Aujourd'hui • Vers ${beneficiary}</span>
+                        <span class="tx-title" style="color:#ef4444;">❌ Virement Rejeté — ${reason}</span>
+                        <span class="tx-date">Aujourd'hui • Destinataire : ${beneficiary}</span>
                     </div>
-                    <span class="tx-amount negative" style="text-decoration: line-through;">-${amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</span>
+                    <span class="tx-amount negative" style="text-decoration: line-through; color: #94a3b8;">-${amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</span>
                 `;
                 list.insertBefore(newItem, list.firstChild);
 
-                // Réinitialiser le formulaire et l'affichage
                 document.getElementById('beneficiary').value = '';
                 document.getElementById('iban-input').value = '';
                 document.getElementById('bic-input').value = '';
@@ -90,14 +90,13 @@ function startTransferAnimation() {
                 document.getElementById('loader-container').style.display = 'none';
                 document.getElementById('form-container').style.display = 'block';
                 showSection('home-section');
-            }, 600);
+            }, 500);
         }
         progressFill.style.width = progress + '%';
         progressText.innerText = progress + '%';
-    }, 150); // Met environ 3 secondes à charger à 100%
+    }, 120); 
 }
 
-// NAVIGATION DU POP-UP DE DÉTAILS
 function openDetails(title, amount, date, reason, status) {
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-type').innerText = title;
@@ -107,8 +106,13 @@ function openDetails(title, amount, date, reason, status) {
     document.getElementById('modal-status').innerText = status;
     
     const statusLabel = document.getElementById('modal-status');
-    if(status === 'Validé') { statusLabel.style.color = '#10b981'; } else { statusLabel.style.color = '#ef4444'; statusLabel.style.fontWeight = 'bold'; }
-
+    if (status === 'COMPLÉTÉ' || status === 'Validé') { 
+        statusLabel.style.color = '#10b981'; 
+        statusLabel.style.fontWeight = 'bold';
+    } else { 
+        statusLabel.style.color = '#ef4444'; 
+        statusLabel.style.fontWeight = 'bold'; 
+    }
     document.getElementById('tx-modal').style.display = 'flex';
 }
 
