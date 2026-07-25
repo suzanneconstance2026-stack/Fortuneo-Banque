@@ -1,0 +1,18 @@
+body { font-family: 'Segoe UI', Roboto, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; color: #333; }
+.dashboard { max-width: 500px; margin: 0 auto; }
+header { text-align: center; margin-bottom: 20px; }
+h1 { color: #1d7132; margin: 0; }
+
+.balance-card, .transfer-box, .history { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 20px; }
+.balance-card { background: linear-gradient(135deg, #1d7132, #144f23); color: white; }
+.amount { font-size: 2rem; font-weight: bold; margin: 10px 0; }
+
+input { display: block; width: 100%; margin: 10px 0; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 1rem; }
+button { width: 100%; padding: 12px; background: #1d7132; color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+button:hover { background: #144f23; }
+
+ul { list-style: none; padding: 0; margin: 0; }
+li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; }
+li:last-child { border: none; }
+.positive { color: #00cc66; font-weight: bold; }
+.negative { color: #ff3333; font-weight: bold; }
