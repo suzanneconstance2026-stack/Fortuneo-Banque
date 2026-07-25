@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortuneo Banque — Espace Démo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>Fortuneo Banque</h1>
+            <p>J'aime ma banque — Espace Démo</p>
+        </header>
+
+        <section class="balance-card">
+            <h3>Solde disponible</h3>
+            <div class="amount" id="balance">2 500,00 €</div>
+            <small>Compte Courant N° FR76 3000 1000 ...</small>
+        </section>
+
+        <section class="transfer-box">
+            <h3>Faire un virement simulation</h3>
+            <input type="text" id="beneficiary" placeholder="Nom du bénéficiaire (ex: Jean Dupont)">
+            <input type="number" id="amount-input" placeholder="Montant en €">
+            <button onclick="executeTransfer()">Valider le virement</button>
+        </section>
+
+        <section class="history">
+            <h3>Dernières opérations</h3>
+            <ul id="transactions-list">
+                <li><span>Virement reçu (Salaire)</span> <span class="positive">+2 200,00 €</span></li>
+                <li><span>Paiement Supermarché</span> <span class="negative">-85,50 €</span></li>
+            </ul>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
