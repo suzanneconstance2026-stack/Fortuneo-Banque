@@ -61,14 +61,16 @@
             <!-- ACCUEIL ULTRA RÉEL -->
             <div id="home-section" class="app-section active-section">
                 <div class="section-title">Vos Comptes & Épargne</div>
-                <div class="premium-card">
-                    <div class="card-header">
-                        <span class="badge-account">Compte Courant d'Excellence</span>
-                        <span class="account-number">N° FR76 1180...094</span>
-                    </div>
-                    <div class="amount" id="balance">7 585 024,00 €</div>
-                    <p class="iban-text">IBAN: FR76 1180 6000 2001 9845 3321 094</p>
-                </div>
+                <div class="premium-card" onclick="navigateToTransfer()" style="cursor: pointer;">
+    <div class="card-header">
+        <span class="badge-account">Compte Courant d'Excellence</span>
+        <span class="account-number" style="display: flex; align-items: center; gap: 4px;">
+            N° FR76 1180...094 <span style="font-size: 0.9rem;">➔</span>
+        </span>
+    </div>
+    <div class="amount" id="balance">7 585 024,00 €</div>
+    <p class="iban-text">IBAN: FR76 1180 6000 2001 9845 3321 094</p>
+</div>
 
                 <!-- Répartition graphique simulée -->
                 <div class="financial-summary-card">
