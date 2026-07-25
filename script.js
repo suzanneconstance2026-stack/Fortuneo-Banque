@@ -14,7 +14,7 @@ function login() {
         btn.disabled = true;
         setTimeout(() => {
             sessionStorage.setItem('isLoggedIn', 'true');
-            window.location.reload();
+            window.location.reload(); // Force le rafraîchissement automatique
         }, 800);
     } else {
         alert("Accès refusé. Les identifiants saisis ne correspondent à aucun compte Fortuneo Privilège.");
@@ -32,8 +32,12 @@ function showSection(sectionId) {
     
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active-nav'));
     
-    const activeNavButton = Array.from(document.querySelectorAll('.nav-item')).find(item => item.getAttribute('onclick').includes(sectionId));
-    if(activeNavButton) {
+    // Correction du bug de navigation qui bloquait le script au démarrage
+    const activeNavButton = Array.from(document.querySelectorAll('.nav-item')).find(item => {
+        const attr = item.getAttribute('onclick');
+        return attr && attr.includes(sectionId);
+    });
+    if (activeNavButton) {
         activeNavButton.classList.add('active-nav');
     }
 }
@@ -120,6 +124,7 @@ function closeDetails() {
     document.getElementById('tx-modal').style.display = 'none';
 }
 
+// Lancement automatique et attribution du solde fixe demandé
 if (sessionStorage.getItem('isLoggedIn') === 'true') {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app-screen').style.display = 'flex';
