@@ -1,442 +1,80 @@
-/* =====================================
-   DONNEES DES COMPTES (PROTOTYPE)
-===================================== */
+/* ======================================
+   SCRIPT PRINCIPAL DU SITE
+====================================== */
 
 
-const accounts = {
+document.addEventListener("DOMContentLoaded", () => {
 
 
-    "450893127": {
 
-        password: "K9#pZ!m7$",
+const loginForm = document.getElementById("login-form");
 
-        name: "Edmond Garnier",
-
-        balance: 758557,
-
-        status: "Compte sous restriction (simulation)",
-
-
-        card: "**** **** **** 4582",
-
-
-        history: [
-
-            {
-                date: "15/03/2023",
-                label: "Virement entrant",
-                amount: "+45 000,00 €"
-            },
-
-            {
-                date: "08/06/2023",
-                label: "Placement épargne",
-                amount: "-25 000,00 €"
-            },
-
-            {
-                date: "21/09/2023",
-                label: "Virement reçu",
-                amount: "+120 000,00 €"
-            },
-
-            {
-                date: "12/01/2024",
-                label: "Gestion patrimoine",
-                amount: "-8 500,00 €"
-            },
-
-            {
-                date: "30/05/2024",
-                label: "Versement financier",
-                amount: "+75 000,00 €"
-            },
-
-            {
-                date: "18/02/2025",
-                label: "Opération bancaire",
-                amount: "-3 200,00 €"
-            }
-
-        ]
-
-    },
+const logoutButton =
+document.getElementById("logout-button");
 
 
 
 
 
-    "975899351": {
-
-
-        password: "D#8@Z!B€$",
-
-        name: "Brigitte Garnier",
-
-        balance: 1351254.50,
-
-        status: "Compte sous restriction (simulation)",
-
-
-        card: "**** **** **** 7319",
-
-
-        history: [
-
-            {
-                date: "02/04/2023",
-                label: "Virement reçu",
-                amount: "+250 000,00 €"
-            },
-
-
-            {
-                date: "14/08/2023",
-                label: "Investissement",
-                amount: "-40 000,00 €"
-            },
-
-
-            {
-                date: "10/12/2023",
-                label: "Revenu financier",
-                amount: "+180 000,00 €"
-            },
-
-
-            {
-                date: "07/03/2024",
-                label: "Virement bancaire",
-                amount: "-15 000,00 €"
-            },
-
-
-            {
-                date: "22/11/2024",
-                label: "Versement",
-                amount: "+95 000,00 €"
-            }
-
-
-        ]
-
-    }
-
-
-};
-
-
-
-
-
-
-let currentAccount = null;
-
-
-
-
-
-
-
-/* =====================================
+/* ==========================
    CONNEXION
-===================================== */
+========================== */
 
 
-document
-.getElementById("login-btn")
-.addEventListener("click", function(){
+loginForm.addEventListener("submit", function(e){
 
 
+e.preventDefault();
 
-    const id =
-        document
-        .getElementById("login-id")
-        .value
-        .trim();
 
 
+const username =
+document.getElementById("username").value.trim();
 
-    const password =
-        document
-        .getElementById("login-password")
-        .value;
 
 
+const password =
+document.getElementById("password").value;
 
-    const error =
-        document
-        .getElementById("login-error");
 
 
-
-
-
-    if(
-        accounts[id] &&
-        accounts[id].password === password
-    ){
-
-
-        currentAccount =
-            accounts[id];
-
-
-
-        document
-        .getElementById("login-screen")
-        .style.display = "none";
-
-
-
-        document
-        .getElementById("bank-screen")
-        .style.display = "block";
-
-
-
-        loadAccount();
-
-
-
-        error.textContent = "";
-
-
-    }
-
-    else {
-
-
-        error.textContent =
-        "Identifiant ou mot de passe incorrect.";
-
-
-    }
-
-
-
-});
-
-
-
-
-
-
-
-/* =====================================
-   CHARGEMENT DU PROFIL
-===================================== */
-
-
-function loadAccount(){
-
-
-
-    document
-    .getElementById("client-name")
-    .textContent =
-        currentAccount.name;
-
-
-
-    document
-    .getElementById("holder-name")
-    .textContent =
-        currentAccount.name;
-
-
-
-    document
-    .getElementById("card-holder")
-    .textContent =
-        currentAccount.name;
-
-
-
-    document
-    .getElementById("balance")
-    .textContent =
-        currentAccount.balance.toLocaleString(
-            "fr-FR",
-            {
-                style:"currency",
-                currency:"EUR"
-            }
-        );
-
-
-
-    document
-    .getElementById("account-status")
-    .textContent =
-        currentAccount.status;
-
-
-
-    displayHistory();
-
-
-
-}/* =====================================
-   AFFICHAGE HISTORIQUE
-===================================== */
-
-
-function displayHistory(){
-
-
-    const dashboardHistory =
-        document.getElementById(
-            "dashboard-history"
-        );
-
-
-    const fullHistory =
-        document.getElementById(
-            "full-history"
-        );
-
-
-
-    dashboardHistory.innerHTML = "";
-
-    fullHistory.innerHTML = "";
-
-
-
-
-
-    currentAccount.history.forEach(
-        (operation, index) => {
-
-
-
-        const item = document.createElement("div");
-
-
-        item.className =
-            "operation-item";
-
-
-
-        item.innerHTML = `
-
-            <div>
-
-                <strong>
-                    ${operation.label}
-                </strong>
-
-                <small>
-                    ${operation.date}
-                </small>
-
-            </div>
-
-
-            <span>
-                ${operation.amount}
-            </span>
-
-        `;
-
-
-
-        fullHistory.appendChild(item);
-
-
-
-        if(index < 3){
-
-            dashboardHistory
-            .appendChild(
-                item.cloneNode(true)
-            );
-
-        }
-
-
-    });
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
-   NAVIGATION
-===================================== */
-
-
-const navigation =
-document.querySelectorAll(
-    "[data-page]"
+const user =
+usersDatabase.find(
+item =>
+item.username === username &&
+item.password === password
 );
 
 
 
-navigation.forEach(button => {
+
+if(!user){
 
 
-
-    button.addEventListener(
-        "click",
-        function(){
+document.getElementById("login-message").innerText =
+"Identifiant ou mot de passe incorrect.";
 
 
+return;
 
-            const page =
-            this.dataset.page;
-
-
-
-            document
-            .querySelectorAll(".page")
-            .forEach(section=>{
-
-                section
-                .classList
-                .remove("active");
-
-            });
+}
 
 
 
 
-            document
-            .getElementById(page)
-            .classList
-            .add("active");
+
+connectedUser = user;
 
 
 
-
-            navigation.forEach(btn=>{
-
-                btn.classList.remove(
-                    "nav-active"
-                );
-
-            });
+localStorage.setItem(
+"connectedUser",
+user.id
+);
 
 
 
-            this.classList.add(
-                "nav-active"
-            );
-
-
-
-        }
-
-    );
+openClientSpace();
 
 
 
@@ -450,262 +88,217 @@ navigation.forEach(button => {
 
 
 
-/* =====================================
-   DECONNEXION
-===================================== */
+/* ==========================
+   OUVRIR ESPACE CLIENT
+========================== */
+
+
+function openClientSpace(){
+
 
 
 document
-.getElementById("logout-btn")
-.addEventListener(
-"click",
-function(){
+.getElementById("login-page")
+.style.display="none";
 
 
 
-    currentAccount = null;
+document
+.getElementById("client-space")
+.classList.remove("hidden");
 
 
 
-    document
-    .getElementById("bank-screen")
-    .style.display="none";
+loadUserInformation();
 
 
 
-    document
-    .getElementById("login-screen")
-    .style.display="flex";
+}
 
 
 
-    document
-    .getElementById("login-id")
-    .value="";
 
 
 
-    document
-    .getElementById("login-password")
-    .value="";
 
 
+
+/* ==========================
+   CHARGEMENT INFORMATIONS
+========================== */
+
+
+function loadUserInformation(){
+
+
+
+const user = connectedUser;
+
+
+
+/* En-tête */
+
+
+document.getElementById("client-name")
+.innerText =
+`${user.profile.firstName} ${user.profile.lastName}`;
+
+
+
+
+
+
+
+/* Solde */
+
+
+document.getElementById("account-balance")
+.innerText =
+formatMoney(user.account.balance);
+
+
+
+document.getElementById("account-status")
+.innerText =
+user.account.status;
+
+
+
+
+
+
+
+
+
+/* Profil */
+
+
+document.getElementById("profile-full-name")
+.innerText =
+`${user.profile.firstName} ${user.profile.lastName}`;
+
+
+document.getElementById("profile-login")
+.innerText =
+user.username;
+
+
+document.getElementById("profile-email")
+.innerText =
+user.profile.email;
+
+
+document.getElementById("profile-phone")
+.innerText =
+user.profile.phone;
+
+
+
+
+
+
+
+
+
+/* Coordonnées bancaires */
+
+
+document.getElementById("rib-name")
+.innerText =
+`${user.profile.firstName} ${user.profile.lastName}`;
+
+
+document.getElementById("rib-iban")
+.innerText =
+user.account.bankingDetails.iban;
+
+
+document.getElementById("rib-bic")
+.innerText =
+user.account.bankingDetails.bic;
+
+
+document.getElementById("rib-number")
+.innerText =
+user.account.bankingDetails.accountNumber;
+
+
+
+
+
+
+
+loadAccounts();
+
+loadHistory();
+
+loadDashboardHistory();
+
+loadCard();
+
+loadNotifications();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   FORMAT MONETAIRE
+========================== */
+
+
+function formatMoney(value){
+
+
+return value.toLocaleString(
+"fr-FR",
+{
+style:"currency",
+currency:"EUR"
+}
+);
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   NAVIGATION
+========================== */
+
+
+window.showPage = function(pageId){
+
+
+
+document
+.querySelectorAll(".website-page")
+.forEach(page=>{
+
+page.classList.remove("active-page");
 
 });
 
 
 
-
-
-
-
-
-
-/* =====================================
-   VIREMENT SIMULE
-===================================== */
-
-
 document
-.getElementById("transfer-btn")
-.addEventListener(
-"click",
-function(){
-
-
-
-    const beneficiary =
-    document
-    .getElementById("beneficiary")
-    .value.trim();
-
-
-
-    const iban =
-    document
-    .getElementById("iban")
-    .value.trim();
-
-
-
-    const amount =
-    document
-    .getElementById("transfer-amount")
-    .value;
-
-
-
-    const reason =
-    document
-    .getElementById("transfer-reason")
-    .value.trim();
-
-
-
-    const result =
-    document
-    .getElementById("transfer-result");
-
-
-
-    const message =
-    document
-    .getElementById("transfer-message");
-
-
-
-
-
-
-
-    if(
-        !beneficiary ||
-        !iban ||
-        !amount ||
-        !reason
-    ){
-
-
-        alert(
-            "Veuillez compléter toutes les informations."
-        );
-
-
-        return;
-
-    }
-
-
-
-
-
-
-
-    result.style.display="block";
-
-
-
-    message.innerHTML = `
-
-
-        <strong>
-        Analyse de sécurité en cours...
-        </strong>
-
-        <br><br>
-
-        Vérification des informations du bénéficiaire...
-
-        <br><br>
-
-        Contrôle réglementaire...
-
-        <br><br>
-
-        <strong class="blocked">
-        Opération refusée
-        </strong>
-
-        <br><br>
-
-        Motif :
-        Le compte est actuellement sous restriction
-        dans cette simulation.
-
-
-    `;
-
-
-
-});/* =====================================
-   SAUVEGARDE SESSION
-===================================== */
-
-
-function saveSession(){
-
-
-    if(currentAccount){
-
-
-        localStorage.setItem(
-            "fortuneo_current",
-            JSON.stringify(currentAccount)
-        );
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-function restoreSession(){
-
-
-    const saved =
-    localStorage.getItem(
-        "fortuneo_current"
-    );
-
-
-
-    if(saved){
-
-
-        currentAccount =
-        JSON.parse(saved);
-
-
-
-        document
-        .getElementById("login-screen")
-        .style.display="none";
-
-
-
-        document
-        .getElementById("bank-screen")
-        .style.display="block";
-
-
-
-        loadAccount();
-
-
-    }
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   MODIFICATION CHARGEMENT PROFIL
-===================================== */
-
-
-const oldLoadAccount = loadAccount;
-
-
-loadAccount = function(){
-
-
-    oldLoadAccount();
-
-
-
-    saveSession();
+.getElementById(pageId)
+.classList.add("active-page");
 
 
 
@@ -718,43 +311,417 @@ loadAccount = function(){
 
 
 
-/* =====================================
-   ANIMATION VIREMENT
-===================================== */
+
+/* ==========================
+   COMPTES
+========================== */
 
 
-const transferButton =
-document.getElementById(
-    "transfer-btn"
-);
+function loadAccounts(){
+
+
+const container =
+document.getElementById("accounts-container");
+
+
+container.innerHTML = `
+
+
+<h3>
+${connectedUser.account.name}
+</h3>
+
+
+<p>
+Solde :
+<strong>
+${formatMoney(
+connectedUser.account.balance
+)}
+</strong>
+</p>
+
+
+<p>
+Statut :
+${connectedUser.account.status}
+</p>
+
+
+`;
 
 
 
-transferButton.addEventListener(
-"click",
-function(){
-
-
-    transferButton.disabled = true;
-
-
-    transferButton.textContent =
-    "Analyse en cours...";
+}
 
 
 
-    setTimeout(()=>{
-
-
-        transferButton.disabled=false;
-
-
-        transferButton.textContent =
-        "Envoyer le virement";
 
 
 
-    },2500);
+
+
+
+/* ==========================
+   HISTORIQUE
+========================== */
+
+
+function loadHistory(){
+
+
+
+const container =
+document.getElementById("history-container");
+
+
+
+container.innerHTML="";
+
+
+
+connectedUser.operations.forEach(operation=>{
+
+
+const div =
+document.createElement("div");
+
+
+
+div.className="operation";
+
+
+
+div.innerHTML=`
+
+
+<div>
+
+<strong>
+${operation.label}
+</strong>
+
+<br>
+
+<span>
+${operation.date}
+</span>
+
+</div>
+
+
+<b>
+${operation.amount}
+</b>
+
+
+`;
+
+
+
+div.onclick=function(){
+
+showOperation(operation);
+
+};
+
+
+
+container.appendChild(div);
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+   HISTORIQUE ACCUEIL
+========================== */
+
+
+function loadDashboardHistory(){
+
+
+
+const box =
+document.getElementById("dashboard-history");
+
+
+box.innerHTML="";
+
+
+
+connectedUser.operations
+.slice(0,3)
+.forEach(operation=>{
+
+
+const div =
+document.createElement("div");
+
+
+div.className="operation";
+
+
+div.innerHTML=`
+
+<strong>
+${operation.label}
+</strong>
+
+<span>
+${operation.amount}
+</span>
+
+
+`;
+
+
+box.appendChild(div);
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   CARTE
+========================== */
+
+
+function loadCard(){
+
+
+const container =
+document.getElementById("cards-container");
+
+
+
+const card =
+connectedUser.card;
+
+
+
+container.innerHTML = `
+
+
+<div class="bank-card">
+
+
+<h3>
+Fortuneo Banque
+</h3>
+
+
+<div class="chip"></div>
+
+
+<h2>
+**** **** **** ${card.number}
+</h2>
+
+
+<p>
+${card.holder}
+</p>
+
+
+<p>
+Expiration : ${card.expiry}
+</p>
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   NOTIFICATIONS
+========================== */
+
+
+function loadNotifications(){
+
+
+const container =
+document.getElementById("notifications-container");
+
+
+
+container.innerHTML="";
+
+
+
+connectedUser.notifications.forEach(note=>{
+
+
+const div =
+document.createElement("div");
+
+
+div.className="notification";
+
+
+div.innerText=note;
+
+
+container.appendChild(div);
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   DETAIL OPERATION
+========================== */
+
+
+function showOperation(operation){
+
+
+
+const modal =
+document.getElementById("operation-modal");
+
+
+
+document.getElementById("operation-details")
+.innerHTML=`
+
+
+<p>
+Libellé :
+${operation.label}
+</p>
+
+
+<p>
+Catégorie :
+${operation.category}
+</p>
+
+
+<p>
+Date :
+${operation.date}
+</p>
+
+
+<p>
+Montant :
+${operation.amount}
+</p>
+
+
+`;
+
+
+
+modal.classList.remove("hidden");
+
+
+}
+
+
+
+
+
+document
+.getElementById("close-modal")
+.onclick=function(){
+
+
+document
+.getElementById("operation-modal")
+.classList.add("hidden");
+
+
+};
+
+
+
+
+
+
+
+
+
+/* ==========================
+   RECHERCHE HISTORIQUE
+========================== */
+
+
+document
+.getElementById("history-search")
+.addEventListener("input",function(){
+
+
+const search =
+this.value.toLowerCase();
+
+
+
+document
+.querySelectorAll(".operation")
+.forEach(item=>{
+
+
+item.style.display =
+item.innerText
+.toLowerCase()
+.includes(search)
+?
+"flex"
+:
+"none";
+
+
+});
 
 
 
@@ -767,58 +734,47 @@ function(){
 
 
 
-/* =====================================
-   NETTOYAGE FORMULAIRE
-===================================== */
+
+/* ==========================
+   VIREMENT
+========================== */
 
 
-function clearTransfer(){
+document
+.getElementById("transfer-button")
+.addEventListener("click",()=>{
 
 
-    document
-    .getElementById("beneficiary")
-    .value="";
-
-
-
-    document
-    .getElementById("iban")
-    .value="";
-
-
-
-    document
-    .getElementById("transfer-amount")
-    .value="";
+const amount =
+Number(
+document.getElementById("transfer-amount").value
+);
 
 
 
-    document
-    .getElementById("transfer-reason")
-    .value="";
+if(!amount || amount<=0){
 
+
+document.getElementById("transfer-result")
+.innerText =
+"Veuillez saisir un montant valide.";
+
+
+return;
 
 }
 
 
 
+document.getElementById("transfer-result")
+.innerText =
+"Votre demande a été prise en compte.";
 
 
 
 
 
-/* =====================================
-   VALIDATION IBAN SIMPLE
-===================================== */
-
-
-function checkIBAN(value){
-
-
-    return value.length >= 10;
-
-
-}
+});
 
 
 
@@ -827,17 +783,29 @@ function checkIBAN(value){
 
 
 
-/* =====================================
-   INITIALISATION
-===================================== */
+
+/* ==========================
+   DECONNEXION
+========================== */
 
 
-window.addEventListener(
-"load",
-function(){
+logoutButton.addEventListener("click",()=>{
 
 
-    restoreSession();
+connectedUser=null;
+
+
+localStorage.removeItem(
+"connectedUser"
+);
+
+
+
+location.reload();
+
+
+
+});
 
 
 
