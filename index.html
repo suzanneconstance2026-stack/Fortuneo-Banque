@@ -1,264 +1,349 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!-- SUITE DU FICHIER index.html -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <div class="section-card">
 
-    <title>NovaBank - Espace Client</title>
+                    <h3>
+                        Mes comptes
+                    </h3>
 
-    <link rel="stylesheet" href="style.css">
-</head>
 
+                    <div class="account-item">
 
-<body>
+                        <div>
+                            <span>
+                                Compte principal
+                            </span>
 
+                            <strong>
+                                **** 4582
+                            </strong>
+                        </div>
 
-<div class="app-container">
 
+                        <b>
+                            0,00 €
+                        </b>
 
-    <!-- =========================
-         CONNEXION
-    ========================== -->
+                    </div>
 
-    <section id="login-screen" class="login-screen">
 
 
-        <div class="login-box">
+                    <div class="account-item">
 
+                        <div>
+                            <span>
+                                Épargne
+                            </span>
 
-            <div class="logo">
+                            <strong>
+                                **** 9217
+                            </strong>
+                        </div>
 
-                <h1>
-                    NovaBank
-                </h1>
 
-                <p>
-                    Espace client
-                </p>
+                        <b>
+                            0,00 €
+                        </b>
 
-            </div>
+                    </div>
 
-
-
-            <h2>
-                Connexion
-            </h2>
-
-
-
-            <div class="input-group">
-
-                <label>
-                    Identifiant
-                </label>
-
-                <input 
-                    id="username"
-                    type="text"
-                    placeholder="Votre identifiant"
-                >
-
-            </div>
-
-
-
-
-            <div class="input-group">
-
-                <label>
-                    Mot de passe
-                </label>
-
-                <input 
-                    id="password"
-                    type="password"
-                    placeholder="Votre mot de passe"
-                >
-
-            </div>
-
-
-
-            <div class="remember">
-
-                <input 
-                    id="remember"
-                    type="checkbox"
-                >
-
-                <label for="remember">
-                    Se souvenir de moi
-                </label>
-
-            </div>
-
-
-
-            <button 
-                id="login-btn"
-                class="main-btn"
-            >
-                Se connecter
-            </button>
-
-
-
-            <p 
-                id="login-error"
-                class="error-message"
-            ></p>
-
-
-
-        </div>
-
-
-    </section>
-
-
-
-
-
-
-
-    <!-- =========================
-         APPLICATION
-    ========================== -->
-
-
-    <section 
-        id="bank-app"
-        class="bank-app"
-        hidden
-    >
-
-
-
-        <!-- HEADER -->
-
-        <header class="header">
-
-
-            <div class="user-info">
-
-
-                <div class="avatar">
-                    NG
-                </div>
-
-
-                <div>
-
-                    <strong>
-                        Nicolas Garnier
-                    </strong>
-
-                    <span>
-                        Client Premium
-                    </span>
 
                 </div>
 
 
-            </div>
-
-
-
-
-            <button 
-                id="logout-btn"
-                class="logout"
-            >
-                Sortir
-            </button>
-
-
-        </header>
+            </section>
 
 
 
 
 
-        <!-- CONTENU -->
 
-        <main class="main-content">
-
-
-
-            <!-- PAGE ACCUEIL -->
+            <!-- PAGE OPERATIONS -->
 
             <section 
-                id="dashboard"
-                class="page active"
+                id="operations"
+                class="page"
             >
 
-
                 <h2>
-                    Vue d'ensemble
+                    Opérations
                 </h2>
 
 
 
-
-                <div class="balance-card">
-
-
-                    <p>
-                        Solde disponible
-                    </p>
+                <div class="form-card">
 
 
-                    <h1 id="balance">
-                        0,00 €
-                    </h1>
+                    <div class="input-group">
+
+                        <label>
+                            Libellé
+                        </label>
+
+                        <input 
+                            id="operation-label"
+                            type="text"
+                            placeholder="Exemple : Paiement"
+                        >
+
+                    </div>
 
 
-                    <small>
-                        Compte principal
-                    </small>
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Montant (€)
+                        </label>
+
+                        <input 
+                            id="operation-amount"
+                            type="number"
+                            placeholder="0"
+                        >
+
+                    </div>
+
+
+
+
+                    <div class="input-group">
+
+                        <label>
+                            Catégorie
+                        </label>
+
+
+                        <select id="operation-category">
+
+                            <option>
+                                Alimentation
+                            </option>
+
+                            <option>
+                                Transport
+                            </option>
+
+                            <option>
+                                Logement
+                            </option>
+
+                            <option>
+                                Loisirs
+                            </option>
+
+                            <option>
+                                Autre
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+
+                    <button 
+                        id="add-operation"
+                        class="main-btn"
+                    >
+                        Ajouter
+                    </button>
+
+
+                </div>
+
+
+            </section>
+
+
+
+
+
+
+
+            <!-- HISTORIQUE -->
+
+            <section 
+                id="transactions"
+                class="page"
+            >
+
+                <h2>
+                    Historique des opérations
+                </h2>
+
+
+                <div class="search-box">
+
+                    <input 
+                        id="search"
+                        type="search"
+                        placeholder="Rechercher une opération"
+                    >
+
+                </div>
+
+
+
+                <div 
+                    id="transaction-list"
+                    class="transaction-list"
+                >
 
 
                 </div>
 
 
 
+            </section>
 
 
-                <div class="quick-menu">
 
 
-                    <button data-page="operations">
-                        Nouvelle opération
-                    </button>
 
 
-                    <button data-page="transactions">
-                        Historique
-                    </button>
 
 
-                    <button data-page="cards">
-                        Mes cartes
-                    </button>
+            <!-- CARTES -->
+
+            <section 
+                id="cards"
+                class="page"
+            >
+
+                <h2>
+                    Mes cartes
+                </h2>
+
+
+
+                <div class="bank-card">
+
+
+                    <div class="card-brand">
+                        Fortuneo Banque
+                    </div>
+
+
+
+                    <div class="chip"></div>
+
+
+
+                    <div class="card-number">
+                        **** **** **** 4582
+                    </div>
+
+
+
+                    <div class="card-footer">
+
+
+                        <span>
+                            TITULAIRE
+                            <strong>
+                                Nicolas Garnier
+                            </strong>
+                        </span>
+
+
+
+                        <span>
+                            TYPE
+                            <strong>
+                                Carte Premium
+                            </strong>
+                        </span>
+
+
+                    </div>
 
 
                 </div>
 
 
 
+                <button 
+                    class="secondary-btn"
+                >
+                    Gérer ma carte
+                </button>
 
 
-                <div class="section-card">
+            </section> 
+                        <!-- PROFIL -->
+
+            <section 
+                id="profile"
+                class="page"
+            >
+
+                <h2>
+                    Mon profil
+                </h2>
 
 
-                    <h3>
-                        Dernières activités
-                    </h3>
+
+                <div class="profile-card">
+
+
+                    <div class="profile-row">
+
+                        <span>
+                            Nom
+                        </span>
+
+                        <strong>
+                            Nicolas Garnier
+                        </strong>
+
+                    </div>
 
 
 
-                    <div id="recent-list">
+
+                    <div class="profile-row">
+
+                        <span>
+                            Type de client
+                        </span>
+
+                        <strong>
+                            Client Premium
+                        </strong>
+
+                    </div>
+
+
+
+
+                    <div class="profile-row">
+
+                        <span>
+                            Conseiller
+                        </span>
+
+                        <strong>
+                            Service clientèle
+                        </strong>
+
+                    </div>
+
+
+
+
+                    <div class="profile-row">
+
+                        <span>
+                            Statut
+                        </span>
+
+                        <strong class="active-status">
+                            Actif
+                        </strong>
 
                     </div>
 
@@ -268,3 +353,125 @@
 
 
             </section>
+
+
+
+
+        </main>
+
+
+
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="bottom-nav">
+
+
+            <button 
+                class="nav-link active"
+                data-page="dashboard"
+            >
+
+                <span>
+                    🏠
+                </span>
+
+                Accueil
+
+            </button>
+
+
+
+
+
+            <button 
+                class="nav-link"
+                data-page="operations"
+            >
+
+                <span>
+                    💶
+                </span>
+
+                Opérations
+
+            </button>
+
+
+
+
+
+            <button 
+                class="nav-link"
+                data-page="transactions"
+            >
+
+                <span>
+                    📄
+                </span>
+
+                Historique
+
+            </button>
+
+
+
+
+
+            <button 
+                class="nav-link"
+                data-page="cards"
+            >
+
+                <span>
+                    💳
+                </span>
+
+                Cartes
+
+            </button>
+
+
+
+
+
+            <button 
+                class="nav-link"
+                data-page="profile"
+            >
+
+                <span>
+                    👤
+                </span>
+
+                Profil
+
+            </button>
+
+
+
+        </nav>
+
+
+
+
+    </section>
+
+
+
+
+
+</div>
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
