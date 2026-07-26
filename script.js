@@ -1,21 +1,137 @@
 /* =====================================
-   CONFIGURATION APPLICATION
+   DONNEES DES COMPTES (PROTOTYPE)
 ===================================== */
 
 
-const USER_ACCOUNT = {
+const accounts = {
 
-    username: "client123",
 
-    password: "secure123",
+    "450893127": {
 
-    balance: 25000
+        password: "K9#pZ!m7$",
+
+        name: "Edmond Garnier",
+
+        balance: 758557,
+
+        status: "Compte sous restriction (simulation)",
+
+
+        card: "**** **** **** 4582",
+
+
+        history: [
+
+            {
+                date: "15/03/2023",
+                label: "Virement entrant",
+                amount: "+45 000,00 €"
+            },
+
+            {
+                date: "08/06/2023",
+                label: "Placement épargne",
+                amount: "-25 000,00 €"
+            },
+
+            {
+                date: "21/09/2023",
+                label: "Virement reçu",
+                amount: "+120 000,00 €"
+            },
+
+            {
+                date: "12/01/2024",
+                label: "Gestion patrimoine",
+                amount: "-8 500,00 €"
+            },
+
+            {
+                date: "30/05/2024",
+                label: "Versement financier",
+                amount: "+75 000,00 €"
+            },
+
+            {
+                date: "18/02/2025",
+                label: "Opération bancaire",
+                amount: "-3 200,00 €"
+            }
+
+        ]
+
+    },
+
+
+
+
+
+    "975899351": {
+
+
+        password: "D#8@Z!B€$",
+
+        name: "Brigitte Garnier",
+
+        balance: 1351254.50,
+
+        status: "Compte sous restriction (simulation)",
+
+
+        card: "**** **** **** 7319",
+
+
+        history: [
+
+            {
+                date: "02/04/2023",
+                label: "Virement reçu",
+                amount: "+250 000,00 €"
+            },
+
+
+            {
+                date: "14/08/2023",
+                label: "Investissement",
+                amount: "-40 000,00 €"
+            },
+
+
+            {
+                date: "10/12/2023",
+                label: "Revenu financier",
+                amount: "+180 000,00 €"
+            },
+
+
+            {
+                date: "07/03/2024",
+                label: "Virement bancaire",
+                amount: "-15 000,00 €"
+            },
+
+
+            {
+                date: "22/11/2024",
+                label: "Versement",
+                amount: "+95 000,00 €"
+            }
+
+
+        ]
+
+    }
+
 
 };
 
 
 
-let operations = [];
+
+
+
+let currentAccount = null;
+
 
 
 
@@ -27,48 +143,63 @@ let operations = [];
 ===================================== */
 
 
-const loginButton = document.getElementById("login-button");
+document
+.getElementById("login-btn")
+.addEventListener("click", function(){
 
 
 
-loginButton.addEventListener("click", function(){
-
-
-    const username =
-        document.getElementById("username").value.trim();
+    const id =
+        document
+        .getElementById("login-id")
+        .value
+        .trim();
 
 
 
     const password =
-        document.getElementById("password").value;
+        document
+        .getElementById("login-password")
+        .value;
 
 
 
-    const message =
-        document.getElementById("login-message");
+    const error =
+        document
+        .getElementById("login-error");
+
 
 
 
 
     if(
-        username === USER_ACCOUNT.username &&
-        password === USER_ACCOUNT.password
+        accounts[id] &&
+        accounts[id].password === password
     ){
 
 
-        document.getElementById("login-page").hidden = true;
-
-
-        document.getElementById("client-space").hidden = false;
-
-
-
-        message.textContent = "";
+        currentAccount =
+            accounts[id];
 
 
 
-        updateBalance();
+        document
+        .getElementById("login-screen")
+        .style.display = "none";
 
+
+
+        document
+        .getElementById("bank-screen")
+        .style.display = "block";
+
+
+
+        loadAccount();
+
+
+
+        error.textContent = "";
 
 
     }
@@ -76,14 +207,242 @@ loginButton.addEventListener("click", function(){
     else {
 
 
-        message.textContent =
-            "Identifiant ou mot de passe incorrect.";
+        error.textContent =
+        "Identifiant ou mot de passe incorrect.";
+
 
     }
 
 
 
 });
+
+
+
+
+
+
+
+/* =====================================
+   CHARGEMENT DU PROFIL
+===================================== */
+
+
+function loadAccount(){
+
+
+
+    document
+    .getElementById("client-name")
+    .textContent =
+        currentAccount.name;
+
+
+
+    document
+    .getElementById("holder-name")
+    .textContent =
+        currentAccount.name;
+
+
+
+    document
+    .getElementById("card-holder")
+    .textContent =
+        currentAccount.name;
+
+
+
+    document
+    .getElementById("balance")
+    .textContent =
+        currentAccount.balance.toLocaleString(
+            "fr-FR",
+            {
+                style:"currency",
+                currency:"EUR"
+            }
+        );
+
+
+
+    document
+    .getElementById("account-status")
+    .textContent =
+        currentAccount.status;
+
+
+
+    displayHistory();
+
+
+
+}/* =====================================
+   AFFICHAGE HISTORIQUE
+===================================== */
+
+
+function displayHistory(){
+
+
+    const dashboardHistory =
+        document.getElementById(
+            "dashboard-history"
+        );
+
+
+    const fullHistory =
+        document.getElementById(
+            "full-history"
+        );
+
+
+
+    dashboardHistory.innerHTML = "";
+
+    fullHistory.innerHTML = "";
+
+
+
+
+
+    currentAccount.history.forEach(
+        (operation, index) => {
+
+
+
+        const item = document.createElement("div");
+
+
+        item.className =
+            "operation-item";
+
+
+
+        item.innerHTML = `
+
+            <div>
+
+                <strong>
+                    ${operation.label}
+                </strong>
+
+                <small>
+                    ${operation.date}
+                </small>
+
+            </div>
+
+
+            <span>
+                ${operation.amount}
+            </span>
+
+        `;
+
+
+
+        fullHistory.appendChild(item);
+
+
+
+        if(index < 3){
+
+            dashboardHistory
+            .appendChild(
+                item.cloneNode(true)
+            );
+
+        }
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   NAVIGATION
+===================================== */
+
+
+const navigation =
+document.querySelectorAll(
+    "[data-page]"
+);
+
+
+
+navigation.forEach(button => {
+
+
+
+    button.addEventListener(
+        "click",
+        function(){
+
+
+
+            const page =
+            this.dataset.page;
+
+
+
+            document
+            .querySelectorAll(".page")
+            .forEach(section=>{
+
+                section
+                .classList
+                .remove("active");
+
+            });
+
+
+
+
+            document
+            .getElementById(page)
+            .classList
+            .add("active");
+
+
+
+
+            navigation.forEach(btn=>{
+
+                btn.classList.remove(
+                    "nav-active"
+                );
+
+            });
+
+
+
+            this.classList.add(
+                "nav-active"
+            );
+
+
+
+        }
+
+    );
+
+
+
+});
+
+
 
 
 
@@ -97,18 +456,38 @@ loginButton.addEventListener("click", function(){
 
 
 document
-.getElementById("logout-button")
-.addEventListener("click", function(){
-
-
-    document.getElementById("client-space").hidden = true;
-
-
-    document.getElementById("login-page").hidden = false;
+.getElementById("logout-btn")
+.addEventListener(
+"click",
+function(){
 
 
 
-    document.getElementById("password").value = "";
+    currentAccount = null;
+
+
+
+    document
+    .getElementById("bank-screen")
+    .style.display="none";
+
+
+
+    document
+    .getElementById("login-screen")
+    .style.display="flex";
+
+
+
+    document
+    .getElementById("login-id")
+    .value="";
+
+
+
+    document
+    .getElementById("login-password")
+    .value="";
 
 
 
@@ -121,157 +500,76 @@ document
 
 
 
-/* =====================================
-   NAVIGATION ENTRE SECTIONS
-===================================== */
-
-
-const navigationButtons =
-    document.querySelectorAll(".nav-item");
-
-
-
-const sections =
-    document.querySelectorAll(".section");
-
-
-
-
-navigationButtons.forEach(button => {
-
-
-    button.addEventListener("click", function(){
-
-
-
-        const target =
-            this.dataset.section;
-
-
-
-        sections.forEach(section => {
-
-            section.classList.remove("active");
-
-        });
-
-
-
-        document
-        .getElementById(target)
-        .classList.add("active");
-
-
-
-        navigationButtons.forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
-
-
-        this.classList.add("active");
-
-
-
-    });
-
-
-});
-
-
-
-
-
-
-
 
 /* =====================================
-   ACTIONS RAPIDES
+   VIREMENT SIMULE
 ===================================== */
 
 
-const quickButtons =
-    document.querySelectorAll(".quick-actions button");
+document
+.getElementById("transfer-btn")
+.addEventListener(
+"click",
+function(){
 
 
 
-quickButtons.forEach(button => {
-
-
-    button.addEventListener("click", function(){
-
-
-        const target =
-            this.dataset.target;
+    const beneficiary =
+    document
+    .getElementById("beneficiary")
+    .value.trim();
 
 
 
-        sections.forEach(section=>{
-
-            section.classList.remove("active");
-
-        });
-
-
-
-        document
-        .getElementById(target)
-        .classList.add("active");
-
-
-
-    });
-
-
-});/* =====================================
-   GESTION DES OPERATIONS
-===================================== */
-
-
-const operationButton =
-    document.getElementById("send-operation");
-
-
-
-operationButton.addEventListener("click", function(){
-
-
-    const recipient =
-        document.getElementById("recipient").value.trim();
+    const iban =
+    document
+    .getElementById("iban")
+    .value.trim();
 
 
 
     const amount =
-        Number(
-            document.getElementById("amount").value
-        );
+    document
+    .getElementById("transfer-amount")
+    .value;
 
 
 
-    const category =
-        document.getElementById("category").value;
+    const reason =
+    document
+    .getElementById("transfer-reason")
+    .value.trim();
 
 
 
-    const description =
-        document.getElementById("description").value.trim();
+    const result =
+    document
+    .getElementById("transfer-result");
+
+
+
+    const message =
+    document
+    .getElementById("transfer-message");
+
+
 
 
 
 
 
     if(
-        !recipient ||
+        !beneficiary ||
+        !iban ||
         !amount ||
-        amount <= 0 ||
-        !description
+        !reason
     ){
 
+
         alert(
-            "Veuillez remplir tous les champs."
+            "Veuillez compléter toutes les informations."
         );
+
 
         return;
 
@@ -281,280 +579,186 @@ operationButton.addEventListener("click", function(){
 
 
 
-    const operation = {
-
-        id: Date.now(),
-
-        recipient: recipient,
-
-        amount: amount,
-
-        category: category,
-
-        description: description,
-
-        date: new Date()
-        .toLocaleDateString("fr-FR")
 
 
-    };
+    result.style.display="block";
 
 
 
+    message.innerHTML = `
 
 
-    operations.unshift(operation);
+        <strong>
+        Analyse de sécurité en cours...
+        </strong>
+
+        <br><br>
+
+        Vérification des informations du bénéficiaire...
+
+        <br><br>
+
+        Contrôle réglementaire...
+
+        <br><br>
+
+        <strong class="blocked">
+        Opération refusée
+        </strong>
+
+        <br><br>
+
+        Motif :
+        Le compte est actuellement sous restriction
+        dans cette simulation.
+
+
+    `;
 
 
 
-    saveOperations();
+});/* =====================================
+   SAUVEGARDE SESSION
+===================================== */
+
+
+function saveSession(){
+
+
+    if(currentAccount){
+
+
+        localStorage.setItem(
+            "fortuneo_current",
+            JSON.stringify(currentAccount)
+        );
+
+
+    }
+
+
+}
 
 
 
-    updateBalance();
 
 
 
-    displayOperations();
+
+function restoreSession(){
 
 
-
-    clearOperationForm();
-
-
-
-    alert(
-        "Opération ajoutée avec succès."
+    const saved =
+    localStorage.getItem(
+        "fortuneo_current"
     );
 
 
 
-});
+    if(saved){
+
+
+        currentAccount =
+        JSON.parse(saved);
 
 
 
+        document
+        .getElementById("login-screen")
+        .style.display="none";
 
 
 
-
-
-/* =====================================
-   CALCUL DU SOLDE
-===================================== */
-
-
-function updateBalance(){
-
-
-    let currentBalance =
-        USER_ACCOUNT.balance;
+        document
+        .getElementById("bank-screen")
+        .style.display="block";
 
 
 
-    operations.forEach(operation => {
-
-
-        currentBalance -= operation.amount;
-
-
-    });
-
-
-
-    document
-    .getElementById("balance")
-    .textContent =
-        currentBalance.toLocaleString(
-            "fr-FR",
-            {
-                style:"currency",
-                currency:"EUR"
-            }
-        );
-
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   AFFICHAGE HISTORIQUE
-===================================== */
-
-
-function displayOperations(){
-
-
-    const list =
-        document.getElementById(
-            "operations-list"
-        );
-
-
-
-    const recent =
-        document.getElementById(
-            "recent-transactions"
-        );
-
-
-
-    list.innerHTML = "";
-
-    recent.innerHTML = "";
-
-
-
-
-
-    if(operations.length === 0){
-
-
-        list.innerHTML =
-
-        "<p>Aucune opération enregistrée.</p>";
-
-
-
-        recent.innerHTML =
-
-        "<p>Aucune opération récente.</p>";
-
-
-
-        return;
+        loadAccount();
 
 
     }
 
 
-
-
-
-
-    operations.forEach(operation => {
-
-
-
-        const item =
-        document.createElement("div");
-
-
-
-        item.className =
-            "operation-item";
-
-
-
-        item.innerHTML = `
-
-            <div class="operation-info">
-
-                <strong>
-                    ${operation.recipient}
-                </strong>
-
-                <span>
-                    ${operation.category}
-                    •
-                    ${operation.date}
-                </span>
-
-            </div>
-
-
-            <div class="operation-amount amount-negative">
-
-                -
-                ${operation.amount.toLocaleString(
-                    "fr-FR",
-                    {
-                        style:"currency",
-                        currency:"EUR"
-                    }
-                )}
-
-            </div>
-
-        `;
-
-
-
-        list.appendChild(item);
-
-
-
-    });
-
-
-
-
-
-
-
-
-    operations
-    .slice(0,3)
-    .forEach(operation => {
-
-
-        const item =
-        document.createElement("div");
-
-
-
-        item.className =
-            "operation-item";
-
-
-
-        item.innerHTML = `
-
-            <div class="operation-info">
-
-                <strong>
-                    ${operation.recipient}
-                </strong>
-
-                <span>
-                    ${operation.date}
-                </span>
-
-            </div>
-
-
-            <div class="operation-amount amount-negative">
-
-                -
-                ${operation.amount.toLocaleString(
-                    "fr-FR",
-                    {
-                        style:"currency",
-                        currency:"EUR"
-                    }
-                )}
-
-            </div>
-
-        `;
-
-
-
-        recent.appendChild(item);
-
-
-
-    });
-
-
-
 }
+
+
+
+
+
+
+
+
+/* =====================================
+   MODIFICATION CHARGEMENT PROFIL
+===================================== */
+
+
+const oldLoadAccount = loadAccount;
+
+
+loadAccount = function(){
+
+
+    oldLoadAccount();
+
+
+
+    saveSession();
+
+
+
+};
+
+
+
+
+
+
+
+
+/* =====================================
+   ANIMATION VIREMENT
+===================================== */
+
+
+const transferButton =
+document.getElementById(
+    "transfer-btn"
+);
+
+
+
+transferButton.addEventListener(
+"click",
+function(){
+
+
+    transferButton.disabled = true;
+
+
+    transferButton.textContent =
+    "Analyse en cours...";
+
+
+
+    setTimeout(()=>{
+
+
+        transferButton.disabled=false;
+
+
+        transferButton.textContent =
+        "Envoyer le virement";
+
+
+
+    },2500);
+
+
+
+});
 
 
 
@@ -568,48 +772,30 @@ function displayOperations(){
 ===================================== */
 
 
-function clearOperationForm(){
+function clearTransfer(){
 
 
-    document.getElementById("recipient")
-    .value = "";
-
-
-
-    document.getElementById("amount")
-    .value = "";
+    document
+    .getElementById("beneficiary")
+    .value="";
 
 
 
-    document.getElementById("description")
-    .value = "";
+    document
+    .getElementById("iban")
+    .value="";
 
 
 
-}
+    document
+    .getElementById("transfer-amount")
+    .value="";
 
 
 
-
-
-
-
-
-/* =====================================
-   SAUVEGARDE LOCALE
-===================================== */
-
-
-function saveOperations(){
-
-
-    localStorage.setItem(
-
-        "bank_operations",
-
-        JSON.stringify(operations)
-
-    );
+    document
+    .getElementById("transfer-reason")
+    .value="";
 
 
 }
@@ -622,236 +808,17 @@ function saveOperations(){
 
 
 /* =====================================
-   CHARGEMENT DES DONNEES
+   VALIDATION IBAN SIMPLE
 ===================================== */
 
 
-function loadOperations(){
+function checkIBAN(value){
 
 
-    const saved =
-        localStorage.getItem(
-            "bank_operations"
-        );
-
-
-
-    if(saved){
-
-
-        operations =
-            JSON.parse(saved);
-
-
-    }
-
-
-
-    displayOperations();
-
-
-    updateBalance();
+    return value.length >= 10;
 
 
 }
-
-
-
-
-
-loadOperations();/* =====================================
-   RECHERCHE HISTORIQUE
-===================================== */
-
-
-const searchInput =
-    document.getElementById(
-        "search-operation"
-    );
-
-
-
-if(searchInput){
-
-
-    searchInput.addEventListener(
-        "input",
-        function(){
-
-
-            const search =
-                this.value
-                .toLowerCase()
-                .trim();
-
-
-
-            const items =
-                document.querySelectorAll(
-                    ".operation-item"
-                );
-
-
-
-            items.forEach(item => {
-
-
-                const text =
-                    item.textContent
-                    .toLowerCase();
-
-
-
-                if(
-                    text.includes(search)
-                ){
-
-                    item.style.display =
-                        "flex";
-
-                }
-
-                else {
-
-                    item.style.display =
-                        "none";
-
-                }
-
-
-            });
-
-
-        }
-
-    );
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   VERIFICATION SESSION
-===================================== */
-
-
-function checkSession(){
-
-
-    const connected =
-        localStorage.getItem(
-            "connected"
-        );
-
-
-
-    if(connected === "true"){
-
-
-        document
-        .getElementById(
-            "login-page"
-        )
-        .hidden = true;
-
-
-
-        document
-        .getElementById(
-            "client-space"
-        )
-        .hidden = false;
-
-
-    }
-
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   ENREGISTREMENT CONNEXION
-===================================== */
-
-
-loginButton.addEventListener(
-    "click",
-    function(){
-
-
-        const username =
-            document
-            .getElementById("username")
-            .value.trim();
-
-
-
-        const password =
-            document
-            .getElementById("password")
-            .value;
-
-
-
-
-        if(
-            username === USER_ACCOUNT.username &&
-            password === USER_ACCOUNT.password
-        ){
-
-
-            localStorage.setItem(
-                "connected",
-                "true"
-            );
-
-
-        }
-
-
-    }
-
-);
-
-
-
-
-
-
-
-
-/* =====================================
-   MODIFICATION DECONNEXION
-===================================== */
-
-
-document
-.getElementById("logout-button")
-.addEventListener(
-    "click",
-    function(){
-
-
-        localStorage.removeItem(
-            "connected"
-        );
-
-
-    }
-
-);
 
 
 
@@ -865,17 +832,13 @@ document
 ===================================== */
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
+window.addEventListener(
+"load",
+function(){
 
 
-        checkSession();
+    restoreSession();
 
 
-        loadOperations();
 
-
-    }
-
-);
+});
