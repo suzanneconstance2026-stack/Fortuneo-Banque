@@ -30,11 +30,10 @@ function showSection(sectionId) {
     document.querySelectorAll('.app-section').forEach(sec => sec.classList.remove('active-section'));
     document.getElementById(sectionId).classList.add('active-section');
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active-nav'));
-    if (event && event.currentTarget) {
-        event.currentTarget.classList.add('active-nav');
-    }
+    event.currentTarget.classList.add('active-nav');
 }
 
+// LOGIQUE DU CHARGEMENT À 100% AVEC ERREUR ADMINISTRATIVE
 function startTransferAnimation() {
     const beneficiary = document.getElementById('beneficiary').value.trim();
     const iban = document.getElementById('iban-input').value.trim();
@@ -47,6 +46,7 @@ function startTransferAnimation() {
         return;
     }
 
+    // Basculer du formulaire vers la jauge de chargement
     document.getElementById('form-container').style.display = 'none';
     document.getElementById('loader-container').style.display = 'block';
 
@@ -55,14 +55,16 @@ function startTransferAnimation() {
     const progressText = document.getElementById('progress-text');
 
     const interval = setInterval(() => {
-        progress += Math.floor(Math.random() * 8) + 2;
+        progress += Math.floor(Math.random() * 8) + 2; // Avancement irrégulier pour faire vrai
         if (progress >= 100) {
             progress = 100;
             clearInterval(interval);
             
+            // Une fois à 100%, déclencher la boîte d'échec
             setTimeout(() => {
                 alert(`⚠️ ÉCHEC CRITIQUE DE TRANSMISSION INTERBANCAIRE\n\nVotre virement de ${amount.toLocaleString('fr-FR')} € vers ${beneficiary} a été REJETÉ.\n\nMotif : Compte bancaire bloqué par mesure de sécurité administrative nationale. Vous devez impérativement vous rendre dans votre agence Fortuneo Haute Gestion muni d'un justificatif d'identité original.`);
                 
+                // Ajouter l'opération en échec dans l'historique
                 const list = document.getElementById('transactions-list');
                 const newItem = document.createElement('div');
                 newItem.className = 'transaction-item blocked-tx';
@@ -78,6 +80,7 @@ function startTransferAnimation() {
                 `;
                 list.insertBefore(newItem, list.firstChild);
 
+                // Réinitialiser le formulaire et l'affichage
                 document.getElementById('beneficiary').value = '';
                 document.getElementById('iban-input').value = '';
                 document.getElementById('bic-input').value = '';
@@ -91,9 +94,10 @@ function startTransferAnimation() {
         }
         progressFill.style.width = progress + '%';
         progressText.innerText = progress + '%';
-    }, 150);
+    }, 150); // Met environ 3 secondes à charger à 100%
 }
 
+// NAVIGATION DU POP-UP DE DÉTAILS
 function openDetails(title, amount, date, reason, status) {
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-type').innerText = title;
