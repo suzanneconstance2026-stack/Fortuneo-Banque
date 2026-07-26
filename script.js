@@ -1,116 +1,881 @@
-// Tout le code a été simplifié pour ouvrir le compte directement sans bloquer
-function logout() {
-    window.location.reload();
-}
+/* =====================================
+   CONFIGURATION APPLICATION
+===================================== */
 
-function showSection(sectionId) {
-    document.querySelectorAll('.app-section').forEach(sec => sec.classList.remove('active-section'));
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.classList.add('active-section');
+
+const USER_ACCOUNT = {
+
+    username: "client123",
+
+    password: "secure123",
+
+    balance: 25000
+
+};
+
+
+
+let operations = [];
+
+
+
+
+
+
+/* =====================================
+   CONNEXION
+===================================== */
+
+
+const loginButton = document.getElementById("login-button");
+
+
+
+loginButton.addEventListener("click", function(){
+
+
+    const username =
+        document.getElementById("username").value.trim();
+
+
+
+    const password =
+        document.getElementById("password").value;
+
+
+
+    const message =
+        document.getElementById("login-message");
+
+
+
+
+    if(
+        username === USER_ACCOUNT.username &&
+        password === USER_ACCOUNT.password
+    ){
+
+
+        document.getElementById("login-page").hidden = true;
+
+
+        document.getElementById("client-space").hidden = false;
+
+
+
+        message.textContent = "";
+
+
+
+        updateBalance();
+
+
+
     }
-    
-    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active-nav'));
-    
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        const onclickAttr = item.getAttribute('onclick');
-        if (onclickAttr && onclickAttr.includes(sectionId)) {
-            item.classList.add('active-nav');
-        }
+
+    else {
+
+
+        message.textContent =
+            "Identifiant ou mot de passe incorrect.";
+
+    }
+
+
+
+});
+
+
+
+
+
+
+
+/* =====================================
+   DECONNEXION
+===================================== */
+
+
+document
+.getElementById("logout-button")
+.addEventListener("click", function(){
+
+
+    document.getElementById("client-space").hidden = true;
+
+
+    document.getElementById("login-page").hidden = false;
+
+
+
+    document.getElementById("password").value = "";
+
+
+
+});
+
+
+
+
+
+
+
+
+/* =====================================
+   NAVIGATION ENTRE SECTIONS
+===================================== */
+
+
+const navigationButtons =
+    document.querySelectorAll(".nav-item");
+
+
+
+const sections =
+    document.querySelectorAll(".section");
+
+
+
+
+navigationButtons.forEach(button => {
+
+
+    button.addEventListener("click", function(){
+
+
+
+        const target =
+            this.dataset.section;
+
+
+
+        sections.forEach(section => {
+
+            section.classList.remove("active");
+
+        });
+
+
+
+        document
+        .getElementById(target)
+        .classList.add("active");
+
+
+
+        navigationButtons.forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+
+        this.classList.add("active");
+
+
+
     });
-}
 
-function startTransferAnimation() {
-    const beneficiary = document.getElementById('beneficiary').value.trim();
-    const iban = document.getElementById('iban-input').value.trim();
-    const bic = document.getElementById('bic-input').value.trim();
-    const amount = parseFloat(document.getElementById('amount-input').value);
-    const reason = document.getElementById('reason-input').value.trim();
 
-    if (!beneficiary || !iban || !bic || isNaN(amount) || amount <= 0 || !reason) {
-        alert("Régulation bancaire : Veuillez remplir l'intégralité des variables (Nom, IBAN, BIC, Montant et Motif) avant de signer l'ordre.");
+});
+
+
+
+
+
+
+
+
+/* =====================================
+   ACTIONS RAPIDES
+===================================== */
+
+
+const quickButtons =
+    document.querySelectorAll(".quick-actions button");
+
+
+
+quickButtons.forEach(button => {
+
+
+    button.addEventListener("click", function(){
+
+
+        const target =
+            this.dataset.target;
+
+
+
+        sections.forEach(section=>{
+
+            section.classList.remove("active");
+
+        });
+
+
+
+        document
+        .getElementById(target)
+        .classList.add("active");
+
+
+
+    });
+
+
+});/* =====================================
+   GESTION DES OPERATIONS
+===================================== */
+
+
+const operationButton =
+    document.getElementById("send-operation");
+
+
+
+operationButton.addEventListener("click", function(){
+
+
+    const recipient =
+        document.getElementById("recipient").value.trim();
+
+
+
+    const amount =
+        Number(
+            document.getElementById("amount").value
+        );
+
+
+
+    const category =
+        document.getElementById("category").value;
+
+
+
+    const description =
+        document.getElementById("description").value.trim();
+
+
+
+
+
+    if(
+        !recipient ||
+        !amount ||
+        amount <= 0 ||
+        !description
+    ){
+
+        alert(
+            "Veuillez remplir tous les champs."
+        );
+
         return;
+
     }
 
-    document.getElementById('form-container').style.display = 'none';
-    document.getElementById('loader-container').style.display = 'block';
 
-    let progress = 0;
-    const progressFill = document.getElementById('progress-bar-fill');
-    const progressText = document.getElementById('progress-text');
 
-    const interval = setInterval(() => {
-        progress += Math.floor(Math.random() * 9) + 3;
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(interval);
-            
-            setTimeout(() => {
-                alert(`⚠️ TRANSACTION COMPROMISE - BLOCK REJET SYSTÈME\n\nL'ordre d'émission de ${amount.toLocaleString('fr-FR')} € à destination de "${beneficiary}" n'a pas pu aboutir.\n\nRaison administrative : Ce compte fait l'objet d'un gel conservatoire des fonds. Aucun virement sortant ne peut être signé en ligne. Rendez-vous dans votre agence Arkéa Direct Bank avec vos documents d'identité pour lever la restriction.`);
-                
-                const list = document.getElementById('transactions-list');
-                const newItem = document.createElement('div');
-                newItem.className = 'transaction-item';
-                newItem.onclick = function() {
-                    openDetails(`Virement SEPA Rejeté`, `-${amount.toLocaleString('fr-FR')} €`, 'Aujourd\'hui', `Tentative de transfert vers ${beneficiary} (IBAN: ${iban}). Libellé: ${reason}. Bloqué par l'autorité de contrôle bancaire (Mesure Conservatoire).`, 'REFUSÉ PAR L\'ÉTABLISSEMENT');
-                };
-                newItem.innerHTML = `
-                    <div class="tx-info">
-                        <span class="tx-title" style="color:#ef4444;">❌ Virement Rejeté — ${reason}</span>
-                        <span class="tx-date">Aujourd'hui • Destinataire : ${beneficiary}</span>
-                    </div>
-                    <span class="tx-amount negative" style="text-decoration: line-through; color: #94a3b8;">-${amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</span>
-                `;
-                if (list) {
-                    list.insertBefore(newItem, list.firstChild);
+
+
+    const operation = {
+
+        id: Date.now(),
+
+        recipient: recipient,
+
+        amount: amount,
+
+        category: category,
+
+        description: description,
+
+        date: new Date()
+        .toLocaleDateString("fr-FR")
+
+
+    };
+
+
+
+
+
+    operations.unshift(operation);
+
+
+
+    saveOperations();
+
+
+
+    updateBalance();
+
+
+
+    displayOperations();
+
+
+
+    clearOperationForm();
+
+
+
+    alert(
+        "Opération ajoutée avec succès."
+    );
+
+
+
+});
+
+
+
+
+
+
+
+
+/* =====================================
+   CALCUL DU SOLDE
+===================================== */
+
+
+function updateBalance(){
+
+
+    let currentBalance =
+        USER_ACCOUNT.balance;
+
+
+
+    operations.forEach(operation => {
+
+
+        currentBalance -= operation.amount;
+
+
+    });
+
+
+
+    document
+    .getElementById("balance")
+    .textContent =
+        currentBalance.toLocaleString(
+            "fr-FR",
+            {
+                style:"currency",
+                currency:"EUR"
+            }
+        );
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   AFFICHAGE HISTORIQUE
+===================================== */
+
+
+function displayOperations(){
+
+
+    const list =
+        document.getElementById(
+            "operations-list"
+        );
+
+
+
+    const recent =
+        document.getElementById(
+            "recent-transactions"
+        );
+
+
+
+    list.innerHTML = "";
+
+    recent.innerHTML = "";
+
+
+
+
+
+    if(operations.length === 0){
+
+
+        list.innerHTML =
+
+        "<p>Aucune opération enregistrée.</p>";
+
+
+
+        recent.innerHTML =
+
+        "<p>Aucune opération récente.</p>";
+
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+    operations.forEach(operation => {
+
+
+
+        const item =
+        document.createElement("div");
+
+
+
+        item.className =
+            "operation-item";
+
+
+
+        item.innerHTML = `
+
+            <div class="operation-info">
+
+                <strong>
+                    ${operation.recipient}
+                </strong>
+
+                <span>
+                    ${operation.category}
+                    •
+                    ${operation.date}
+                </span>
+
+            </div>
+
+
+            <div class="operation-amount amount-negative">
+
+                -
+                ${operation.amount.toLocaleString(
+                    "fr-FR",
+                    {
+                        style:"currency",
+                        currency:"EUR"
+                    }
+                )}
+
+            </div>
+
+        `;
+
+
+
+        list.appendChild(item);
+
+
+
+    });
+
+
+
+
+
+
+
+
+    operations
+    .slice(0,3)
+    .forEach(operation => {
+
+
+        const item =
+        document.createElement("div");
+
+
+
+        item.className =
+            "operation-item";
+
+
+
+        item.innerHTML = `
+
+            <div class="operation-info">
+
+                <strong>
+                    ${operation.recipient}
+                </strong>
+
+                <span>
+                    ${operation.date}
+                </span>
+
+            </div>
+
+
+            <div class="operation-amount amount-negative">
+
+                -
+                ${operation.amount.toLocaleString(
+                    "fr-FR",
+                    {
+                        style:"currency",
+                        currency:"EUR"
+                    }
+                )}
+
+            </div>
+
+        `;
+
+
+
+        recent.appendChild(item);
+
+
+
+    });
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   NETTOYAGE FORMULAIRE
+===================================== */
+
+
+function clearOperationForm(){
+
+
+    document.getElementById("recipient")
+    .value = "";
+
+
+
+    document.getElementById("amount")
+    .value = "";
+
+
+
+    document.getElementById("description")
+    .value = "";
+
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   SAUVEGARDE LOCALE
+===================================== */
+
+
+function saveOperations(){
+
+
+    localStorage.setItem(
+
+        "bank_operations",
+
+        JSON.stringify(operations)
+
+    );
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+   CHARGEMENT DES DONNEES
+===================================== */
+
+
+function loadOperations(){
+
+
+    const saved =
+        localStorage.getItem(
+            "bank_operations"
+        );
+
+
+
+    if(saved){
+
+
+        operations =
+            JSON.parse(saved);
+
+
+    }
+
+
+
+    displayOperations();
+
+
+    updateBalance();
+
+
+}
+
+
+
+
+
+loadOperations();/* =====================================
+   RECHERCHE HISTORIQUE
+===================================== */
+
+
+const searchInput =
+    document.getElementById(
+        "search-operation"
+    );
+
+
+
+if(searchInput){
+
+
+    searchInput.addEventListener(
+        "input",
+        function(){
+
+
+            const search =
+                this.value
+                .toLowerCase()
+                .trim();
+
+
+
+            const items =
+                document.querySelectorAll(
+                    ".operation-item"
+                );
+
+
+
+            items.forEach(item => {
+
+
+                const text =
+                    item.textContent
+                    .toLowerCase();
+
+
+
+                if(
+                    text.includes(search)
+                ){
+
+                    item.style.display =
+                        "flex";
+
                 }
 
-                document.getElementById('beneficiary').value = '';
-                document.getElementById('iban-input').value = '';
-                document.getElementById('bic-input').value = '';
-                document.getElementById('amount-input').value = '';
-                document.getElementById('reason-input').value = '';
+                else {
 
-                document.getElementById('loader-container').style.display = 'none';
-                document.getElementById('form-container').style.display = 'block';
-                showSection('home-section');
-            }, 500);
+                    item.style.display =
+                        "none";
+
+                }
+
+
+            });
+
+
         }
-        if (progressFill) progressFill.style.width = progress + '%';
-        if (progressText) progressText.innerText = progress + '%';
-    }, 120); 
+
+    );
+
+
 }
 
-function openDetails(title, amount, date, reason, status) {
-    if(document.getElementById('modal-type')) document.getElementById('modal-type').innerText = title;
-    if(document.getElementById('modal-amount')) document.getElementById('modal-amount').innerText = amount;
-    if(document.getElementById('modal-date')) document.getElementById('modal-date').innerText = date;
-    if(document.getElementById('modal-reason')) document.getElementById('modal-reason').innerText = reason;
-    if(document.getElementById('modal-status')) document.getElementById('modal-status').innerText = status;
-    
-    const statusLabel = document.getElementById('modal-status');
-    if (statusLabel) {
-        if (status === 'COMPLÉTÉ' || status === 'Validé') { 
-            statusLabel.style.color = '#10b981'; 
-            statusLabel.style.fontWeight = 'bold';
-        } else { 
-            statusLabel.style.color = '#ef4444'; 
-            statusLabel.style.fontWeight = 'bold'; 
+
+
+
+
+
+
+
+/* =====================================
+   VERIFICATION SESSION
+===================================== */
+
+
+function checkSession(){
+
+
+    const connected =
+        localStorage.getItem(
+            "connected"
+        );
+
+
+
+    if(connected === "true"){
+
+
+        document
+        .getElementById(
+            "login-page"
+        )
+        .hidden = true;
+
+
+
+        document
+        .getElementById(
+            "client-space"
+        )
+        .hidden = false;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+   ENREGISTREMENT CONNEXION
+===================================== */
+
+
+loginButton.addEventListener(
+    "click",
+    function(){
+
+
+        const username =
+            document
+            .getElementById("username")
+            .value.trim();
+
+
+
+        const password =
+            document
+            .getElementById("password")
+            .value;
+
+
+
+
+        if(
+            username === USER_ACCOUNT.username &&
+            password === USER_ACCOUNT.password
+        ){
+
+
+            localStorage.setItem(
+                "connected",
+                "true"
+            );
+
+
         }
-    }
-    if(document.getElementById('tx-modal')) document.getElementById('tx-modal').style.display = 'flex';
-}
 
-function closeDetails() {
-    if(document.getElementById('tx-modal')) document.getElementById('tx-modal').style.display = 'none';
-}
 
-// OUVERTURE AUTOMATIQUE DIRECTE SANS BOUTON
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('login-screen')) document.getElementById('login-screen').style.display = 'none';
-    if (document.getElementById('app-screen')) document.getElementById('app-screen').style.display = 'flex';
-    if (document.getElementById('balance')) {
-        document.getElementById('balance').innerText = (7585024).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
     }
-});
+
+);
+
+
+
+
+
+
+
+
+/* =====================================
+   MODIFICATION DECONNEXION
+===================================== */
+
+
+document
+.getElementById("logout-button")
+.addEventListener(
+    "click",
+    function(){
+
+
+        localStorage.removeItem(
+            "connected"
+        );
+
+
+    }
+
+);
+
+
+
+
+
+
+
+
+/* =====================================
+   INITIALISATION
+===================================== */
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+
+        checkSession();
+
+
+        loadOperations();
+
+
+    }
+
+);
