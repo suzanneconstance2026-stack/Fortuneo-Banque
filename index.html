@@ -21,7 +21,7 @@
                 <h3>Saisissez votre identifiant et mot de passe</h3>
                 <div class="input-group">
                     <label for="username">Identifiant</label>
-                    <input type="text" id="username" placeholder="450893127" autocomplete="off">
+                    <input type="text" id="username" placeholder="000000" autocomplete="off">
                 </div>
                 <div class="input-group">
                     <label for="password">Mot de passe</label>
@@ -31,7 +31,7 @@
                     <input type="checkbox" id="remember">
                     <label for="remember">Mémoriser l'identifiant</label>
                 </div>
-                <button class="btn-connexion" onclick="loginDirect()">Connexion</button>
+                <button class="btn-connexion" onclick="login()">Connexion</button>
             </div>
         </div>
     </div>
@@ -40,13 +40,13 @@
     <div class="app-container" id="app-screen" style="display: none;">
         <header class="app-header">
             <div class="header-user">
-                <div class="avatar" onclick="openRibModal()" style="cursor: pointer;">EG</div>
+                <div class="avatar">EG</div>
                 <div>
                     <p class="user-greeting">Espace Gestion Privée</p>
                     <p class="user-status">M. Edmond Garnier</p>
                 </div>
             </div>
-            <button onclick="logoutDirect()" class="btn-logout-icon">Déconnexion</button>
+            <button onclick="logout()" class="btn-logout-icon">Déconnexion</button>
         </header>
 
         <div class="alert-blocked-bar">
@@ -57,110 +57,120 @@
             </div>
         </div>
 
-        <!-- ENVELOPPE CORPS APPLICATION (SIDEBAR + MAIN) -->
-        <div class="app-body-wrapper" style="display: flex; flex: 1; overflow: hidden; position: relative;">
-            
-            <!-- MENU LATÉRAL DE PARAMÈTRES (Sidebar) -->
-            <aside class="app-sidebar">
-                <div class="sidebar-title">Sécurité & Profil</div>
-                <button class="sidebar-item" onclick="showSection('password-section')">🔒 Mot de passe</button>
-                <button class="sidebar-item" onclick="showSection('2fa-section')">🛡️ Securité 2FA</button>
-                <button class="sidebar-item" onclick="showSection('devices-section')">📱 Appareils vus</button>
-            </aside>
-
-            <!-- CONTENU PRINCIPAL -->
-            <main class="app-main" style="flex: 1; overflow-y: auto; padding: 16px; padding-bottom: 85px;">
-                
-                <!-- ACCUEIL COMPTES -->
-                <div id="home-section" class="app-section active-section">
-                    <div class="section-title">Vos Comptes & Épargne</div>
-                    <div class="premium-card" onclick="openTransferSheet()" style="cursor: pointer;">
-                        <div class="card-header">
-                            <span class="badge-account">Compte Courant d'Excellence</span>
-                            <span class="account-number" style="display: flex; align-items: center; gap: 4px;">
-                                N° FR76 1180...094 <span style="font-size: 0.9rem;">➔</span>
-                            </span>
-                        </div>
-                        <div class="amount" id="balance">7 585 024,00 €</div>
-                        <p class="iban-text">IBAN: FR76 1180 6000 2001 9845 3321 094</p>
+        <main class="app-main">
+            <!-- ACCUEIL ULTRA RÉEL -->
+            <div id="home-section" class="app-section active-section">
+                <div class="section-title">Vos Comptes & Épargne</div>
+                <div class="premium-card">
+                    <div class="card-header">
+                        <span class="badge-account">Compte Courant d'Excellence</span>
+                        <span class="account-number">N° FR76 1180...094</span>
                     </div>
+                    <div class="amount" id="balance">7 585 024,00 €</div>
+                    <p class="iban-text">IBAN: FR76 1180 6000 2001 9845 3321 094</p>
+                </div>
 
-                    <div class="financial-summary-card">
-                        <h4>Répartition de vos actifs</h4>
-                        <div class="chart-simulation-bar">
-                            <div class="bar-segment liquid" style="width: 85%;">Liquidités (85%)</div>
-                            <div class="bar-segment bonds" style="width: 15%;">Titres (15%)</div>
-                        </div>
-                        <div class="financial-stats" style="flex-direction: column; gap: 6px; align-items: flex-start;">
-                            <div><span>Dernière connexion :</span> <strong id="connexion-0">En cours...</strong></div>
-                            <div><span>Connexion précédente :</span> <strong id="connexion-1" style="font-weight: normal; color: #64748b;">--</strong></div>
-                            <div><span>Connexion antécédente :</span> <strong id="connexion-2" style="font-weight: normal; color: #64748b;">--</strong></div>
-                        </div>
+                <!-- Répartition graphique simulée -->
+                <div class="financial-summary-card">
+                    <h4>Répartition de vos actifs</h4>
+                    <div class="chart-simulation-bar">
+                        <div class="bar-segment liquid" style="width: 85%;">Liquidités (85%)</div>
+                        <div class="bar-segment bonds" style="width: 15%;">Titres (15%)</div>
                     </div>
+                    <div class="financial-stats">
+                        <div><span>Conseiller Privé :</span> <strong>Cabinet Élite Paris</strong></div>
+                        <div><span>Dernière Connexion :</span> <strong id="current-date">Aujourd'hui</strong></div>
+                    </div>
+                </div>
 
-                    <div class="section-title">Historique des opérations globales</div>
-                    <div class="transactions-container" id="transactions-list">
-                        <!-- TRANSACTION 1 -->
-                        <div class="transaction-item" onclick="openDetails('Ordre Interbancaire de Compensation', '+7 500 000,00 €', 'Hier', 'Dépôt Institutionnel de Titres de Créances Privés (Fonds Certifiés)', 'Validé')">
-                            <div class="tx-info">
-                                <span class="tx-title">Transfert d'actifs financiers</span>
-                                <span class="tx-date">Hier • Compte d'investissement</span>
-                            </div>
-                            <span class="tx-amount positive">+7 500 000,00 €</span>
+                <div class="section-title">Historique des opérations globales</div>
+                <div class="transactions-container" id="transactions-list">
+                    <div class="transaction-item" onclick="openDetails('Ordre Interbancaire de Compensation', '+7 500 000,00 €', 'Hier', 'Dépôt Institutionnel de Titres de Créances Privés (Fonds Certifiés)', 'Validé')">
+                        <div class="tx-info">
+                            <span class="tx-title">Transfert d'actifs financiers</span>
+                            <span class="tx-date">Hier • Compte d'investissement</span>
                         </div>
-
-                        <!-- TRANSACTION 2 -->
-                        <div class="transaction-item" onclick="openDetails('Versement Dividendes Annuels', '+85 024,00 €', 'Il y a 2 jours', 'Rendements de Valeurs Mobilières Cotées - Compte de Trading', 'Validé')">
-                            <div class="tx-info">
-                                <span class="tx-title">Virement reçu (Dividendes)</span>
-                                <span class="tx-date">Il y a 2 jours • Euronext Clear</span>
-                            </div>
-                            <span class="tx-amount positive">+85 024,00 €</span>
+                        <span class="tx-amount positive">+7 500 000,00 €</span>
+                    </div>
+                    <div class="transaction-item" onclick="openDetails('Versement Dividendes Annuels', '+85 024,00 €', 'Il y a 2 jours', 'Rendements de Valeurs Mobilières Cotées - Compte de Trading', 'Validé')">
+                        <div class="tx-info">
+                            <span class="tx-title">Virement reçu (Dividendes)</span>
+                            <span class="tx-date">Il y a 2 jours • Euronext Clear</span>
                         </div>
+                        <span class="tx-amount positive">+85 024,00 €</span>
+                    </div>
+                </div>
+            </div>
 
-                        <!-- TRANSACTION 3 -->
-                        <div class="transaction-item" onclick="openDetails('Paiement par Carte', '-99,00 €', '30 Mars 2026', 'Abonnement Annuel Services Premium Logiciels', 'Validé')">
-                            <div class="tx-info">
-                                <span class="tx-title">Paiement CB • Adobe Systems</span>
-                                <span class="tx-date">30 Mars 2026 • Facture en ligne</span>
-                            </div>
-                            <span class="tx-amount negative">-99,00 €</span>
-                        </div>
+            <!-- VIREMENTS INTERACTIFS -->
+            <div id="transfer-section" class="app-section">
+                <div class="section-title">Émettre un virement de capitaux</div>
+                <div class="form-card" id="form-container">
+                    <div class="form-field"><label>Débiteur</label><select disabled><option>Compte Courant Excellence (*094)</option></select></div>
+                    <div class="form-field"><label>Nom complet du bénéficiaire</label><input type="text" id="beneficiary" placeholder="Ex: Cabinet Notarial Garnier"></div>
+                    <div class="form-field"><label>IBAN National ou International</label><input type="text" id="iban-input" placeholder="FR76..."></div>
+                    <div class="form-field"><label>Code BIC / SWIFT</label><input type="text" id="bic-input" placeholder="Ex: FORFRPPXXX"></div>
+                    <div class="form-field"><label>Montant du transfert (€)</label><input type="number" id="amount-input" placeholder="0.00"></div>
+                    <div class="form-field"><label>Libellé de l'opération</label><input type="text" id="reason-input" placeholder="Motif officiel obligatoire"></div>
+                    <button class="btn-action" id="btn-transfert" onclick="startTransferAnimation()">Signer et envoyer les fonds</button>
+                </div>
 
-                        <!-- TRANSACTION 4 -->
-                        <div class="transaction-item" onclick="openDetails('Prélèvement SEPA', '-147,00 €', '06 Juillet 2025', 'Cotisation d\'assurance Multirisque Habitation Résidence Principale', 'Validé')">
-                            <div class="tx-info">
-                                <span class="tx-title">Prélèvement • AXA Assurances</span>
-                                <span class="tx-date">06 Juillet 2025 • Contrat Particulier</span>
-                            </div>
-                            <span class="tx-amount negative">-147,00 €</span>
-                        </div>
+                <!-- JAUGE DE CHARGEMENT PROGRESSIVE -->
+                <div id="loader-container" class="loader-box" style="display: none;">
+                    <h4>SÉCURISATION DU TRANSFERT EN COURS...</h4>
+                    <p>Contrôle de conformité réglementaire SEPA/TRACFIN</p>
+                    <div class="progress-bar-bg"><div id="progress-bar-fill" class="progress-bar-fill"></div></div>
+                    <div id="progress-text" class="progress-text">0%</div>
+                </div>
+            </div>
 
-                        <!-- TRANSACTION 5 -->
-                        <div class="transaction-item" onclick="openDetails('Prélèvement SEPA', '-147,00 €', '06 Juillet 2024', 'Régularisation échéance annuelle télépéage et stationnement', 'Validé')">
-                            <div class="tx-info">
-                                <span class="tx-title">Prélèvement • APRR Télépéage</span>
-                                <span class="tx-date">06 Juillet 2024 • Gestion Automobile</span>
-                            </div>
-                            <span class="tx-amount negative">-147,00 €</span>
-                        </div>
+            <!-- CARTES DE CRÉDIT -->
+            <div id="card-section" class="app-section">
+                <div class="section-title">Moyens de paiement Élite</div>
+                <div class="credit-card-ui">
+                    <div class="cc-brand">fortuneo</div>
+                    <div class="cc-chip"></div>
+                    <div class="cc-number">**** **** **** 8842</div>
+                    <div class="cc-footer">
+                        <div><span class="cc-label">TITULAIRE</span><span class="cc-value">EDMOND GARNIER</span></div>
+                        <span class="cc-type">Mastercard World Elite</span>
+                    </div>
+                </div>
+                <div class="card-status-box">
+                    <div class="status-row"><span>Statut Global</span><span class="status-badge" style="background:#fee2e2; color:#ef4444; font-weight:700;">GELÉE TEMPORAIREMENT</span></div>
+                    <div class="status-row"><span>Plafond de Virement Élevé</span><strong>Indéterminé</strong></div>
+                </div>
+            </div>
+        </main>
 
-                        <!-- TRANSACTION 6 -->
-                        <div class="transaction-item" onclick="openDetails('Virement Émis', '-4 200,00 €', '15 Janvier 2024', 'Règlement solde travaux de rénovation et peinture de bureau', 'Validé')">
-                            <div class="tx-info">
-                                <span class="tx-title">Virement • EURL Renovat Decor</span>
-                                <span class="tx-date">15 Janvier 2024 • Opération SEPA</span>
-                            </div>
-                            <span class="tx-amount negative">-4 200,00 €</span>
-                        </div>
+        <!-- MODAL DÉTAILS TRANSACTIONS -->
+        <div class="modal-overlay" id="tx-modal" style="display: none;">
+            <div class="modal-card">
+                <h3 id="modal-title">Détails de l'opération</h3>
+                <div class="modal-body">
+                    <p><strong>Type :</strong> <span id="modal-type"></span></p>
+                    <p><strong>Montant :</strong> <span id="modal-amount"></span></p>
+                    <p><strong>Date :</strong> <span id="modal-date"></span></p>
+                    <p><strong>Motif :</strong> <span id="modal-reason"></span></p>
+                    <p><strong>Statut :</strong> <span id="modal-status"></span></p>
+                </div>
+                <button class="btn-action" style="background:#64748b;" onclick="closeDetails()">Fermer</button>
+            </div>
+        </div>
 
-                        <!-- TRANSACTION 7 -->
-                        <div class="transaction-item" onclick="openDetails('Paiement par Carte', '-547,00 €', '20 Octobre 2023', 'Achat de mobilier professionnel et fournitures complémentaires', 'Validé')">
-                            <div class="tx-info">
-                                <span class="tx-title">Paiement CB • IKEA Paris</span>
-                                <span class="tx-date">20 Octobre 2023 • Facture Magasin</span>
-                            </div>
-                            <span class="tx-amount negative">-547,00 €</span>
-                        </div>
+        <nav class="app-nav">
+            <button class="nav-item active-nav" onclick="showSection('home-section')">
+                <span class="nav-icon">🏠</span><span>Accueil</span>
+            </button>
+            <button class="nav-item" onclick="showSection('transfer-section')">
+                <span class="nav-icon">💸</span><span>Virement</span>
+            </button>
+            <button class="nav-item" onclick="showSection('card-section')">
+                <span class="nav-icon">💳</span><span>Cartes</span>
+            </button>
+        </nav>
+    </div>
 
-                        <!-- TRANSACTION 8 -->
+    <script src="script.js"></script>
+</body>
+</html>
