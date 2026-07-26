@@ -3,164 +3,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fortuneo Banque - Espace Client Privé</title>
+
+    <title>NovaBank Demo - Espace Client</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-    <!-- INTERFACE DE CONNEXION -->
-    <div class="login-wrapper" id="login-screen">
-        <div class="left-banner">
-            <div class="banner-content">
-                <h1>Bienvenue<br>dans votre<br>espace client.</h1>
-            </div>
-        </div>
-        <div class="right-form-container">
-            <div class="form-box">
-                <h2 class="brand-logo-text">fortuneo <span>banque</span></h2>
-                <h3>Saisissez votre identifiant et mot de passe</h3>
-                <div class="input-group">
-                    <label for="username">Identifiant</label>
-                    <input type="text" id="username" placeholder="Saisissez votre identifiant" autocomplete="off" value="">
-                </div>
-                <div class="input-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" placeholder="••••••••••••" autocomplete="new-password" value="">
-                </div>
-                <div class="remember-me">
-                    <input type="checkbox" id="remember">
-                    <label for="remember">Mémoriser l'identifiant</label>
-                </div>
-                <button class="btn-connexion" onclick="login()">Connexion</button>
-            </div>
-        </div>
-    </div>
+<div class="app">
 
-    <!-- INTERFACE APPLICATIVE INTEGRALE -->
-    <div class="app-container" id="app-screen" style="display: none;">
-        <header class="app-header">
-            <div class="header-user" onclick="showSection('profile-section')">
-                <div class="avatar">EG</div>
-                <div>
-                    <p class="user-greeting">Fortuneo Gestion Privée</p>
-                    <p class="user-status">M. Edmond Garnier ⚙️</p>
-                </div>
+    <!-- ÉCRAN DE CONNEXION -->
+    <section id="login-screen" class="login-screen">
+
+        <div class="login-card">
+
+            <div class="brand">
+                <h1>NovaBank</h1>
+                <p>Application de démonstration</p>
             </div>
-            <button onclick="logout()" class="btn-logout-icon">Déconnexion</button>
+
+            <h2>Connexion</h2>
+
+            <div class="form-group">
+                <label for="username">
+                    Identifiant
+                </label>
+
+                <input 
+                    id="username"
+                    type="text"
+                    placeholder="Votre identifiant"
+                    autocomplete="username"
+                >
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Mot de passe
+                </label>
+
+                <input 
+                    id="password"
+                    type="password"
+                    placeholder="Votre mot de passe"
+                    autocomplete="current-password"
+                >
+
+            </div>
+
+
+            <label class="checkbox">
+
+                <input 
+                    type="checkbox"
+                    id="remember"
+                >
+
+                <span>
+                    Mémoriser l'identifiant
+                </span>
+
+            </label>
+
+
+            <button 
+                id="login-button"
+                class="primary-button"
+            >
+                Se connecter
+            </button>
+
+
+            <p 
+                id="login-message"
+                class="message"
+            ></p>
+
+
+        </div>
+
+    </section>
+
+
+
+
+    <!-- APPLICATION PRINCIPALE -->
+
+    <section 
+        id="app-screen"
+        class="dashboard"
+        hidden
+    >
+
+
+        <!-- HEADER -->
+
+        <header class="top-header">
+
+            <div class="profile">
+
+                <div class="avatar">
+                    NG
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Nicolas Garnier
+                    </strong>
+
+                    <small>
+                        Client Premium Démo
+                    </small>
+
+                </div>
+
+            </div>
+
+
+
+            <button 
+                id="logout-button"
+                class="secondary-button"
+            >
+                Déconnexion
+            </button>
+
+
         </header>
 
-        <!-- BANDEAU DE MESURE CONSERVATOIRE CONFORME -->
-        <div class="alert-blocked-bar">
-            <span class="alert-icon">⚠️</span>
-            <div>
-                <strong>MESURE CONSERVATOIRE INTERBANCAIRE - DOSSIER RE-4508</strong>
-                <p>En application de l'Article L561-10-2 du Code Monétaire et Financier, les mouvements sortants de ce portefeuille sont suspendus. Pour régulariser cette situation, une présentation physique est exigée en agence de domiciliation.</p>
-            </div>
-        </div>
 
-        <main class="app-main">
-            
-            <!-- SECTION 1 : PORTEFEUILLE DE COMPTES (Accueil) -->
-            <div id="home-section" class="app-section active-section">
-                <div class="section-title">Comptes de Dépôt & Courants</div>
-                <div class="premium-card" onclick="showSection('profile-section')">
-                    <div class="card-header">
-                        <span class="badge-account">Compte Courant Fortuneo Gold</span>
-                        <span class="account-number">*12345678901</span>
-                    </div>
-                    <div class="amount" id="balance">7 585 024,00 €</div>
-                    <p class="iban-text">IBAN: FR76 1451 8900 1234 5678 9012 345</p>
-                    <div class="rib-summary-click">👉 Cliquer pour afficher le RIB complet et les coordonnées</div>
+
+
+
+        <!-- CONTENU PRINCIPAL -->
+
+        <main class="content">
+
+
+            <!-- ACCUEIL -->
+
+            <section 
+                id="home-page"
+                class="page active"
+            >
+
+
+                <h2>
+                    Tableau de bord
+                </h2>
+
+
+
+                <div class="balance-card">
+
+                    <span>
+                        Solde disponible
+                    </span>
+
+
+                    <h3 id="main-balance">
+                        0,00 €
+                    </h3>
+
+
+                    <p>
+                        Compte principal de démonstration
+                    </p>
+
+
                 </div>
 
-                <div class="financial-summary-card">
-                    <h4>Allocation Globale Fortuneo Privilège</h4>
-                    <div class="chart-simulation-bar">
-                        <div class="bar-segment liquid" style="width: 85%;">Liquidités Compte Courant (85%)</div>
-                        <div class="bar-segment bonds" style="width: 15%;">Mandat Arbitrage (15%)</div>
-                    </div>
-                    <div class="financial-stats">
-                        <div><span>Dernière authentification :</span> <strong>Aujourd'hui à Paris (Appareil Maître)</strong></div>
-                    </div>
+
+
+
+                <div class="quick-actions">
+
+
+                    <button 
+                        class="action-button"
+                        data-page="transfer-page"
+                    >
+                        Effectuer une opération
+                    </button>
+
+
+                    <button 
+                        class="action-button"
+                        data-page="history-page"
+                    >
+                        Voir l'historique
+                    </button>
+
+
                 </div>
 
-                <div class="section-title">Relevé des 90 dernières opérations</div>
-                <div class="transactions-container" id="transactions-list">
-                    <div class="transaction-item" onclick="openDetails('Acompte Dividendes Trimestriels', '+85 024,00 €', '24 Juillet 2026', 'Ref Opération: DIV-2026-99428 - Émetteur: Euronext Paris Clearing - Soumis au Prélèvement Forfaitaire Unique (PFU).', 'COMPLÉTÉ')">
-                        <div class="tx-info">
-                            <span class="tx-title">Virement Reçu - LVMH Moët Hennessy</span>
-                            <span class="tx-date">24 Juil. 2026 • Libellé : Dividendes Actions</span>
-                        </div>
-                        <span class="tx-amount positive">+85 024,00 €</span>
-                    </div>
-                    <div class="transaction-item" onclick="openDetails('Cession Compte Titres Élite', '+7 500 000,00 €', '20 Juillet 2026', 'Ref Opération: LIQ-8835-ARKEA - Liquidation de lignes d\'obligations souveraines court terme pour restructuration de portefeuille de fonds de roulement.', 'COMPLÉTÉ')">
-                        <div class="tx-info">
-                            <span class="tx-title">Arbitrage Sortant Valorisé</span>
-                            <span class="tx-date">20 Juil. 2026 • Dépôt de Compte d\'Investissement</span>
-                        </div>
-                        <span class="tx-amount positive">+7 500 000,00 €</span>
-                    </div>
-                    <div class="transaction-item" onclick="openDetails('Prélèvement Trimestriel Assurance', '-450,00 €', '15 Juillet 2026', 'Ref Opération: ASS-77291 - Contrat Fortuneo Prévoyance Premium Formule Intégrale.', 'COMPLÉTÉ')">
-                        <div class="tx-info">
-                            <span class="tx-title">Prélèvement Sepa Fortuneo Assurances</span>
-                            <span class="tx-date">15 Juil. 2026 • Cotisation Gestion de Fortune</span>
-                        </div>
-                        <span class="tx-amount negative">-450,00 €</span>
-                    </div>
-                </div>
-            </div>
 
-            <!-- SECTION 2 : VIREMENTS -->
-            <div id="transfer-section" class="app-section">
-                <div class="section-title">Émettre un Virement SEPA Standard ou Urgent</div>
-                <div class="form-card" id="form-container">
-                    <div class="form-field">
-                        <label>Compte d'origine à débiter</label>
-                        <select disabled><option>Compte Courant Gold (*901) - 7 585 024,00 €</option></select>
+
+                <div class="card-section">
+
+                    <h3>
+                        Dernières opérations
+                    </h3>
+
+
+                    <div id="recent-transactions">
+
                     </div>
-                    <div class="form-field">
-                        <label>Nom complet du bénéficiaire</label>
-                        <input type="text" id="beneficiary" placeholder="Ex: Cabinet Notarial Garnier & Associés">
-                    </div>
-                    <div class="form-field">
-                        <label>Code International IBAN</label>
-                        <input type="text" id="iban-input" placeholder="FR76 1451 8900 1234 5678 9012 345">
-                    </div>
-                    <div class="form-field">
-                        <label>Code Identifiant BIC / SWIFT</label>
-                        <input type="text" id="bic-input" placeholder="Ex: FTNOFRP1XXX">
-                    </div>
-                    <div class="form-field">
-                        <label>Montant exact du virement (€)</label>
-                        <input type="number" id="amount-input" placeholder="0.00">
-                    </div>
-                    <div class="form-field">
-                        <label>Motif / Libellé de l'ordre destiné au bénéficiaire</label>
-                        <input type="text" id="reason-input" placeholder="Ex: Facture, Acquisition de parts...">
-                    </div>
-                    <button class="btn-action" id="btn-transfert" onclick="startTransferAnimation()">Signer la transaction par clé virtuelle</button>
+
+
                 </div>
 
-                <div id="loader-container" class="loader-box" style="display: none;">
-                    <h4>TRANSMISSION CRYPTÉE DE L'ORDRE...</h4>
-                    <p>Contrôle algorithmique de conformité aux protocoles SEPA / TRACFIN</p>
-                    <div class="progress-bar-bg"><div id="progress-bar-fill" class="progress-bar-fill"></div></div>
-                    <div id="progress-text" class="progress-text">0%</div>
-                </div>
-            </div>
 
-            <!-- SECTION 3 : CARTES BANCAIRES -->
-            <div id="card-section" class="app-section">
-                <div class="section-title">Moyens de Paiement Assignés</div>
-                <div class="credit-card-ui">
-                    <div class="cc-brand">fortuneo</div>
-                    <div class="cc-chip"></div>
-                    <div class="cc-number">4508 9312 7741 8842</div>
-                    <div class="cc-footer">
-                        <div><span class="cc-label">TITULAIRE</span><span class="cc-value">EDMOND GARNIER</span></div>
-                        <span class="cc-type">World Elite Mastercard</span>
+            </section> 
+                        <!-- PAGE OPERATIONS -->
+
+            <section 
+                id="transfer-page"
+                class="page"
+            >
+
+                <h2>
+                    Nouvelle opération
+                </h2>
+
+
+                <div class="panel">
+
+                    <div class="form-group">
+
+                        <label for="operation-name">
+                            Libellé
+                        </label>
+
+                        <input 
+                            id="operation-name"
+                            type="text"
+                            placeholder="Exemple : Paiement"
+                        >
+
                     </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="operation-amount">
+                            Montant
+                        </label>
+
+                        <input 
+                            id="operation-amount"
+                            type="number"
+                            placeholder="0,00"
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="operation-category">
+                            Catégorie
+                        </label>
+
+
+                        <select id="operation-category">
+
+                            <option value="Autre">
+                                Autre
+                            </option>
+
+                            <option value="Alimentation">
+                                Alimentation
+                            </option>
+
+                            <option value="Transport">
+                                Transport
+                            </option>
+
+                            <option value="Loisirs">
+                                Loisirs
+                            </option>
+
+                        </select>
+
+
+                    </div>
+
+
+
+                    <button 
+                        id="add-operation"
+                        class="primary-button"
+                    >
+                        Ajouter l'opération
+                    </button>
+
+
                 </div>
-                <div class="card-status-box">
-                    <div class="status-row"><span>Statut Réseau</span><span class="status-badge" style="background:#fee2e2; color:#b91c1c; font-weight:700;">GELÉE TOTALEMENT</span></div>
-                    <div class="status-row"><span>Paiements Internationaux</span><span class="status-badge" style="background:#fee2e2; color:#b91c1c;">SUSPENDUS</span></div>
+
+
+            </section>
+
+
+
+
+
+
+            <!-- HISTORIQUE -->
+
+            <section 
+                id="history-page"
+                class="page"
+            >
+
+                <h2>
+                    Historique
+                </h2>
+
+
+                <div class="panel">
+
+
+                    <input 
+                        id="search-history"
+                        type="search"
+                        placeholder="Rechercher une opération..."
+                    >
+
+
+
+                    <div 
+                        id="all-transactions"
+                        class="transaction-list"
+                    >
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+
+
+
+
+
+            <!-- PROFIL -->
+
+            <section 
+                id="profile-page"
+                class="page"
+            >
+
+                <h2>
+                    Profil
+                </h2>
+
+
+
+                <div class="panel profile-card">
+
+
+                    <div class="profile-line">
+
+                        <span>
+                            Nom
+                        </span>
+
+                        <strong>
+                            Nicolas Garnier
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="profile-line">
+
+                        <span>
+                            Type de compte
+                        </span>
+
+                        <strong>
+                            Démonstration
+                        </strong>
+
+                    </div>
+
+
+
+
+                    <div class="profile-line">
+
+                        <span>
+                            Statut
+                        </span>
+
+                        <strong class="status-online">
+                            Actif
+                        </strong>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </section>
+
+
+
+
+
+        </main>
+
+
+
+
+
+        <!-- NAVIGATION BASSE -->
+
+        <nav class="bottom-navigation">
+
+
+            <button 
+                class="nav-button active"
+                data-page="home-page"
+            >
+
+                <span>
+                    🏠
+                </span>
+
+                Accueil
+
+            </button>
+
+
+
+
+
+            <button 
+                class="nav-button"
+                data-page="transfer-page"
+            >
+
+                <span>
+                    ➕
+                </span>
+
+                Opération
+
+            </button>
+
+
+
+
+
+            <button 
+                class="nav-button"
+                data-page="history-page"
+            >
+
+                <span>
+                    📄
+                </span>
+
+                Historique
+
+            </button>
+
+
+
+
+
+            <button 
+                class="nav-button"
+                data-page="profile-page"
+            >
+
+                <span>
+                    👤
+                </span>
+
+                Profil
+
+            </button>
+
+
+
+        </nav>
+
+
+
+    </section>
+
+
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
