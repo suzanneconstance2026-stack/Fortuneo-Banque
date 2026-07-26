@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Espace Client</title>
+    <title>Fortuneo Banque - Prototype Client</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -17,884 +17,636 @@
 <body>
 
 
-<div class="app-container">
+<div class="app">
 
 
-    <!-- =========================
-         PAGE DE CONNEXION
-    ========================== -->
-
-    <section id="login-page" class="login-page">
+<!-- ==========================
+     CONNEXION
+=========================== -->
 
 
-        <div class="login-card">
+<section id="login-screen" class="login-screen">
 
 
-            <div class="brand">
-
-                <h1>
-                    Banque Horizon
-                </h1>
-
-                <p>
-                    Espace client sécurisé
-                </p>
-
-            </div>
+    <div class="login-card">
 
 
+        <div class="logo">
 
-            <div class="form-group">
+            <h1>
+                Fortuneo Banque
+            </h1>
 
-                <label for="username">
-                    Identifiant
-                </label>
-
-                <input
-                    id="username"
-                    type="text"
-                    placeholder="Votre identifiant"
-                >
-
-            </div>
-
-
-
-
-            <div class="form-group">
-
-                <label for="password">
-                    Mot de passe
-                </label>
-
-                <input
-                    id="password"
-                    type="password"
-                    placeholder="Votre mot de passe"
-                >
-
-            </div>
-
-
-
-
-            <div class="remember-box">
-
-                <input 
-                    id="remember"
-                    type="checkbox"
-                >
-
-                <label for="remember">
-                    Mémoriser mes informations
-                </label>
-
-            </div>
-
-
-
-
-            <button 
-                id="login-button"
-                class="primary-button"
-            >
-
-                Connexion
-
-            </button>
-
-
-
-
-            <p 
-                id="login-message"
-                class="message"
-            ></p>
-
-
+            <p>
+                Espace client sécurisé - Prototype
+            </p>
 
         </div>
 
 
-    </section>
 
+        <label>
+            Identifiant
+        </label>
 
+        <input 
+            id="login-id"
+            type="text"
+            placeholder="Votre identifiant"
+        >
 
 
 
 
+        <label>
+            Mot de passe
+        </label>
 
-    <!-- =========================
-         APPLICATION PRINCIPALE
-    ========================== -->
+        <input
+            id="login-password"
+            type="password"
+            placeholder="Votre mot de passe"
+        >
 
 
-    <section 
-        id="client-space"
-        class="client-space"
-        hidden
-    >
 
 
+        <button 
+            id="login-btn"
+        >
 
-        <!-- HEADER -->
+            Connexion
 
-        <header class="header">
+        </button>
 
 
-            <div class="user-block">
 
 
-                <div class="avatar">
+        <p 
+            id="login-error"
+            class="error"
+        ></p>
 
-                    HG
 
-                </div>
+    </div>
 
 
+</section>
 
-                <div>
 
-                    <strong>
-                        Hugo Garnier
-                    </strong>
 
-                    <span>
-                        Client Premium
-                    </span>
 
-                </div>
 
 
-            </div>
 
 
+<!-- ==========================
+     ESPACE CLIENT
+=========================== -->
 
 
-            <button 
-                id="logout-button"
-                class="logout-button"
-            >
+<section 
+id="bank-screen"
+class="bank-screen"
+style="display:none;"
+>
 
-                Déconnexion
 
-            </button>
 
+<header class="header">
 
 
-        </header>
+    <div>
 
 
+        <h2>
+            Fortuneo Banque
+        </h2>
 
 
+        <p id="client-name">
 
+        </p>
 
-        <!-- CONTENU -->
 
-        <main class="content">
+    </div>
 
 
 
-            <!-- TABLEAU DE BORD -->
+    <button id="logout-btn">
 
-            <section 
-                id="home-section"
-                class="section active"
-            >
+        Déconnexion
 
+    </button>
 
-                <h2>
-                    Tableau de bord
-                </h2>
 
+</header>
 
 
 
-                <div class="balance-card">
 
 
-                    <span>
-                        Solde disponible
-                    </span>
 
 
-                    <h1 id="balance">
-                        0,00 €
-                    </h1>
+<main>
 
 
-                    <small>
-                        Compte principal
-                    </small>
 
+<!-- CARTE SOLDE -->
 
-                </div>
 
+<div class="balance-card">
 
 
+    <p>
+        Solde disponible
+    </p>
 
 
-                <div class="quick-actions">
+    <h1 id="balance">
 
+        0 €
 
-                    <button data-target="transfer-section">
+    </h1>
 
-                        Nouvelle opération
 
-                    </button>
 
+    <span id="account-status">
 
+    </span>
 
-                    <button data-target="history-section">
 
-                        Historique
 
-                    </button>
+</div>
 
 
 
-                    <button data-target="card-section">
 
-                        Cartes
 
-                    </button>
 
 
-                </div>
+<!-- MENU -->
 
 
+<div class="menu">
 
 
+<button data-page="dashboard">
 
-                <div class="panel">
+    Accueil
 
+</button>
 
-                    <h3>
-                        Dernières opérations
-                    </h3>
 
+<button data-page="history">
 
-                    <div id="recent-transactions">
+    Historique
 
-                    </div>
+</button>
 
 
-                </div>
+<button data-page="transfer">
 
+    Virement
 
+</button>
 
-            </section>             <!-- =========================
-                 OPERATIONS
-            ========================== -->
 
-            <section
-                id="transfer-section"
-                class="section"
-            >
+<button data-page="card">
 
+    Carte
 
-                <h2>
-                    Nouvelle opération
-                </h2>
+</button>
 
 
+</div><!-- ==========================
+     TABLEAU DE BORD
+=========================== -->
 
-                <div class="panel">
 
+<section 
+id="dashboard"
+class="page active"
+>
 
-                    <div class="form-group">
 
-                        <label for="recipient">
-                            Bénéficiaire
-                        </label>
+<div class="panel">
 
 
-                        <input
-                            id="recipient"
-                            type="text"
-                            placeholder="Nom du bénéficiaire"
-                        >
+    <h3>
+        Informations du compte
+    </h3>
 
-                    </div>
 
 
+    <div class="info-row">
 
+        <span>
+            Titulaire
+        </span>
 
-                    <div class="form-group">
+        <strong id="holder-name">
 
-                        <label for="amount">
-                            Montant
-                        </label>
+        </strong>
 
+    </div>
 
-                        <input
-                            id="amount"
-                            type="number"
-                            placeholder="0"
-                        >
 
-                    </div>
 
 
+    <div class="info-row">
 
+        <span>
+            Type de compte
+        </span>
 
-                    <div class="form-group">
+        <strong>
+            Compte Premium
+        </strong>
 
-                        <label for="category">
-                            Catégorie
-                        </label>
+    </div>
 
 
-                        <select id="category">
 
-                            <option>
-                                Alimentation
-                            </option>
 
+    <div class="info-row">
 
-                            <option>
-                                Transport
-                            </option>
+        <span>
+            Statut
+        </span>
 
+        <strong class="blocked">
+            Sous restriction (simulation)
+        </strong>
 
-                            <option>
-                                Logement
-                            </option>
+    </div>
 
 
-                            <option>
-                                Loisirs
-                            </option>
 
+</div>
 
-                            <option>
-                                Autre
-                            </option>
 
 
-                        </select>
 
 
-                    </div>
+<div class="panel">
 
 
+<h3>
+    Dernières opérations
+</h3>
 
 
-                    <div class="form-group">
+<div id="dashboard-history">
 
-                        <label for="description">
-                            Description
-                        </label>
+</div>
 
 
-                        <input
-                            id="description"
-                            type="text"
-                            placeholder="Motif de l'opération"
-                        >
+</div>
 
-                    </div>
 
+</section>
 
 
 
-                    <button
-                        id="send-operation"
-                        class="primary-button"
-                    >
 
-                        Valider l'opération
 
-                    </button>
 
 
 
-                </div>
 
+<!-- ==========================
+     HISTORIQUE
+=========================== -->
 
-            </section>
 
+<section 
+id="history"
+class="page"
+>
 
 
+<h2>
+    Historique des opérations
+</h2>
 
 
 
+<div class="panel">
 
 
+<div id="full-history">
 
-            <!-- =========================
-                 HISTORIQUE
-            ========================== -->
+</div>
 
 
-            <section
-                id="history-section"
-                class="section"
-            >
+</div>
 
 
-                <h2>
-                    Historique
-                </h2>
+</section>
 
 
 
-                <div class="panel">
 
 
-                    <input
-                        id="search-operation"
-                        class="search-input"
-                        type="search"
-                        placeholder="Rechercher une opération"
-                    >
 
 
 
 
-                    <div
-                        id="operations-list"
-                        class="operations-list"
-                    >
+<!-- ==========================
+     VIREMENT
+=========================== -->
 
 
-                    </div>
+<section 
+id="transfer"
+class="page"
+>
 
 
-                </div>
+<h2>
+    Effectuer un virement
+</h2>
 
 
 
-            </section>
+<div class="panel">
 
 
 
+<label>
+    Nom du bénéficiaire
+</label>
 
 
+<input 
+id="beneficiary"
+type="text"
+placeholder="Nom complet"
+>
 
 
 
-            <!-- =========================
-                 CARTES
-            ========================== -->
 
 
-            <section
-                id="card-section"
-                class="section"
-            >
+<label>
+    IBAN bénéficiaire
+</label>
 
 
-                <h2>
-                    Mes cartes
-                </h2>
+<input 
+id="iban"
+type="text"
+placeholder="FR00 0000 0000..."
+>
 
 
 
-                <div class="bank-card">
 
 
-                    <div class="card-header">
+<label>
+    Montant (€)
+</label>
 
-                        <span>
-                            Banque Horizon
-                        </span>
 
+<input 
+id="transfer-amount"
+type="number"
+placeholder="0"
+>
 
-                        <span>
-                            PREMIUM
-                        </span>
 
-                    </div>
 
 
 
+<label>
+    Motif
+</label>
 
-                    <div class="card-chip">
 
-                    </div>
+<input 
+id="transfer-reason"
+type="text"
+placeholder="Motif du virement"
+>
 
 
 
 
-                    <div class="card-number">
+<button id="transfer-btn">
 
-                        4821 **** **** 6394
+    Envoyer le virement
 
-                    </div>
+</button>
 
 
 
 
+</div>
 
-                    <div class="card-footer">
 
 
-                        <div>
 
-                            <small>
-                                TITULAIRE
-                            </small>
 
-                            <strong>
-                                HUGO GARNIER
-                            </strong>
 
-                        </div>
 
+<div 
+id="transfer-result"
+class="transfer-result"
+style="display:none;"
+>
 
 
+<h3>
+    Traitement terminé
+</h3>
 
-                        <div>
 
-                            <small>
-                                TYPE
-                            </small>
+<p id="transfer-message">
 
-                            <strong>
-                                CARTE PREMIUM
-                            </strong>
+</p>
 
-                        </div>
 
+</div>
 
 
-                    </div>
 
+</section>
 
 
-                </div>
 
 
 
 
 
-                <div class="panel">
 
 
-                    <h3>
-                        Gestion de la carte
-                    </h3>
+<!-- ==========================
+     CARTE
+=========================== -->
 
 
-                    <button class="secondary-button">
+<section 
+id="card"
+class="page"
+>
 
-                        Bloquer temporairement
 
-                    </button>
+<h2>
+    Ma carte
+</h2>
 
 
-                    <button class="secondary-button">
 
-                        Voir les paramètres
 
-                    </button>
+<div class="bank-card">
 
 
-                </div>
+<div class="card-brand">
 
+    Fortuneo Banque
 
+</div>
 
-            </section> 
-                      <!-- =========================
-                 PROFIL
-            ========================== -->
 
 
-            <section
-                id="profile-section"
-                class="section"
-            >
 
+<div class="chip">
 
-                <h2>
-                    Mon profil
-                </h2>
+</div>
 
 
 
-                <div class="panel profile-panel">
 
+<div class="card-number">
 
-                    <div class="profile-row">
+    **** **** **** 4582
 
-                        <span>
-                            Nom complet
-                        </span>
+</div>
 
-                        <strong>
-                            Hugo Garnier
-                        </strong>
 
-                    </div>
 
 
 
+<div class="card-footer">
 
-                    <div class="profile-row">
 
-                        <span>
-                            Type de client
-                        </span>
+<span>
+    TITULAIRE
+    <strong id="card-holder">
 
-                        <strong>
-                            Premium
-                        </strong>
+    </strong>
+</span>
 
-                    </div>
 
 
+<span>
+    STATUT
+    <strong>
+        Restreinte
+    </strong>
+</span>
 
 
-                    <div class="profile-row">
 
-                        <span>
-                            Email
-                        </span>
+</div>
 
-                        <strong>
-                            hugo.garnier@email.fr
-                        </strong>
 
-                    </div>
+</div>
 
 
 
+<div class="panel">
 
-                    <div class="profile-row">
 
-                        <span>
-                            Statut
-                        </span>
+<p>
+    Carte virtuelle de démonstration.
+</p>
 
-                        <strong class="status-active">
-                            Actif
-                        </strong>
 
-                    </div>
+<button>
+    Gestion de la carte
+</button>
 
 
+</div>
 
-                </div>
 
 
-            </section>
+</section><!-- ==========================
+     NAVIGATION BASSE
+=========================== -->
 
 
+<nav class="bottom-nav">
 
 
+<button 
+class="nav-active"
+data-page="dashboard"
+>
 
+    🏠
+    <span>
+        Accueil
+    </span>
 
+</button>
 
 
-            <!-- =========================
-                 NOTIFICATIONS
-            ========================== -->
 
 
-            <section
-                id="notification-section"
-                class="section"
-            >
+<button 
+data-page="history"
+>
 
+    📄
+    <span>
+        Historique
+    </span>
 
-                <h2>
-                    Notifications
-                </h2>
+</button>
 
 
 
-                <div
-                    id="notification-list"
-                    class="panel"
-                >
 
 
-                    <div class="notification-item">
+<button 
+data-page="transfer"
+>
 
-                        <strong>
-                            Information
-                        </strong>
+    💸
+    <span>
+        Virement
+    </span>
 
-                        <p>
-                            Votre espace client est disponible.
-                        </p>
+</button>
 
-                    </div>
 
 
 
-                </div>
 
+<button 
+data-page="card"
+>
 
+    💳
+    <span>
+        Carte
+    </span>
 
-            </section>
+</button>
 
 
 
+</nav>
 
 
 
+</main>
 
 
-            <!-- =========================
-                 PARAMETRES
-            ========================== -->
-
-
-            <section
-                id="settings-section"
-                class="section"
-            >
-
-
-                <h2>
-                    Paramètres
-                </h2>
-
-
-
-                <div class="panel">
-
-
-                    <button class="secondary-button">
-
-                        Modifier mes informations
-
-                    </button>
-
-
-
-                    <button class="secondary-button">
-
-                        Préférences de connexion
-
-                    </button>
-
-
-
-                    <button class="secondary-button">
-
-                        Sécurité
-
-                    </button>
-
-
-
-                </div>
-
-
-            </section>
-
-
-
-        </main>
-
-
-
-
-
-
-
-
-        <!-- =========================
-             NAVIGATION BASSE
-        ========================== -->
-
-
-        <nav class="bottom-navigation">
-
-
-            <button
-                class="nav-item active"
-                data-section="home-section"
-            >
-
-                🏠
-
-                <span>
-                    Accueil
-                </span>
-
-            </button>
-
-
-
-
-
-            <button
-                class="nav-item"
-                data-section="transfer-section"
-            >
-
-                💶
-
-                <span>
-                    Opérations
-                </span>
-
-            </button>
-
-
-
-
-
-            <button
-                class="nav-item"
-                data-section="history-section"
-            >
-
-                📄
-
-                <span>
-                    Historique
-                </span>
-
-            </button>
-
-
-
-
-
-            <button
-                class="nav-item"
-                data-section="card-section"
-            >
-
-                💳
-
-                <span>
-                    Cartes
-                </span>
-
-            </button>
-
-
-
-
-
-            <button
-                class="nav-item"
-                data-section="profile-section"
-            >
-
-                👤
-
-                <span>
-                    Profil
-                </span>
-
-            </button>
-
-
-
-        </nav>
-
-
-
-
-    </section>
-
+</section>
 
 
 </div>
