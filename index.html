@@ -57,167 +57,140 @@
             </div>
         </div>
 
-        <main class="app-main">
-            <!-- ACCUEIL ULTRA RÉEL -->
-            <div id="home-section" class="app-section active-section">
-                <div class="section-title">Vos Comptes & Épargne</div>
-                <div class="premium-card" onclick="navigateToTransfer()" style="cursor: pointer;">
-    <div class="card-header">
-        <span class="badge-account">Compte Courant d'Excellence</span>
-        <span class="account-number" style="display: flex; align-items: center; gap: 4px;">
-            N° FR76 1180...094 <span style="font-size: 0.9rem;">➔</span>
-        </span>
-    </div>
-    <div class="amount" id="balance">7 585 024,00 €</div>
-    <p class="iban-text">IBAN: FR76 1180 6000 2001 9845 3321 094</p>
-</div>
+                <div class="app-body-wrapper" style="display: flex; flex: 1; overflow: hidden; position: relative;">
+            
+            <!-- MENU LATÉRAL DE PARAMÈTRES (Sidebar) -->
+            <aside class="app-sidebar">
+                <div class="sidebar-title">Sécurité & Profil</div>
+                <button class="sidebar-item" onclick="showSection('password-section')">🔒 Mot de passe</button>
+                <button class="sidebar-item" onclick="showSection('2fa-section')">🛡️ Securité 2FA</button>
+                <button class="sidebar-item" onclick="showSection('devices-section')">📱 Appareils vus</button>
+            </aside>
 
-                <!-- Répartition graphique simulée -->
-                <div class="financial-summary-card">
-                    <h4>Répartition de vos actifs</h4>
-                    <div class="chart-simulation-bar">
-                        <div class="bar-segment liquid" style="width: 85%;">Liquidités (85%)</div>
-                        <div class="bar-segment bonds" style="width: 15%;">Titres (15%)</div>
+            <!-- CONTENU PRINCIPAL -->
+            <main class="app-main" style="flex: 1; overflow-y: auto; padding: 16px; padding-bottom: 85px;">
+                <!-- ACCUEIL ULTRA RÉEL -->
+                <div id="home-section" class="app-section active-section">
+                    <div class="section-title">Vos Comptes & Épargne</div>
+                    <div class="premium-card" onclick="navigateToTransfer()" style="cursor: pointer;">
+                        <div class="card-header">
+                            <span class="badge-account">Compte Courant d'Excellence</span>
+                            <span class="account-number" style="display: flex; align-items: center; gap: 4px;">
+                                N° FR76 1180...094 <span style="font-size: 0.9rem;">➔</span>
+                            </span>
+                        </div>
+                        <div class="amount" id="balance">7 585 024,00 €</div>
+                        <p class="iban-text">IBAN: FR76 1180 6000 2001 9845 3321 094</p>
                     </div>
-                    <div class="financial-stats">
-    <div class="financial-stats" style="flex-direction: column; gap: 6px; align-items: flex-start;">
-    <div><span>Dernière connexion :</span> <strong id="connexion-0">En cours...</strong></div>
-</div>
 
+                    <div class="financial-summary-card">
+                        <h4>Répartition de vos actifs</h4>
+                        <div class="chart-simulation-bar">
+                            <div class="bar-segment liquid" style="width: 85%;">Liquidités (85%)</div>
+                            <div class="bar-segment bonds" style="width: 15%;">Titres (15%)</div>
+                        </div>
+                        <div class="financial-stats" style="flex-direction: column; gap: 6px; align-items: flex-start;">
+                            <div><span>Dernière connexion :</span> <strong id="connexion-0">En cours...</strong></div>
+                            <div><span>Connexion précédente :</span> <strong id="connexion-1" style="font-weight: normal; color: #64748b;">--</strong></div>
+                            <div><span>Connexion antécédente :</span> <strong id="connexion-2" style="font-weight: normal; color: #64748b;">--</strong></div>
+                        </div>
+                    </div>
 
-                </div>
-
-                <div class="section-title">Historique des opérations globales</div>
-                <div class="transactions-container" id="transactions-list">
+                    <div class="section-title">Historique des opérations globales</div>
+                    <div class="transactions-container" id="transactions-list">
                         <!-- TRANSACTION EXISTANTE 1 (Hier) -->
-    <div class="transaction-item" onclick="openDetails('Ordre Interbancaire de Compensation', '+7 500 000,00 €', 'Hier', 'Dépôt Institutionnel de Titres de Créances Privés (Fonds Certifiés)', 'Validé')">
-        <div class="tx-info">
-            <span class="tx-title">Transfert d'actifs financiers</span>
-            <span class="tx-date">Hier • Compte d'investissement</span>
-        </div>
-        <span class="tx-amount positive">+7 500 000,00 €</span>
-    </div>
+                        <div class="transaction-item" onclick="openDetails('Ordre Interbancaire de Compensation', '+7 500 000,00 €', 'Hier', 'Dépôt Institutionnel de Titres de Créances Privés (Fonds Certifiés)', 'Validé')">
+                            <div class="tx-info">
+                                <span class="tx-title">Transfert d'actifs financiers</span>
+                                <span class="tx-date">Hier • Compte d'investissement</span>
+                            </div>
+                            <span class="tx-amount positive">+7 500 000,00 €</span>
+                        </div>
 
-    <!-- TRANSACTION EXISTANTE 2 (Il y a 2 jours) -->
-    <div class="transaction-item" onclick="openDetails('Versement Dividendes Annuels', '+85 024,00 €', 'Il y a 2 jours', 'Rendements de Valeurs Mobilières Cotées - Compte de Trading', 'Validé')">
-        <div class="tx-info">
-            <span class="tx-title">Virement reçu (Dividendes)</span>
-            <span class="tx-date">Il y a 2 jours • Euronext Clear</span>
-        </div>
-        <span class="tx-amount positive">+85 024,00 €</span>
-    </div>
+                        <!-- TRANSACTION EXISTANTE 2 (Il y a 2 jours) -->
+                        <div class="transaction-item" onclick="openDetails('Versement Dividendes Annuels', '+85 024,00 €', 'Il y a 2 jours', 'Rendements de Valeurs Mobilières Cotées - Compte de Trading', 'Validé')">
+                            <div class="tx-info">
+                                <span class="tx-title">Virement reçu (Dividendes)</span>
+                                <span class="tx-date">Il y a 2 jours • Euronext Clear</span>
+                            </div>
+                            <span class="tx-amount positive">+85 024,00 €</span>
+                        </div>
 
-    <!-- NOUVELLE 1 : 30 Mars 2026 -->
-    <div class="transaction-item" onclick="openDetails('Paiement par Carte', '-99,00 €', '30 Mars 2026', 'Abonnement Annuel Services Premium Logiciels', 'Validé')">
-        <div class="tx-info">
-            <span class="tx-title">Paiement CB • Adobe Systems</span>
-            <span class="tx-date">30 Mars 2026 • Facture en ligne</span>
-        </div>
-        <span class="tx-amount negative">-99,00 €</span>
-    </div>
+                        <!-- NOUVELLE 1 : 30 Mars 2026 -->
+                        <div class="transaction-item" onclick="openDetails('Paiement par Carte', '-99,00 €', '30 Mars 2026', 'Abonnement Annuel Services Premium Logiciels', 'Validé')">
+                            <div class="tx-info">
+                                <span class="tx-title">Paiement CB • Adobe Systems</span>
+                                <span class="tx-date">30 Mars 2026 • Facture en ligne</span>
+                            </div>
+                            <span class="tx-amount negative">-99,00 €</span>
+                        </div>
 
-    <!-- NOUVELLE 2 : 06 Juillet 2025 -->
-    <div class="transaction-item" onclick="openDetails('Prélèvement SEPA', '-147,00 €', '06 Juillet 2025', 'Cotisation d\'assurance Multirisque Habitation Résidence Principale', 'Validé')">
-        <div class="tx-info">
-            <span class="tx-title">Prélèvement • AXA Assurances</span>
-            <span class="tx-date">06 Juillet 2025 • Contrat Particulier</span>
-        </div>
-        <span class="tx-amount negative">-147,00 €</span>
-    </div>
+                        <!-- NOUVELLE 2 : 06 Juillet 2025 -->
+                        <div class="transaction-item" onclick="openDetails('Prélèvement SEPA', '-147,00 €', '06 Juillet 2025', 'Cotisation d\'assurance Multirisque Habitation Résidence Principale', 'Validé')">
+                            <div class="tx-info">
+                                <span class="tx-title">Prélèvement • AXA Assurances</span>
+                                <span class="tx-date">06 Juillet 2025 • Contrat Particulier</span>
+                            </div>
+                            <span class="tx-amount negative">-147,00 €</span>
+                        </div>
 
-    <!-- NOUVELLE 3 : 06 Juillet 2024 -->
-    <div class="transaction-item" onclick="openDetails('Prélèvement SEPA', '-147,00 €', '06 Juillet 2024', 'Régularisation échéance annuelle télépéage et stationnement', 'Validé')">
-        <div class="tx-info">
-            <span class="tx-title">Prélèvement • APRR Télépéage</span>
-            <span class="tx-date">06 Juillet 2024 • Gestion Automobile</span>
-        </div>
-        <span class="tx-amount negative">-147,00 €</span>
-    </div>
+                        <!-- NOUVELLE 3 : 06 Juillet 2024 -->
+                        <div class="transaction-item" onclick="openDetails('Prélèvement SEPA', '-147,00 €', '06 Juillet 2024', 'Régularisation échéance annuelle télépéage et stationnement', 'Validé')">
+                            <div class="tx-info">
+                                <span class="tx-title">Prélèvement • APRR Télépéage</span>
+                                <span class="tx-date">06 Juillet 2024 • Gestion Automobile</span>
+                            </div>
+                            <span class="tx-amount negative">-147,00 €</span>
+                        </div>
 
-    <!-- NOUVELLE 4 : 15 Janvier 2024 -->
-    <div class="transaction-item" onclick="openDetails('Virement Émis', '-4 200,00 €', '15 Janvier 2024', 'Règlement solde travaux de rénovation et peinture de bureau', 'Validé')">
-        <div class="tx-info">
-            <span class="tx-title">Virement • EURL Renovat Decor</span>
-            <span class="tx-date">15 Janvier 2024 • Opération SEPA</span>
-        </div>
-        <span class="tx-amount negative">-4 200,00 €</span>
-    </div>
+                        <!-- NOUVELLE 4 : 15 Janvier 2024 -->
+                        <div class="transaction-item" onclick="openDetails('Virement Émis', '-4 200,00 €', '15 Janvier 2024', 'Règlement solde travaux de rénovation et peinture de bureau', 'Validé')">
+                            <div class="tx-info">
+                                <span class="tx-title">Virement • EURL Renovat Decor</span>
+                                <span class="tx-date">15 Janvier 2024 • Opération SEPA</span>
+                            </div>
+                            <span class="tx-amount negative">-4 200,00 €</span>
+                        </div>
 
-    <!-- NOUVELLE 5 : 20 Octobre 2023 -->
-    <div class="transaction-item" onclick="openDetails('Paiement par Carte', '-547,00 €', '20 Octobre 2023', 'Achat de mobilier professionnel et fournitures complémentaires', 'Validé')">
-        <div class="tx-info">
-            <span class="tx-title">Paiement CB • IKEA Paris</span>
-            <span class="tx-date">20 Octobre 2023 • Facture Magasin</span>
-        </div>
-        <span class="tx-amount negative">-547,00 €</span>
-    </div>
+                        <!-- NOUVELLE 5 : 20 Octobre 2023 -->
+                        <div class="transaction-item" onclick="openDetails('Paiement par Carte', '-547,00 €', '20 Octobre 2023', 'Achat de mobilier professionnel et fournitures complémentaires', 'Validé')">
+                            <div class="tx-info">
+                                <span class="tx-title">Paiement CB • IKEA Paris</span>
+                                <span class="tx-date">20 Octobre 2023 • Facture Magasin</span>
+                            </div>
+                            <span class="tx-amount negative">-547,00 €</span>
+                        </div>
 
-    <!-- NOUVELLE 6 : 19 Septembre 2023 -->
-    <div class="transaction-item" onclick="openDetails('Virement Reçu', '+6 850,00 €', '19 Septembre 2023', 'Remboursement partiel avance de trésorerie sur frais d\'études', 'Validé')">
-        <div class="tx-info">
-            <span class="tx-title">Virement reçu • Cabinet Legal Paris</span>
-            <span class="tx-date">19 Septembre 2023 • Compte Tiers</span>
-        </div>
-        <span class="tx-amount positive">+6 850,00 €</span>
-    </div>
+                        <!-- NOUVELLE 6 : 19 Septembre 2023 -->
+                        <div class="transaction-item" onclick="openDetails('Virement Reçu', '+6 850,00 €', '19 Septembre 2023', 'Remboursement partiel avance de trésorerie sur frais d\'études', 'Validé')">
+                            <div class="tx-info">
+                                <span class="tx-title">Virement reçu • Cabinet Legal Paris</span>
+                                <span class="tx-date">19 Septembre 2023 • Compte Tiers</span>
+                            </div>
+                            <span class="tx-amount positive">+6 850,00 €</span>
+                        </div>
 
-    <!-- NOUVELLE 7 : 04 Janvier 2019 -->
-    <div class="transaction-item" onclick="openDetails('Virement Reçu', '+587,00 €', '04 Janvier 2019', 'Remboursement annuel d\'honoraires de conseil de gestion de patrimoine', 'Validé')">
-        <div class="tx-info">
-            <span class="tx-title">Virement reçu • Cabinet Audits & Co</span>
-            <span class="tx-date">04 Janvier 2019 • Versement Externe</span>
-        </div>
-        <span class="tx-amount positive">+587,00 €</span>
-    </div>
-
+                        <!-- NOUVELLE 7 : 04 Janvier 2019 -->
+                        <div class="transaction-item" onclick="openDetails('Virement Reçu', '+587,00 €', '04 Janvier 2019', 'Remboursement annuel d\'honoraires de conseil de gestion de patrimoine', 'Validé')">
+                            <div class="tx-info">
+                                <span class="tx-title">Virement reçu • Cabinet Audits & Co</span>
+                                <span class="tx-date">04 Janvier 2019 • Versement Externe</span>
+                            </div>
+                            <span class="tx-amount positive">+587,00 €</span>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- VIREMENTS INTERACTIFS -->
-            <div id="transfer-section" class="app-section">
-                <div class="section-title">Émettre un virement de capitaux</div>
-                <div class="form-card" id="form-container">
-                    <div class="form-field"><label>Débiteur</label><select disabled><option>Compte Courant Excellence (*094)</option></select></div>
-                    <div class="form-field"><label>Nom complet du bénéficiaire</label><input type="text" id="beneficiary" placeholder="Ex: Cabinet Notarial Garnier"></div>
-                    <div class="form-field"><label>IBAN National ou International</label><input type="text" id="iban-input" placeholder="FR76..."></div>
-                    <div class="form-field"><label>Code BIC / SWIFT</label><input type="text" id="bic-input" placeholder="Ex: FORFRPPXXX"></div>
-                    <div class="form-field"><label>Montant du transfert (€)</label><input type="number" id="amount-input" placeholder="0.00"></div>
-                    <div class="form-field"><label>Libellé de l'opération</label><input type="text" id="reason-input" placeholder="Motif officiel obligatoire"></div>
-                    <button class="btn-action" id="btn-transfert" onclick="startTransferAnimation()">Signer et envoyer les fonds</button>
-                </div>
+                <!-- VIREMENTS INTERACTIFS -->
+                <div id="transfer-section" class="app-section">
+                    <div class="section-title">Émettre un virement de capitaux</div>
+                    <div class="form-card" id="form-container">
+                        <div class="form-field"><label>Débiteur</label><select disabled><option>Compte Courant Excellence (*094)</option></select></div>
+                        <div class="form-field"><label>Nom complet du bénéficiaire</label><input type="text" id="beneficiary" placeholder="Ex: Cabinet Notarial Garnier"></div>
+                        <div class="form-field"><label>IBAN National ou International</label><input type="text" id="iban-input" placeholder="FR76..."></div>
+                        <div class="form-field"><label>Code BIC / SWIFT</label><input type="text" id="bic-input" placeholder="Ex: FORFRPPXXX"></div>
+                        <div class="form-field"><label>Montant du transfert (€)</label><input type="number" id="amount-input" placeholder="0.00"></div>
 
-                <!-- JAUGE DE CHARGEMENT PROGRESSIVE -->
-                <div id="loader-container" class="loader-box" style="display: none;">
-                    <h4>SÉCURISATION DU TRANSFERT EN COURS...</h4>
-                    <p>Contrôle de conformité réglementaire SEPA/TRACFIN</p>
-                    <div class="progress-bar-bg"><div id="progress-bar-fill" class="progress-bar-fill"></div></div>
-                    <div id="progress-text" class="progress-text">0%</div>
-                </div>
-            </div>
-
-            <!-- CARTES DE CRÉDIT -->
-            <div id="card-section" class="app-section">
-                <div class="section-title">Moyens de paiement Élite</div>
-                <div class="credit-card-ui">
-                    <div class="cc-brand">fortuneo</div>
-                    <div class="cc-chip"></div>
-                    <div class="cc-number">**** **** **** 8842</div>
-                    <div class="cc-footer">
-                        <div><span class="cc-label">TITULAIRE</span><span class="cc-value">EDMOND GARNIER</span></div>
-                        <div class="cc-type-container">
-    <span class="cc-type">World Elite</span>
-    <img src="https://wikimedia.org" alt="Mastercard" class="mastercard-logo">
-</div>
-
-                    </div>
-                </div>
-                <div class="card-status-box">
-                    <div class="status-row"><span>Statut Global</span><span class="status-badge" style="background:#fee2e2; color:#ef4444; font-weight:700;">GELÉE TEMPORAIREMENT</span></div>
-                    <div class="status-row"><span>Plafond de Virement Élevé</span><strong>Indéterminé</strong></div>
-                </div>
-            </div>
-        </main>
 
         <!-- MODAL DÉTAILS TRANSACTIONS -->
         <div class="modal-overlay" id="tx-modal" style="display: none;">
