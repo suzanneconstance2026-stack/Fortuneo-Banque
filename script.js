@@ -1,5 +1,6 @@
 /* ======================================
-   SCRIPT PRINCIPAL - ESPACE CLIENT WEB
+   SCRIPT PRINCIPAL
+   FORTUNEO BANQUE - SITE WEB
 ====================================== */
 
 
@@ -7,11 +8,14 @@ let connectedUser = null;
 
 
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
 
 
-const loginForm = document.getElementById("login-form");
+const loginForm =
+document.getElementById("login-form");
+
 
 const logoutButton =
 document.getElementById("logout-button");
@@ -20,22 +24,23 @@ document.getElementById("logout-button");
 
 
 
-/* ==========================
+
+/* ======================================
    RESTAURATION SESSION
-========================== */
+====================================== */
 
 
-const savedUser =
+const saved =
 localStorage.getItem("connectedUser");
 
 
 
-if(savedUser){
+if(saved){
 
 
 const user =
 usersDatabase.find(
-u => u.id == savedUser
+u => u.id == saved
 );
 
 
@@ -59,17 +64,17 @@ openClientSpace();
 
 
 
-/* ==========================
+/* ======================================
    CONNEXION
-========================== */
+====================================== */
 
 
 loginForm.addEventListener(
 "submit",
-(event)=>{
+(e)=>{
 
 
-event.preventDefault();
+e.preventDefault();
 
 
 
@@ -84,12 +89,14 @@ document.getElementById("password").value;
 
 
 
+
 const user =
 usersDatabase.find(
-item =>
-item.username === username &&
-item.password === password
+u =>
+u.username === username &&
+u.password === password
 );
+
 
 
 
@@ -104,9 +111,7 @@ document.getElementById("login-message")
 
 return;
 
-
 }
-
 
 
 
@@ -136,9 +141,9 @@ openClientSpace();
 
 
 
-/* ==========================
-   OUVERTURE ESPACE CLIENT
-========================== */
+/* ======================================
+   OUVERTURE ESPACE
+====================================== */
 
 
 function openClientSpace(){
@@ -157,7 +162,7 @@ document
 
 
 
-loadUserInformation();
+loadAll();
 
 
 
@@ -171,20 +176,16 @@ loadUserInformation();
 
 
 
-/* ==========================
-   CHARGEMENT UTILISATEUR
-========================== */
+/* ======================================
+   CHARGEMENT GENERAL
+====================================== */
 
 
-function loadUserInformation(){
+function loadAll(){
 
 
-
-if(!connectedUser) return;
-
-
-
-const user = connectedUser;
+const user =
+connectedUser;
 
 
 
@@ -195,10 +196,11 @@ document
 
 
 
+
 document
 .getElementById("account-balance")
 .innerText =
-formatMoney(user.account.balance);
+money(user.account.balance);
 
 
 
@@ -212,49 +214,127 @@ user.account.status;
 
 
 
+loadProfile();
 
-/* Profil */
+loadAccounts();
+
+loadHistory();
+
+loadDashboard();
+
+loadCard();
+
+loadNotifications();
+
+loadStatistics();
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ======================================
+   PROFIL
+====================================== */
+
+
+function loadProfile(){
+
+
+const p =
+connectedUser.profile;
+
 
 
 document
 .getElementById("profile-full-name")
 .innerText =
-`${user.profile.firstName} ${user.profile.lastName}`;
+`${p.firstName} ${p.lastName}`;
 
 
 
 document
 .getElementById("profile-login")
 .innerText =
-user.username;
+connectedUser.username;
 
 
 
 document
 .getElementById("profile-email")
 .innerText =
-user.profile.email;
+p.email;
 
 
 
 document
 .getElementById("profile-phone")
 .innerText =
-user.profile.phone;
+p.phone;
+
+
+
+}
 
 
 
 
 
 
-/* RIB interne */
+
+
+
+/* ======================================
+   COMPTE
+====================================== */
+
+
+function loadAccounts(){
+
+
+const user =
+connectedUser;
+
 
 
 document
-.getElementById("rib-name")
+.getElementById("accounts-container")
+.innerHTML = `
+
+
+<h3>
+${user.account.name}
+</h3>
+
+
+<p>
+Solde :
+<strong>
+${money(user.account.balance)}
+</strong>
+</p>
+
+
+<p>
+${user.account.status}
+</p>
+
+
+`;
+
+
+
+document
+.getElementById("rib-holder")
 .innerText =
 `${user.profile.firstName} ${user.profile.lastName}`;
-
 
 
 document
@@ -263,12 +343,10 @@ document
 user.account.bankingDetails.iban;
 
 
-
 document
 .getElementById("rib-bic")
 .innerText =
 user.account.bankingDetails.bic;
-
 
 
 document
@@ -278,20 +356,6 @@ user.account.bankingDetails.accountNumber;
 
 
 
-
-
-loadAccounts();
-
-loadHistory();
-
-loadDashboardHistory();
-
-loadCard();
-
-loadNotifications();
-
-
-
 }
 
 
@@ -302,177 +366,9 @@ loadNotifications();
 
 
 
-/* ==========================
-   FORMAT €
-========================== */
-
-
-function formatMoney(amount){
-
-
-return new Intl.NumberFormat(
-"fr-FR",
-{
-style:"currency",
-currency:"EUR"
-}
-).format(amount);
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================
-   NAVIGATION
-========================== */
-
-
-window.showPage=function(page){
-
-
-
-document
-.querySelectorAll(".website-page")
-.forEach(
-section =>
-section.classList.remove("active-page")
-);
-
-
-
-const target =
-document.getElementById(page);
-
-
-
-if(target){
-
-target.classList.add("active-page");
-
-}
-
-
-
-};
-
-
-
-
-
-
-
-
-
-/* ==========================
-   COMPTES
-========================== */
-
-
-function loadAccounts(){
-
-
-const box =
-document.getElementById("accounts-container");
-
-
-
-box.innerHTML = `
-
-<h3>
-${connectedUser.account.name}
-</h3>
-
-
-<p>
-Solde actuel :
-<strong>
-${formatMoney(
-connectedUser.account.balance
-)}
-</strong>
-</p>
-
-
-<p>
-${connectedUser.account.status}
-</p>
-
-`;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================
+/* ======================================
    HISTORIQUE
-========================== */
-
-
-function createOperation(operation){
-
-
-const div =
-document.createElement("div");
-
-
-
-div.className="operation";
-
-
-
-div.innerHTML=`
-
-<div>
-
-<strong>
-${operation.label}
-</strong>
-
-<br>
-
-<small>
-${operation.date}
-</small>
-
-</div>
-
-
-<b>
-${operation.amount}
-</b>
-
-`;
-
-
-
-div.onclick=()=>openOperation(operation);
-
-
-
-return div;
-
-
-}
-
-
-
-
+====================================== */
 
 
 function loadHistory(){
@@ -490,9 +386,57 @@ box.innerHTML="";
 connectedUser.operations.forEach(op=>{
 
 
-box.appendChild(
-createOperation(op)
-);
+const item =
+document.createElement("div");
+
+
+item.className="operation";
+
+
+
+item.innerHTML=`
+
+
+<div>
+
+<strong>
+${op.label}
+</strong>
+
+<br>
+
+<small>
+${op.date}
+</small>
+
+</div>
+
+
+<div>
+
+<b>
+${op.amount}
+</b>
+
+<br>
+
+<small>
+${op.category}
+</small>
+
+</div>
+
+
+`;
+
+
+
+item.onclick=()=>showOperation(op);
+
+
+
+box.appendChild(item);
+
 
 
 });
@@ -508,8 +452,7 @@ createOperation(op)
 
 
 
-function loadDashboardHistory(){
-
+function loadDashboard(){
 
 
 const box =
@@ -526,9 +469,136 @@ connectedUser.operations
 .forEach(op=>{
 
 
-box.appendChild(
-createOperation(op)
-);
+const div =
+document.createElement("div");
+
+
+div.className="operation";
+
+
+div.innerHTML=`
+
+<strong>
+${op.label}
+</strong>
+
+<span>
+${op.amount}
+</span>
+
+`;
+
+
+
+box.appendChild(div);
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ======================================
+   CARTE
+====================================== */
+
+
+function loadCard(){
+
+
+
+const box =
+document.getElementById("cards-container");
+
+
+
+const card =
+connectedUser.card;
+
+
+
+box.innerHTML = `
+
+
+<div class="bank-card">
+
+
+<h3>
+Fortuneo Banque
+</h3>
+
+
+<div class="chip"></div>
+
+
+<h2>
+**** **** **** ${card.number}
+</h2>
+
+
+<p>
+${card.holder}
+</p>
+
+
+<p>
+Expire : ${card.expiry}
+</p>
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ======================================
+   NOTIFICATIONS
+====================================== */
+
+
+function loadNotifications(){
+
+
+const box =
+document.getElementById("notifications-container");
+
+
+box.innerHTML="";
+
+
+
+connectedUser.notifications.forEach(n=>{
+
+
+const p =
+document.createElement("p");
+
+
+p.innerText=n;
+
+
+box.appendChild(p);
 
 
 
@@ -545,55 +615,128 @@ createOperation(op)
 
 
 
-/* ==========================
+/* ======================================
+   STATISTIQUES
+====================================== */
+
+
+function loadStatistics(){
+
+
+
+let income=0;
+
+let expense=0;
+
+
+
+connectedUser.operations.forEach(op=>{
+
+
+const amount =
+Number(
+op.amount
+.replace("€","")
+.replace(/\s/g,"")
+.replace(",",".")
+);
+
+
+
+if(amount>0){
+
+income+=amount;
+
+}
+
+else{
+
+expense+=Math.abs(amount);
+
+}
+
+
+});
+
+
+
+
+
+document.getElementById("operation-count")
+.innerText =
+connectedUser.operations.length;
+
+
+
+document.getElementById("income-total")
+.innerText =
+money(income);
+
+
+
+document.getElementById("expense-total")
+.innerText =
+money(expense);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ======================================
    DETAIL OPERATION
-========================== */
+====================================== */
 
 
-function openOperation(operation){
-
-
-
-const modal =
-document.getElementById("operation-modal");
+function showOperation(op){
 
 
 
 document
 .getElementById("operation-details")
-.innerHTML=`
+.innerHTML = `
+
 
 <p>
-<strong>Opération :</strong>
-${operation.label}
+Libellé : ${op.label}
 </p>
 
 
 <p>
-<strong>Date :</strong>
-${operation.date}
+Date : ${op.date}
 </p>
 
 
 <p>
-<strong>Catégorie :</strong>
-${operation.category}
+Référence : ${op.reference}
 </p>
 
 
 <p>
-<strong>Montant :</strong>
-${operation.amount}
+Montant : ${op.amount}
 </p>
+
 
 `;
 
 
 
-modal.classList.remove("hidden");
+document
+.getElementById("operation-modal")
+.classList.remove("hidden");
+
 
 
 }
+
+
 
 
 
@@ -620,105 +763,31 @@ document
 
 
 
-/* ==========================
-   CARTE
-========================== */
+/* ======================================
+   NAVIGATION
+====================================== */
 
 
-function loadCard(){
+window.showPage=function(page){
 
 
-const box =
-document.getElementById("cards-container");
+document
+.querySelectorAll(".website-page")
+.forEach(p=>{
 
-
-
-const card =
-connectedUser.card;
-
-
-
-box.innerHTML=`
-
-<div class="bank-card">
-
-
-<h3>
-Fortuneo Banque
-</h3>
-
-
-<div class="chip"></div>
-
-
-<h2>
-**** **** **** ${card.number}
-</h2>
-
-
-<p>
-${card.holder}
-</p>
-
-
-<p>
-Expire ${card.expiry}
-</p>
-
-
-</div>
-
-`;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================
-   NOTIFICATIONS
-========================== */
-
-
-function loadNotifications(){
-
-
-const box =
-document.getElementById("notifications-container");
-
-
-box.innerHTML="";
-
-
-
-connectedUser.notifications
-.forEach(note=>{
-
-
-const item =
-document.createElement("p");
-
-
-item.innerText =
-note;
-
-
-
-box.appendChild(item);
-
-
+p.classList.remove("active-page");
 
 });
 
 
-}
+
+document
+.getElementById(page)
+.classList.add("active-page");
+
+
+
+};
 
 
 
@@ -728,9 +797,9 @@ box.appendChild(item);
 
 
 
-/* ==========================
+/* ======================================
    RECHERCHE
-========================== */
+====================================== */
 
 
 document
@@ -747,11 +816,11 @@ this.value.toLowerCase();
 
 document
 .querySelectorAll(".operation")
-.forEach(item=>{
+.forEach(op=>{
 
 
-item.style.display =
-item.innerText
+op.style.display =
+op.innerText
 .toLowerCase()
 .includes(value)
 ?
@@ -773,9 +842,9 @@ item.innerText
 
 
 
-/* ==========================
+/* ======================================
    VIREMENT
-========================== */
+====================================== */
 
 
 document
@@ -784,19 +853,19 @@ document
 
 
 const amount =
-Number(
-document.getElementById("transfer-amount").value
-);
+document
+.getElementById("transfer-amount")
+.value;
 
 
 
-if(!amount || amount <=0){
+if(!amount){
 
 
 document
 .getElementById("transfer-result")
 .innerText =
-"Montant incorrect.";
+"Veuillez saisir un montant.";
 
 
 return;
@@ -809,8 +878,7 @@ return;
 document
 .getElementById("transfer-result")
 .innerText =
-"Demande enregistrée.";
-
+"Votre demande a été enregistrée.";
 
 
 };
@@ -823,9 +891,9 @@ document
 
 
 
-/* ==========================
+/* ======================================
    DECONNEXION
-========================== */
+====================================== */
 
 
 logoutButton.onclick=()=>{
@@ -837,15 +905,33 @@ localStorage.removeItem(
 
 
 
-connectedUser=null;
-
-
-
 location.reload();
 
 
 
 };
+
+
+
+
+
+
+
+
+
+function money(value){
+
+
+return new Intl.NumberFormat(
+"fr-FR",
+{
+style:"currency",
+currency:"EUR"
+}
+).format(value);
+
+
+}
 
 
 
