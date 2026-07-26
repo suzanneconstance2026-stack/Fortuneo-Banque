@@ -1,16 +1,18 @@
 /* =====================================
-   STYLE GENERAL - FORTUNEO BANQUE
+   STYLE GENERAL
 ===================================== */
 
 
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 
 body{
 
-    margin:0;
+    min-height:100vh;
 
     background:#f1f5f9;
 
@@ -27,14 +29,33 @@ body{
 
 button{
 
+    cursor:pointer;
+
+    border:none;
+
     transition:.2s ease;
 
 }
 
 
+
 button:hover{
 
     transform:translateY(-2px);
+
+}
+
+
+
+input{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #cbd5e1;
 
 }
 
@@ -52,11 +73,13 @@ button:hover{
 }
 
 
+
 .website-page{
 
     display:none;
 
 }
+
 
 
 .active-page{
@@ -85,9 +108,9 @@ button:hover{
 
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
+
+    justify-content:center;
 
 
     background:
@@ -103,16 +126,16 @@ button:hover{
 
 
 
-.login-container{
+.login-card{
 
 
     width:420px;
 
     background:white;
 
-    border-radius:24px;
-
     padding:40px;
+
+    border-radius:25px;
 
 
     box-shadow:
@@ -125,33 +148,32 @@ button:hover{
 
 
 
-.brand-area{
+.logo-zone{
 
 
     text-align:center;
 
-    margin-bottom:35px;
+    margin-bottom:30px;
 
 
 }
 
 
 
-.brand-area h1{
+.logo-zone h1{
 
 
     color:#15803d;
 
     font-size:34px;
 
-    margin-bottom:8px;
-
 
 }
 
 
 
-.brand-area p{
+.logo-zone p{
+
 
     color:#64748b;
 
@@ -160,37 +182,25 @@ button:hover{
 
 
 
+.form-group{
 
 
-
-
-
-.field input{
-
-
-    width:100%;
-
-    padding:15px;
-
-    border-radius:12px;
-
-    border:1px solid #cbd5e1;
+    margin-bottom:20px;
 
 
 }
 
 
 
-.field label{
+.form-group label{
 
 
     display:block;
 
     margin-bottom:7px;
 
-    font-size:14px;
-
     font-weight:600;
+
 
 }
 
@@ -198,18 +208,32 @@ button:hover{
 
 
 
-#login-button{
+.remember-line{
+
+
+    display:flex;
+
+    gap:8px;
+
+    margin-bottom:20px;
+
+
+}
+
+
+
+.primary-button{
 
 
     width:100%;
 
-    padding:16px;
+    padding:15px;
+
+    border-radius:30px;
 
     background:#15803d;
 
     color:white;
-
-    border-radius:30px;
 
     font-size:16px;
 
@@ -225,38 +249,30 @@ button:hover{
 
 
 /* =====================================
-   ESPACE CLIENT
+   HEADER
 ===================================== */
 
 
-#client-space{
-
-
-    min-height:100vh;
-
-
-}
-
-
-
-.site-header{
+.main-header{
 
 
     height:80px;
 
     background:white;
 
+
     display:flex;
 
-    justify-content:space-between;
-
     align-items:center;
+
+    justify-content:space-between;
 
 
     padding:0 30px;
 
 
     border-bottom:
+
     1px solid #e2e8f0;
 
 
@@ -264,7 +280,7 @@ button:hover{
 
 
 
-.client-profile{
+.user-area{
 
 
     display:flex;
@@ -273,6 +289,9 @@ button:hover{
 
     gap:15px;
 
+    cursor:pointer;
+
+
 }
 
 
@@ -280,15 +299,16 @@ button:hover{
 .avatar{
 
 
-    width:48px;
+    width:50px;
 
-    height:48px;
-
-    border-radius:50%;
+    height:50px;
 
     background:#15803d;
 
     color:white;
+
+
+    border-radius:50%;
 
 
     display:flex;
@@ -305,11 +325,30 @@ button:hover{
 
 
 
+.avatar.large{
+
+    width:75px;
+
+    height:75px;
+
+    font-size:22px;
+
+}
 
 
 
 
-.content-area{
+
+
+
+
+
+/* =====================================
+   CONTENU
+===================================== */
+
+
+.site-content{
 
 
     max-width:1000px;
@@ -317,6 +356,9 @@ button:hover{
     margin:auto;
 
     padding:30px;
+
+
+    padding-bottom:100px;
 
 
 }
@@ -330,11 +372,11 @@ button:hover{
 
 
 /* =====================================
-   SOLDE
+   RESUME COMPTE
 ===================================== */
 
 
-.balance-box{
+.account-summary{
 
 
     background:
@@ -348,6 +390,7 @@ button:hover{
 
     color:white;
 
+
     padding:35px;
 
     border-radius:25px;
@@ -355,7 +398,7 @@ button:hover{
 
     box-shadow:
 
-    0 15px 30px
+    0 15px 35px
     rgba(0,0,0,.18);
 
 
@@ -363,14 +406,7 @@ button:hover{
 
 
 
-.balance-box p{
-
-    opacity:.7;
-
-}
-
-
-.balance-box h1{
+.account-summary h1{
 
 
     font-size:42px;
@@ -389,19 +425,22 @@ button:hover{
 
 
 /* =====================================
-   RACCOURCIS
+   ACTIONS RAPIDES
 ===================================== */
 
 
-.shortcut-grid{
+.quick-actions{
 
 
     display:grid;
 
     grid-template-columns:
+
     repeat(4,1fr);
 
+
     gap:15px;
+
 
     margin:25px 0;
 
@@ -410,13 +449,12 @@ button:hover{
 
 
 
-.shortcut-grid button{
+.quick-actions button{
 
 
     background:white;
 
     padding:22px;
-
 
     border-radius:18px;
 
@@ -438,27 +476,23 @@ button:hover{
 
 
 /* =====================================
-   CARTES CONTENU
+   BLOCS
 ===================================== */
 
 
-.content-card{
+.content-box{
 
 
     background:white;
 
-
-    border-radius:20px;
-
-
     padding:25px;
 
+    border-radius:20px;
 
     margin-bottom:25px;
 
 
     box-shadow:
-
 
     0 8px 25px
     rgba(0,0,0,.06);
@@ -473,22 +507,22 @@ button:hover{
 
 
 
+
 /* =====================================
-   OPERATIONS
+   INFORMATIONS
 ===================================== */
 
 
-.operation{
+.bank-information div,
+.information-row,
+.security-row{
 
 
     display:flex;
 
     justify-content:space-between;
 
-    align-items:center;
-
-
-    padding:18px 10px;
+    padding:15px 0;
 
 
     border-bottom:
@@ -500,21 +534,10 @@ button:hover{
 
 
 
-.operation:hover{
+.bank-information span{
 
 
-    background:#f8fafc;
-
-}
-
-
-
-
-
-.operation b{
-
-
-    color:#15803d;
+    color:#64748b;
 
 
 }
@@ -528,7 +551,50 @@ button:hover{
 
 
 /* =====================================
-   CARTE BANCAIRE
+   HISTORIQUE
+===================================== */
+
+
+.operation{
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:18px 5px;
+
+
+    border-bottom:
+
+    1px solid #e2e8f0;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+.operation:hover{
+
+
+    background:#f8fafc;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   CARTE
 ===================================== */
 
 
@@ -540,17 +606,16 @@ button:hover{
     height:230px;
 
 
-    border-radius:24px;
-
-
     padding:28px;
+
+
+    border-radius:25px;
 
 
     color:white;
 
 
     background:
-
 
     linear-gradient(
         135deg,
@@ -569,30 +634,91 @@ button:hover{
 
 
 
-.bank-card h2{
+.chip{
 
 
-    letter-spacing:3px;
+    width:48px;
 
-    margin-top:30px;
+    height:35px;
+
+    background:#facc15;
+
+    border-radius:8px;
+
+    margin:25px 0;
 
 
 }
 
 
 
-.chip{
+.bank-card h2{
 
 
-    width:48px;
+    letter-spacing:3px;
 
-    height:34px;
-
-
-    background:#facc15;
+}
 
 
-    border-radius:8px;
+
+
+
+
+
+
+
+/* =====================================
+   STATISTIQUES
+===================================== */
+
+
+.statistics-grid{
+
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(3,1fr);
+
+
+    gap:20px;
+
+
+}
+
+
+
+.stat-card{
+
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+
+    box-shadow:
+
+    0 8px 20px
+    rgba(0,0,0,.05);
+
+
+}
+
+
+
+.stat-card strong{
+
+
+    display:block;
+
+    margin-top:15px;
+
+    font-size:25px;
+
+    color:#15803d;
 
 
 }
@@ -606,16 +732,18 @@ button:hover{
 
 
 /* =====================================
-   INFORMATIONS BANCAIRES
+   DOCUMENTS
 ===================================== */
 
 
-.bank-details div{
+.document-item{
 
 
     display:flex;
 
     justify-content:space-between;
+
+    align-items:center;
 
 
     padding:15px 0;
@@ -630,10 +758,84 @@ button:hover{
 
 
 
-.bank-details span{
+.document-item button{
 
 
-    color:#64748b;
+    background:#15803d;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   MODALE
+===================================== */
+
+
+.modal{
+
+
+    position:fixed;
+
+    inset:0;
+
+
+    background:
+
+    rgba(0,0,0,.5);
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+}
+
+
+
+.modal-content{
+
+
+    background:white;
+
+    width:90%;
+
+    max-width:420px;
+
+    padding:30px;
+
+    border-radius:20px;
+
+
+}
+
+
+
+.close-button{
+
+
+    float:right;
+
+    background:none;
+
+    font-size:25px;
+
 
 }
 
@@ -695,68 +897,13 @@ button:hover{
 }
 
 
+
 .bottom-navigation span{
 
 
     display:block;
 
     font-size:12px;
-
-
-}
-
-
-
-
-
-
-
-
-
-/* =====================================
-   MODALE
-===================================== */
-
-
-.modal{
-
-
-    position:fixed;
-
-    inset:0;
-
-
-    background:
-
-    rgba(15,23,42,.55);
-
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-
-}
-
-
-
-.modal-content{
-
-
-    background:white;
-
-
-    padding:30px;
-
-
-    border-radius:22px;
-
-
-    width:90%;
-
-    max-width:420px;
 
 
 }
@@ -778,21 +925,19 @@ button:hover{
 
 
 
-.content-area{
-
-    padding:15px;
-
-}
-
-
-
-.shortcut-grid{
-
+.quick-actions{
 
     grid-template-columns:
 
     repeat(2,1fr);
 
+}
+
+
+
+.statistics-grid{
+
+    grid-template-columns:1fr;
 
 }
 
@@ -800,31 +945,26 @@ button:hover{
 
 .bank-card{
 
-
     width:100%;
 
+}
+
+
+
+.site-content{
+
+    padding:15px;
 
 }
 
 
 
-.balance-box h1{
-
-
-    font-size:32px;
-
-
-}
-
-
-
-.login-container{
-
+.login-card{
 
     width:90%;
 
-
 }
+
 
 
 }
