@@ -1,6 +1,10 @@
 /* ======================================
-   SCRIPT PRINCIPAL DU SITE
+   SCRIPT PRINCIPAL - ESPACE CLIENT WEB
 ====================================== */
+
+
+let connectedUser = null;
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,14 +21,55 @@ document.getElementById("logout-button");
 
 
 /* ==========================
+   RESTAURATION SESSION
+========================== */
+
+
+const savedUser =
+localStorage.getItem("connectedUser");
+
+
+
+if(savedUser){
+
+
+const user =
+usersDatabase.find(
+u => u.id == savedUser
+);
+
+
+
+if(user){
+
+connectedUser = user;
+
+openClientSpace();
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
    CONNEXION
 ========================== */
 
 
-loginForm.addEventListener("submit", function(e){
+loginForm.addEventListener(
+"submit",
+(event)=>{
 
 
-e.preventDefault();
+event.preventDefault();
 
 
 
@@ -35,6 +80,7 @@ document.getElementById("username").value.trim();
 
 const password =
 document.getElementById("password").value;
+
 
 
 
@@ -51,11 +97,13 @@ item.password === password
 if(!user){
 
 
-document.getElementById("login-message").innerText =
+document.getElementById("login-message")
+.innerText =
 "Identifiant ou mot de passe incorrect.";
 
 
 return;
+
 
 }
 
@@ -89,7 +137,7 @@ openClientSpace();
 
 
 /* ==========================
-   OUVRIR ESPACE CLIENT
+   OUVERTURE ESPACE CLIENT
 ========================== */
 
 
@@ -124,7 +172,7 @@ loadUserInformation();
 
 
 /* ==========================
-   CHARGEMENT INFORMATIONS
+   CHARGEMENT UTILISATEUR
 ========================== */
 
 
@@ -132,38 +180,33 @@ function loadUserInformation(){
 
 
 
+if(!connectedUser) return;
+
+
+
 const user = connectedUser;
 
 
 
-/* En-tête */
-
-
-document.getElementById("client-name")
+document
+.getElementById("client-name")
 .innerText =
 `${user.profile.firstName} ${user.profile.lastName}`;
 
 
 
-
-
-
-
-/* Solde */
-
-
-document.getElementById("account-balance")
+document
+.getElementById("account-balance")
 .innerText =
 formatMoney(user.account.balance);
 
 
 
-document.getElementById("account-status")
+
+document
+.getElementById("account-status")
 .innerText =
 user.account.status;
-
-
-
 
 
 
@@ -173,22 +216,29 @@ user.account.status;
 /* Profil */
 
 
-document.getElementById("profile-full-name")
+document
+.getElementById("profile-full-name")
 .innerText =
 `${user.profile.firstName} ${user.profile.lastName}`;
 
 
-document.getElementById("profile-login")
+
+document
+.getElementById("profile-login")
 .innerText =
 user.username;
 
 
-document.getElementById("profile-email")
+
+document
+.getElementById("profile-email")
 .innerText =
 user.profile.email;
 
 
-document.getElementById("profile-phone")
+
+document
+.getElementById("profile-phone")
 .innerText =
 user.profile.phone;
 
@@ -197,32 +247,34 @@ user.profile.phone;
 
 
 
+/* RIB interne */
 
 
-
-/* Coordonnées bancaires */
-
-
-document.getElementById("rib-name")
+document
+.getElementById("rib-name")
 .innerText =
 `${user.profile.firstName} ${user.profile.lastName}`;
 
 
-document.getElementById("rib-iban")
+
+document
+.getElementById("rib-iban")
 .innerText =
 user.account.bankingDetails.iban;
 
 
-document.getElementById("rib-bic")
+
+document
+.getElementById("rib-bic")
 .innerText =
 user.account.bankingDetails.bic;
 
 
-document.getElementById("rib-number")
+
+document
+.getElementById("rib-number")
 .innerText =
 user.account.bankingDetails.accountNumber;
-
-
 
 
 
@@ -251,20 +303,21 @@ loadNotifications();
 
 
 /* ==========================
-   FORMAT MONETAIRE
+   FORMAT €
 ========================== */
 
 
-function formatMoney(value){
+function formatMoney(amount){
 
 
-return value.toLocaleString(
+return new Intl.NumberFormat(
 "fr-FR",
 {
 style:"currency",
 currency:"EUR"
 }
-);
+).format(amount);
+
 
 
 }
@@ -282,23 +335,29 @@ currency:"EUR"
 ========================== */
 
 
-window.showPage = function(pageId){
+window.showPage=function(page){
 
 
 
 document
 .querySelectorAll(".website-page")
-.forEach(page=>{
-
-page.classList.remove("active-page");
-
-});
-
+.forEach(
+section =>
+section.classList.remove("active-page")
+);
 
 
-document
-.getElementById(pageId)
-.classList.add("active-page");
+
+const target =
+document.getElementById(page);
+
+
+
+if(target){
+
+target.classList.add("active-page");
+
+}
 
 
 
@@ -320,12 +379,12 @@ document
 function loadAccounts(){
 
 
-const container =
+const box =
 document.getElementById("accounts-container");
 
 
-container.innerHTML = `
 
+box.innerHTML = `
 
 <h3>
 ${connectedUser.account.name}
@@ -333,7 +392,7 @@ ${connectedUser.account.name}
 
 
 <p>
-Solde :
+Solde actuel :
 <strong>
 ${formatMoney(
 connectedUser.account.balance
@@ -343,10 +402,8 @@ connectedUser.account.balance
 
 
 <p>
-Statut :
 ${connectedUser.account.status}
 </p>
-
 
 `;
 
@@ -367,20 +424,7 @@ ${connectedUser.account.status}
 ========================== */
 
 
-function loadHistory(){
-
-
-
-const container =
-document.getElementById("history-container");
-
-
-
-container.innerHTML="";
-
-
-
-connectedUser.operations.forEach(operation=>{
+function createOperation(operation){
 
 
 const div =
@@ -394,7 +438,6 @@ div.className="operation";
 
 div.innerHTML=`
 
-
 <div>
 
 <strong>
@@ -403,9 +446,9 @@ ${operation.label}
 
 <br>
 
-<span>
+<small>
 ${operation.date}
-</span>
+</small>
 
 </div>
 
@@ -414,25 +457,45 @@ ${operation.date}
 ${operation.amount}
 </b>
 
-
 `;
 
 
 
-div.onclick=function(){
-
-showOperation(operation);
-
-};
+div.onclick=()=>openOperation(operation);
 
 
 
-container.appendChild(div);
+return div;
 
+
+}
+
+
+
+
+
+
+function loadHistory(){
+
+
+const box =
+document.getElementById("history-container");
+
+
+
+box.innerHTML="";
+
+
+
+connectedUser.operations.forEach(op=>{
+
+
+box.appendChild(
+createOperation(op)
+);
 
 
 });
-
 
 
 }
@@ -443,10 +506,6 @@ container.appendChild(div);
 
 
 
-
-/* ==========================
-   HISTORIQUE ACCUEIL
-========================== */
 
 
 function loadDashboardHistory(){
@@ -457,45 +516,101 @@ const box =
 document.getElementById("dashboard-history");
 
 
+
 box.innerHTML="";
 
 
 
 connectedUser.operations
 .slice(0,3)
-.forEach(operation=>{
+.forEach(op=>{
 
 
-const div =
-document.createElement("div");
-
-
-div.className="operation";
-
-
-div.innerHTML=`
-
-<strong>
-${operation.label}
-</strong>
-
-<span>
-${operation.amount}
-</span>
-
-
-`;
-
-
-box.appendChild(div);
+box.appendChild(
+createOperation(op)
+);
 
 
 
 });
 
 
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   DETAIL OPERATION
+========================== */
+
+
+function openOperation(operation){
+
+
+
+const modal =
+document.getElementById("operation-modal");
+
+
+
+document
+.getElementById("operation-details")
+.innerHTML=`
+
+<p>
+<strong>Opération :</strong>
+${operation.label}
+</p>
+
+
+<p>
+<strong>Date :</strong>
+${operation.date}
+</p>
+
+
+<p>
+<strong>Catégorie :</strong>
+${operation.category}
+</p>
+
+
+<p>
+<strong>Montant :</strong>
+${operation.amount}
+</p>
+
+`;
+
+
+
+modal.classList.remove("hidden");
+
 
 }
+
+
+
+
+
+
+document
+.getElementById("close-modal")
+.onclick=()=>{
+
+
+document
+.getElementById("operation-modal")
+.classList.add("hidden");
+
+
+};
 
 
 
@@ -513,7 +628,7 @@ box.appendChild(div);
 function loadCard(){
 
 
-const container =
+const box =
 document.getElementById("cards-container");
 
 
@@ -523,8 +638,7 @@ connectedUser.card;
 
 
 
-container.innerHTML = `
-
+box.innerHTML=`
 
 <div class="bank-card">
 
@@ -548,12 +662,11 @@ ${card.holder}
 
 
 <p>
-Expiration : ${card.expiry}
+Expire ${card.expiry}
 </p>
 
 
 </div>
-
 
 `;
 
@@ -577,29 +690,28 @@ Expiration : ${card.expiry}
 function loadNotifications(){
 
 
-const container =
+const box =
 document.getElementById("notifications-container");
 
 
-
-container.innerHTML="";
-
+box.innerHTML="";
 
 
-connectedUser.notifications.forEach(note=>{
+
+connectedUser.notifications
+.forEach(note=>{
 
 
-const div =
-document.createElement("div");
+const item =
+document.createElement("p");
 
 
-div.className="notification";
+item.innerText =
+note;
 
 
-div.innerText=note;
 
-
-container.appendChild(div);
+box.appendChild(item);
 
 
 
@@ -617,91 +729,18 @@ container.appendChild(div);
 
 
 /* ==========================
-   DETAIL OPERATION
-========================== */
-
-
-function showOperation(operation){
-
-
-
-const modal =
-document.getElementById("operation-modal");
-
-
-
-document.getElementById("operation-details")
-.innerHTML=`
-
-
-<p>
-Libellé :
-${operation.label}
-</p>
-
-
-<p>
-Catégorie :
-${operation.category}
-</p>
-
-
-<p>
-Date :
-${operation.date}
-</p>
-
-
-<p>
-Montant :
-${operation.amount}
-</p>
-
-
-`;
-
-
-
-modal.classList.remove("hidden");
-
-
-}
-
-
-
-
-
-document
-.getElementById("close-modal")
-.onclick=function(){
-
-
-document
-.getElementById("operation-modal")
-.classList.add("hidden");
-
-
-};
-
-
-
-
-
-
-
-
-
-/* ==========================
-   RECHERCHE HISTORIQUE
+   RECHERCHE
 ========================== */
 
 
 document
 .getElementById("history-search")
-.addEventListener("input",function(){
+.addEventListener(
+"input",
+function(){
 
 
-const search =
+const value =
 this.value.toLowerCase();
 
 
@@ -714,7 +753,7 @@ document
 item.style.display =
 item.innerText
 .toLowerCase()
-.includes(search)
+.includes(value)
 ?
 "flex"
 :
@@ -722,7 +761,6 @@ item.innerText
 
 
 });
-
 
 
 });
@@ -742,7 +780,7 @@ item.innerText
 
 document
 .getElementById("transfer-button")
-.addEventListener("click",()=>{
+.onclick=()=>{
 
 
 const amount =
@@ -752,29 +790,30 @@ document.getElementById("transfer-amount").value
 
 
 
-if(!amount || amount<=0){
+if(!amount || amount <=0){
 
 
-document.getElementById("transfer-result")
+document
+.getElementById("transfer-result")
 .innerText =
-"Veuillez saisir un montant valide.";
+"Montant incorrect.";
 
 
 return;
+
 
 }
 
 
 
-document.getElementById("transfer-result")
+document
+.getElementById("transfer-result")
 .innerText =
-"Votre demande a été prise en compte.";
+"Demande enregistrée.";
 
 
 
-
-
-});
+};
 
 
 
@@ -789,10 +828,7 @@ document.getElementById("transfer-result")
 ========================== */
 
 
-logoutButton.addEventListener("click",()=>{
-
-
-connectedUser=null;
+logoutButton.onclick=()=>{
 
 
 localStorage.removeItem(
@@ -801,11 +837,15 @@ localStorage.removeItem(
 
 
 
+connectedUser=null;
+
+
+
 location.reload();
 
 
 
-});
+};
 
 
 
