@@ -1,130 +1,36 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Fortuneo Banque - Espace Client</title>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-
-<body>
-
-
 <!-- ==========================
-     PAGE DE CONNEXION
+     STATISTIQUES DU COMPTE
 ========================== -->
 
 
-<div id="login-page">
+<section
+id="statistics-page"
+class="website-page">
 
 
-    <div class="login-container">
-
-
-        <div class="brand-area">
-
-            <h1>
-                Fortuneo Banque
-            </h1>
-
-            <p>
-                Accédez à votre espace client
-            </p>
-
-        </div>
+<h2>
+Analyse du compte
+</h2>
 
 
 
-
-        <form id="login-form">
-
-
-            <div class="field">
+<div class="content-card">
 
 
-                <label>
-                    Identifiant
-                </label>
+<div class="stats-grid">
 
 
-                <input 
-                type="text"
-                id="username"
-                placeholder="Saisissez votre identifiant"
-                autocomplete="off">
+<div class="stat-box">
 
 
-            </div>
+<span>
+Opérations récentes
+</span>
 
 
-
-
-
-            <div class="field">
-
-
-                <label>
-                    Mot de passe
-                </label>
-
-
-                <input 
-                type="password"
-                id="password"
-                placeholder="Saisissez votre mot de passe">
-
-
-            </div>
-
-
-
-
-
-            <div class="remember">
-
-
-                <input 
-                type="checkbox"
-                id="remember">
-
-
-                <label>
-                    Mémoriser l'identifiant
-                </label>
-
-
-            </div>
-
-
-
-
-
-            <button 
-            type="submit"
-            id="login-button">
-
-                Connexion
-
-            </button>
-
-
-
-            <p id="login-message"></p>
-
-
-
-        </form>
-
-
-
-    </div>
+<strong id="operation-count">
+0
+</strong>
 
 
 </div>
@@ -133,192 +39,111 @@
 
 
 
+<div class="stat-box">
 
 
+<span>
+Entrées
+</span>
 
 
-<!-- ==========================
-     ESPACE CLIENT
-========================== -->
-
-
-<div id="client-space" class="hidden">
-
-
-
-
-
-<header class="site-header">
-
-
-
-<div 
-class="client-profile"
-onclick="showPage('profile-page')">
-
-
-<div class="avatar">
-
-EG
-
-</div>
-
-
-
-<div>
-
-<h3 id="client-name">
-
-Client
-
-</h3>
-
-
-<p>
-Espace personnel
-</p>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div class="header-buttons">
-
-
-<button onclick="showPage('notifications-page')">
-
-🔔
-
-</button>
-
-
-
-<button id="logout-button">
-
-Déconnexion
-
-</button>
-
-
-
-</div>
-
-
-</header>
-
-
-
-
-
-
-
-
-<main class="content-area">
-
-
-
-
-
-
-<!-- ==========================
-     TABLEAU DE BORD
-========================== -->
-
-
-<section 
-id="dashboard-page"
-class="website-page active-page">
-
-
-
-<div class="balance-box">
-
-
-<p>
-Solde disponible
-</p>
-
-
-<h1 id="account-balance">
-
+<strong id="income-total">
 0,00 €
 
-</h1>
+</strong>
+
+
+</div>
 
 
 
-<span id="account-status">
 
-Statut du compte
 
+<div class="stat-box">
+
+
+<span>
+Sorties
 </span>
 
 
-</div>
+<strong id="expense-total">
+0,00 €
 
-
-
-
-
-
-
-<div class="shortcut-grid">
-
-
-<button onclick="showPage('accounts-page')">
-
-Mes comptes
-
-</button>
-
-
-
-<button onclick="showPage('history-page')">
-
-Opérations
-
-</button>
-
-
-
-<button onclick="showPage('transfer-page')">
-
-Virements
-
-</button>
-
-
-
-<button onclick="showPage('cards-page')">
-
-Cartes
-
-</button>
+</strong>
 
 
 </div>
 
 
 
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ==========================
+     DOCUMENTS
+========================== -->
+
+
+<section
+id="documents-page"
+class="website-page">
+
+
+<h2>
+Documents
+</h2>
 
 
 
 <div class="content-card">
 
 
-<h2>
-Dernières opérations
-</h2>
+<div class="document-item">
+
+📄 Relevé de compte
+
+<button>
+Consulter
+</button>
+
+</div>
 
 
 
-<div id="dashboard-history">
+<div class="document-item">
+
+📄 Informations du compte
+
+<button>
+Consulter
+</button>
+
+</div>
+
+
+
+<div class="document-item">
+
+📄 Historique des opérations
+
+<button>
+Consulter
+</button>
 
 </div>
 
@@ -328,110 +153,69 @@ Dernières opérations
 
 
 
+</section>
 
-</section><!-- ==========================
-     PAGE COMPTES
+
+
+
+
+
+
+
+
+<!-- ==========================
+     SECURITE
 ========================== -->
 
 
-<section 
-id="accounts-page"
+<section
+id="security-page"
 class="website-page">
 
 
 <h2>
-Mes comptes
+Sécurité
 </h2>
-
-
-
-
-<div 
-id="accounts-container"
-class="content-card">
-
-
-</div>
-
-
-
-
-
 
 
 
 <div class="content-card">
 
 
-<h3>
-Coordonnées du compte
-</h3>
+<div class="security-line">
 
+Authentification
 
-
-<div class="bank-details">
-
-
-<div>
-
-<span>
-Titulaire
-</span>
-
-<strong id="rib-name">
+<strong>
+Active
 </strong>
 
-
 </div>
 
 
 
+<div class="security-line">
 
-<div>
+Dernière connexion
 
-<span>
-IBAN
-</span>
-
-<strong id="rib-iban">
+<strong>
+Aujourd'hui
 </strong>
 
-
 </div>
 
 
 
+<div class="security-line">
 
-<div>
+Notifications de sécurité
 
-<span>
-BIC
-</span>
-
-<strong id="rib-bic">
+<strong>
+Activées
 </strong>
 
-
 </div>
 
-
-
-
-<div>
-
-<span>
-Numéro de compte
-</span>
-
-<strong id="rib-number">
-</strong>
-
-
-</div>
-
-
-
-</div>
 
 
 </div>
@@ -449,245 +233,17 @@ Numéro de compte
 
 
 <!-- ==========================
-     HISTORIQUE
+     PREFERENCES
 ========================== -->
 
 
 <section
-id="history-page"
-class="website-page">
-
-
-
-<h2>
-Historique des opérations
-</h2>
-
-
-
-
-
-<div class="search-area">
-
-
-<input
-id="history-search"
-type="text"
-placeholder="Rechercher une opération">
-
-
-</div>
-
-
-
-
-
-<div 
-id="history-container"
-class="content-card">
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================
-     VIREMENTS
-========================== -->
-
-
-<section
-id="transfer-page"
-class="website-page">
-
-
-
-<h2>
-Nouveau virement
-</h2>
-
-
-
-
-
-<div class="content-card transfer-form">
-
-
-
-
-
-<div class="field">
-
-<label>
-Nom du bénéficiaire
-</label>
-
-
-<input 
-id="beneficiary-name"
-placeholder="Nom du bénéficiaire">
-
-
-</div>
-
-
-
-
-
-
-
-<div class="field">
-
-
-<label>
-IBAN du bénéficiaire
-</label>
-
-
-<input 
-id="beneficiary-iban"
-placeholder="FR00 0000 0000 0000">
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="field">
-
-
-<label>
-Montant
-</label>
-
-
-<input 
-id="transfer-amount"
-type="number"
-placeholder="0,00 €">
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="field">
-
-
-<label>
-Motif
-</label>
-
-
-<input 
-id="transfer-reason"
-placeholder="Motif du virement">
-
-
-</div>
-
-
-
-
-
-
-
-<button 
-id="transfer-button">
-
-
-Continuer
-
-
-</button>
-
-
-
-
-
-<div 
-id="transfer-result">
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================
-     CARTES
-========================== -->
-
-
-<section
-id="cards-page"
-class="website-page">
-
-
-
-<h2>
-Mes cartes
-</h2>
-
-
-
-
-<div 
-id="cards-container">
-
-
-</div>
-
-
-
-
-</section><!-- ==========================
-     PAGE PROFIL
-========================== -->
-
-
-<section
-id="profile-page"
+id="preferences-page"
 class="website-page">
 
 
 <h2>
-Mon profil
+Préférences
 </h2>
 
 
@@ -696,90 +252,28 @@ Mon profil
 <div class="content-card">
 
 
-<div class="profile-header">
+<label class="switch-line">
 
+Recevoir les notifications
 
-<div class="avatar large">
+<input 
+type="checkbox"
+checked>
 
-EG
-
-</div>
-
-
-
-<div>
-
-<h3 id="profile-full-name">
-
-</h3>
-
-
-<p>
-Informations personnelles
-</p>
-
-
-</div>
-
-
-</div>
+</label>
 
 
 
 
+<label class="switch-line">
 
+Afficher les informations détaillées
 
+<input 
+type="checkbox"
+checked>
 
-<div class="information-line">
-
-<span>
-Identifiant
-</span>
-
-
-<strong id="profile-login">
-
-</strong>
-
-
-</div>
-
-
-
-
-
-<div class="information-line">
-
-<span>
-Adresse e-mail
-</span>
-
-
-<strong id="profile-email">
-
-</strong>
-
-
-</div>
-
-
-
-
-
-
-<div class="information-line">
-
-<span>
-Téléphone
-</span>
-
-
-<strong id="profile-phone">
-
-</strong>
-
-
-</div>
+</label>
 
 
 
@@ -788,258 +282,3 @@ Téléphone
 
 
 </section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================
-     PAGE NOTIFICATIONS
-========================== -->
-
-
-<section
-id="notifications-page"
-class="website-page">
-
-
-<h2>
-Notifications
-</h2>
-
-
-
-
-<div 
-id="notifications-container"
-class="content-card">
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================
-     PAGE PARAMETRES
-========================== -->
-
-
-<section
-id="settings-page"
-class="website-page">
-
-
-<h2>
-Paramètres
-</h2>
-
-
-
-
-
-<div class="content-card settings-list">
-
-
-
-<button>
-🔐 Sécurité du compte
-</button>
-
-
-
-
-<button>
-🔔 Gestion des notifications
-</button>
-
-
-
-
-<button>
-👤 Informations personnelles
-</button>
-
-
-
-
-<button>
-📄 Documents
-</button>
-
-
-
-</div>
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- ==========================
-     FENETRE DETAIL OPERATION
-========================== -->
-
-
-<div
-id="operation-modal"
-class="modal hidden">
-
-
-
-<div class="modal-content">
-
-
-<button 
-id="close-modal"
-class="close-modal">
-
-×
-
-</button>
-
-
-
-
-<h2>
-Détail de l'opération
-</h2>
-
-
-
-
-<div id="operation-details">
-
-</div>
-
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- ==========================
-     NAVIGATION DU SITE
-========================== -->
-
-
-<nav class="bottom-navigation">
-
-
-
-<button onclick="showPage('dashboard-page')">
-
-🏠
-
-<span>
-Accueil
-</span>
-
-</button>
-
-
-
-
-
-<button onclick="showPage('accounts-page')">
-
-💳
-
-<span>
-Comptes
-</span>
-
-</button>
-
-
-
-
-
-<button onclick="showPage('history-page')">
-
-📄
-
-<span>
-Historique
-</span>
-
-</button>
-
-
-
-
-
-<button onclick="showPage('settings-page')">
-
-⚙️
-
-<span>
-Paramètres
-</span>
-
-</button>
-
-
-
-</nav>
-
-
-
-
-
-</main>
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<script src="database.js"></script>
-
-<script src="script.js"></script>
-
-
-</body>
-
-</html>
