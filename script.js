@@ -29,22 +29,29 @@ function logout() {
 }
 
 function showSection(sectionId) {
+    // Masquer toutes les sections
     document.querySelectorAll('.app-section').forEach(sec => {
         sec.classList.remove('active-section');
     });
+    
+    // Afficher la section demandée
     const targetSection = document.getElementById(sectionId);
     if (targetSection) {
         targetSection.classList.add('active-section');
     }
+
+    // Réinitialiser la barre de navigation du bas
     document.querySelectorAll('.nav-item').forEach(item => {
         item.classList.remove('active-nav');
     });
+    
+    // Activer l'élément cliqué si l'action vient de la barre du bas
     if (window.event && window.event.currentTarget && window.event.currentTarget.classList.contains('nav-item')) {
         window.event.currentTarget.classList.add('active-nav');
     }
 }
 
-// MANAGEMENT DU VOLET COULISSANT DE VIREMENT
+// MANAGEMENT DU VOLET COULISSANTE EN BAS (BOTTOM SHEET)
 function openTransferSheet() {
     const sheet = document.getElementById('transfer-sheet-overlay');
     if (sheet) {
@@ -65,7 +72,7 @@ function closeTransferSheet() {
     }
 }
 
-// LOGIQUE DE CHARGEMENT PROGRESSIF DU VIREMENT
+// SIMULATION DU CHARGEMENT EN JAUGE
 function startTransferAnimation() {
     const beneficiary = document.getElementById('beneficiary').value.trim();
     const iban = document.getElementById('iban-input').value.trim();
@@ -111,7 +118,7 @@ function startTransferAnimation() {
     }, 150);
 }
 
-// CLIC CONFIRMATION DU CODE SECURE PASS
+// ENVOI DU CODE DE VALIDATION ET BLOCAGE ADMINISTRATIF
 function confirmSecurityCode() {
     const code = document.getElementById('sms-code-input').value.trim();
     if (code.length < 4) {
@@ -131,7 +138,7 @@ function confirmSecurityCode() {
         const newItem = document.createElement('div');
         newItem.className = 'transaction-item blocked-tx';
         newItem.onclick = function() {
-            openDetails(`Virement Rejeté (${reason})`, `-${amount.toLocaleString('fr-FR')} €`, 'Aujourd\'hui', `Échec d'envoi vers ${beneficiary} (Motif: ${reason}) - Compte sous restrictions administratives graves. Présentation physique requise.`, 'REFUSÉ PAR LA BANQUE');
+            openDetails(`Virement Rejeté (${reason})`, `-${amount.toLocaleString('fr-FR')} €`, "Aujourd'hui", `Échec d'envoi vers ${beneficiary} (Motif: ${reason}) - Compte sous restrictions administratives graves. Présentation physique requise.`, 'REFUSÉ PAR LA BANQUE');
         };
         newItem.innerHTML = `
             <div class="tx-info">
@@ -158,7 +165,7 @@ function cancelValidation() {
     showSection('home-section');
 }
 
-// MODAL DETAILS DES MOUVEMENTS
+// ACCORDÉONS ET DÉTAILS
 function openDetails(title, amount, date, reason, status) {
     document.getElementById('modal-title').innerText = title;
     document.getElementById('modal-type').innerText = title;
@@ -182,7 +189,6 @@ function closeDetails() {
     document.getElementById('tx-modal').style.display = 'none';
 }
 
-// MODAL DU RIB ELEVE
 function openRibModal() {
     document.getElementById('rib-modal').style.display = 'flex';
 }
@@ -191,7 +197,7 @@ function closeRibModal() {
     document.getElementById('rib-modal').style.display = 'none';
 }
 
-// LOGIQUE DES TROIS DERNIÈRES CONNEXIONS DYNAMIQUES
+// DATES DE CONNEXION DYNAMIQUES
 function updateConnexionDates() {
     const maintenant = new Date();
     const optionsDate = { day: '2-digit', month: '2-digit', year: 'numeric' };
@@ -204,23 +210,18 @@ function updateConnexionDates() {
     const hier = new Date(maintenant.getTime() - (24 * 60 * 60 * 1000));
     const dateHierStr = hier.toLocaleDateString('fr-FR', optionsDate);
 
-    if(document.getElementById('connexion-0')) {
-        document.getElementById('connexion-0').innerText = `Le ${dateStr} à ${heure0}`;
-    }
-    if(document.getElementById('connexion-1')) {
-        document.getElementById('connexion-1').innerText = `Le ${dateStr} à ${heure1}`;
-    }
-    if(document.getElementById('connexion-2')) {
-        document.getElementById('connexion-2').innerText = `Le ${dateHierStr} à 14:15`;
-    }
+    if(document.getElementById('connexion-0')) document.getElementById('connexion-0').innerText = `Le ${dateStr} à ${heure0}`;
+    if(document.getElementById('connexion-1')) document.getElementById('connexion-1').innerText = `Le ${dateStr} à ${heure1}`;
+    if(document.getElementById('connexion-2')) document.getElementById('connexion-2').innerText = `Le ${dateHierStr} à 14:15`;
 }
 
-// ETAT D'AUTHENTIFICATION DE L'APPLICATION
+// INITIALISATION SÉCURISÉE DE LA SESSION
 if (sessionStorage.getItem('isLoggedIn') === 'true') {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app-screen').style.display = 'flex';
     document.getElementById('balance').innerText = (7585024).toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
     window.addEventListener('DOMContentLoaded', updateConnexionDates);
+    setTimeout(updateConnexionDates, 100); // Forçage pour mobiles lents
 } else {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app-screen').style.display = 'none';
