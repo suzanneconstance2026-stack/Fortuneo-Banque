@@ -1,49 +1,280 @@
-<!-- SUITE DU FICHIER index.html -->
+<!DOCTYPE html>
+<html lang="fr">
 
-                <div class="section-card">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Espace Client</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- =========================
+         PAGE DE CONNEXION
+    ========================== -->
+
+    <section id="login-page" class="login-page">
+
+
+        <div class="login-card">
+
+
+            <div class="brand">
+
+                <h1>
+                    Banque Horizon
+                </h1>
+
+                <p>
+                    Espace client sécurisé
+                </p>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="username">
+                    Identifiant
+                </label>
+
+                <input
+                    id="username"
+                    type="text"
+                    placeholder="Votre identifiant"
+                >
+
+            </div>
+
+
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Mot de passe
+                </label>
+
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Votre mot de passe"
+                >
+
+            </div>
+
+
+
+
+            <div class="remember-box">
+
+                <input 
+                    id="remember"
+                    type="checkbox"
+                >
+
+                <label for="remember">
+                    Mémoriser mes informations
+                </label>
+
+            </div>
+
+
+
+
+            <button 
+                id="login-button"
+                class="primary-button"
+            >
+
+                Connexion
+
+            </button>
+
+
+
+
+            <p 
+                id="login-message"
+                class="message"
+            ></p>
+
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+
+
+
+    <!-- =========================
+         APPLICATION PRINCIPALE
+    ========================== -->
+
+
+    <section 
+        id="client-space"
+        class="client-space"
+        hidden
+    >
+
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+
+            <div class="user-block">
+
+
+                <div class="avatar">
+
+                    HG
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        Hugo Garnier
+                    </strong>
+
+                    <span>
+                        Client Premium
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+
+            <button 
+                id="logout-button"
+                class="logout-button"
+            >
+
+                Déconnexion
+
+            </button>
+
+
+
+        </header>
+
+
+
+
+
+
+        <!-- CONTENU -->
+
+        <main class="content">
+
+
+
+            <!-- TABLEAU DE BORD -->
+
+            <section 
+                id="home-section"
+                class="section active"
+            >
+
+
+                <h2>
+                    Tableau de bord
+                </h2>
+
+
+
+
+                <div class="balance-card">
+
+
+                    <span>
+                        Solde disponible
+                    </span>
+
+
+                    <h1 id="balance">
+                        0,00 €
+                    </h1>
+
+
+                    <small>
+                        Compte principal
+                    </small>
+
+
+                </div>
+
+
+
+
+
+                <div class="quick-actions">
+
+
+                    <button data-target="transfer-section">
+
+                        Nouvelle opération
+
+                    </button>
+
+
+
+                    <button data-target="history-section">
+
+                        Historique
+
+                    </button>
+
+
+
+                    <button data-target="card-section">
+
+                        Cartes
+
+                    </button>
+
+
+                </div>
+
+
+
+
+
+                <div class="panel">
+
 
                     <h3>
-                        Mes comptes
+                        Dernières opérations
                     </h3>
 
 
-                    <div class="account-item">
-
-                        <div>
-                            <span>
-                                Compte principal
-                            </span>
-
-                            <strong>
-                                **** 4582
-                            </strong>
-                        </div>
-
-
-                        <b>
-                            0,00 €
-                        </b>
-
-                    </div>
-
-
-
-                    <div class="account-item">
-
-                        <div>
-                            <span>
-                                Épargne
-                            </span>
-
-                            <strong>
-                                **** 9217
-                            </strong>
-                        </div>
-
-
-                        <b>
-                            0,00 €
-                        </b>
+                    <div id="recent-transactions">
 
                     </div>
 
@@ -51,39 +282,37 @@
                 </div>
 
 
-            </section>
 
+            </section>             <!-- =========================
+                 OPERATIONS
+            ========================== -->
 
-
-
-
-
-            <!-- PAGE OPERATIONS -->
-
-            <section 
-                id="operations"
-                class="page"
+            <section
+                id="transfer-section"
+                class="section"
             >
 
+
                 <h2>
-                    Opérations
+                    Nouvelle opération
                 </h2>
 
 
 
-                <div class="form-card">
+                <div class="panel">
 
 
-                    <div class="input-group">
+                    <div class="form-group">
 
-                        <label>
-                            Libellé
+                        <label for="recipient">
+                            Bénéficiaire
                         </label>
 
-                        <input 
-                            id="operation-label"
+
+                        <input
+                            id="recipient"
                             type="text"
-                            placeholder="Exemple : Paiement"
+                            placeholder="Nom du bénéficiaire"
                         >
 
                     </div>
@@ -91,14 +320,15 @@
 
 
 
-                    <div class="input-group">
+                    <div class="form-group">
 
-                        <label>
-                            Montant (€)
+                        <label for="amount">
+                            Montant
                         </label>
 
-                        <input 
-                            id="operation-amount"
+
+                        <input
+                            id="amount"
                             type="number"
                             placeholder="0"
                         >
@@ -108,30 +338,34 @@
 
 
 
-                    <div class="input-group">
+                    <div class="form-group">
 
-                        <label>
+                        <label for="category">
                             Catégorie
                         </label>
 
 
-                        <select id="operation-category">
+                        <select id="category">
 
                             <option>
                                 Alimentation
                             </option>
 
+
                             <option>
                                 Transport
                             </option>
+
 
                             <option>
                                 Logement
                             </option>
 
+
                             <option>
                                 Loisirs
                             </option>
+
 
                             <option>
                                 Autre
@@ -145,12 +379,34 @@
 
 
 
-                    <button 
-                        id="add-operation"
-                        class="main-btn"
+
+                    <div class="form-group">
+
+                        <label for="description">
+                            Description
+                        </label>
+
+
+                        <input
+                            id="description"
+                            type="text"
+                            placeholder="Motif de l'opération"
+                        >
+
+                    </div>
+
+
+
+
+                    <button
+                        id="send-operation"
+                        class="primary-button"
                     >
-                        Ajouter
+
+                        Valider l'opération
+
                     </button>
+
 
 
                 </div>
@@ -164,34 +420,45 @@
 
 
 
-            <!-- HISTORIQUE -->
 
-            <section 
-                id="transactions"
-                class="page"
+
+            <!-- =========================
+                 HISTORIQUE
+            ========================== -->
+
+
+            <section
+                id="history-section"
+                class="section"
             >
 
+
                 <h2>
-                    Historique des opérations
+                    Historique
                 </h2>
 
 
-                <div class="search-box">
 
-                    <input 
-                        id="search"
+                <div class="panel">
+
+
+                    <input
+                        id="search-operation"
+                        class="search-input"
                         type="search"
                         placeholder="Rechercher une opération"
                     >
 
-                </div>
 
 
 
-                <div 
-                    id="transaction-list"
-                    class="transaction-list"
-                >
+                    <div
+                        id="operations-list"
+                        class="operations-list"
+                    >
+
+
+                    </div>
 
 
                 </div>
@@ -207,12 +474,16 @@
 
 
 
-            <!-- CARTES -->
+            <!-- =========================
+                 CARTES
+            ========================== -->
 
-            <section 
-                id="cards"
-                class="page"
+
+            <section
+                id="card-section"
+                class="section"
             >
+
 
                 <h2>
                     Mes cartes
@@ -223,63 +494,118 @@
                 <div class="bank-card">
 
 
-                    <div class="card-brand">
-                        Fortuneo Banque
+                    <div class="card-header">
+
+                        <span>
+                            Banque Horizon
+                        </span>
+
+
+                        <span>
+                            PREMIUM
+                        </span>
+
                     </div>
 
 
 
-                    <div class="chip"></div>
+
+                    <div class="card-chip">
+
+                    </div>
+
 
 
 
                     <div class="card-number">
-                        **** **** **** 4582
+
+                        4821 **** **** 6394
+
                     </div>
+
+
 
 
 
                     <div class="card-footer">
 
 
-                        <span>
-                            TITULAIRE
+                        <div>
+
+                            <small>
+                                TITULAIRE
+                            </small>
+
                             <strong>
-                                Nicolas Garnier
+                                HUGO GARNIER
                             </strong>
-                        </span>
+
+                        </div>
 
 
 
-                        <span>
-                            TYPE
+
+                        <div>
+
+                            <small>
+                                TYPE
+                            </small>
+
                             <strong>
-                                Carte Premium
+                                CARTE PREMIUM
                             </strong>
-                        </span>
+
+                        </div>
+
 
 
                     </div>
+
 
 
                 </div>
 
 
 
-                <button 
-                    class="secondary-btn"
-                >
-                    Gérer ma carte
-                </button>
+
+
+                <div class="panel">
+
+
+                    <h3>
+                        Gestion de la carte
+                    </h3>
+
+
+                    <button class="secondary-button">
+
+                        Bloquer temporairement
+
+                    </button>
+
+
+                    <button class="secondary-button">
+
+                        Voir les paramètres
+
+                    </button>
+
+
+                </div>
+
 
 
             </section> 
-                        <!-- PROFIL -->
+                      <!-- =========================
+                 PROFIL
+            ========================== -->
 
-            <section 
-                id="profile"
-                class="page"
+
+            <section
+                id="profile-section"
+                class="section"
             >
+
 
                 <h2>
                     Mon profil
@@ -287,17 +613,17 @@
 
 
 
-                <div class="profile-card">
+                <div class="panel profile-panel">
 
 
                     <div class="profile-row">
 
                         <span>
-                            Nom
+                            Nom complet
                         </span>
 
                         <strong>
-                            Nicolas Garnier
+                            Hugo Garnier
                         </strong>
 
                     </div>
@@ -312,7 +638,7 @@
                         </span>
 
                         <strong>
-                            Client Premium
+                            Premium
                         </strong>
 
                     </div>
@@ -323,11 +649,11 @@
                     <div class="profile-row">
 
                         <span>
-                            Conseiller
+                            Email
                         </span>
 
                         <strong>
-                            Service clientèle
+                            hugo.garnier@email.fr
                         </strong>
 
                     </div>
@@ -341,11 +667,61 @@
                             Statut
                         </span>
 
-                        <strong class="active-status">
+                        <strong class="status-active">
                             Actif
                         </strong>
 
                     </div>
+
+
+
+                </div>
+
+
+            </section>
+
+
+
+
+
+
+
+
+            <!-- =========================
+                 NOTIFICATIONS
+            ========================== -->
+
+
+            <section
+                id="notification-section"
+                class="section"
+            >
+
+
+                <h2>
+                    Notifications
+                </h2>
+
+
+
+                <div
+                    id="notification-list"
+                    class="panel"
+                >
+
+
+                    <div class="notification-item">
+
+                        <strong>
+                            Information
+                        </strong>
+
+                        <p>
+                            Votre espace client est disponible.
+                        </p>
+
+                    </div>
+
 
 
                 </div>
@@ -357,6 +733,61 @@
 
 
 
+
+
+
+
+            <!-- =========================
+                 PARAMETRES
+            ========================== -->
+
+
+            <section
+                id="settings-section"
+                class="section"
+            >
+
+
+                <h2>
+                    Paramètres
+                </h2>
+
+
+
+                <div class="panel">
+
+
+                    <button class="secondary-button">
+
+                        Modifier mes informations
+
+                    </button>
+
+
+
+                    <button class="secondary-button">
+
+                        Préférences de connexion
+
+                    </button>
+
+
+
+                    <button class="secondary-button">
+
+                        Sécurité
+
+                    </button>
+
+
+
+                </div>
+
+
+            </section>
+
+
+
         </main>
 
 
@@ -364,21 +795,26 @@
 
 
 
-        <!-- NAVIGATION -->
-
-        <nav class="bottom-nav">
 
 
-            <button 
-                class="nav-link active"
-                data-page="dashboard"
+        <!-- =========================
+             NAVIGATION BASSE
+        ========================== -->
+
+
+        <nav class="bottom-navigation">
+
+
+            <button
+                class="nav-item active"
+                data-section="home-section"
             >
 
-                <span>
-                    🏠
-                </span>
+                🏠
 
-                Accueil
+                <span>
+                    Accueil
+                </span>
 
             </button>
 
@@ -386,16 +822,16 @@
 
 
 
-            <button 
-                class="nav-link"
-                data-page="operations"
+            <button
+                class="nav-item"
+                data-section="transfer-section"
             >
 
-                <span>
-                    💶
-                </span>
+                💶
 
-                Opérations
+                <span>
+                    Opérations
+                </span>
 
             </button>
 
@@ -403,16 +839,16 @@
 
 
 
-            <button 
-                class="nav-link"
-                data-page="transactions"
+            <button
+                class="nav-item"
+                data-section="history-section"
             >
 
-                <span>
-                    📄
-                </span>
+                📄
 
-                Historique
+                <span>
+                    Historique
+                </span>
 
             </button>
 
@@ -420,16 +856,16 @@
 
 
 
-            <button 
-                class="nav-link"
-                data-page="cards"
+            <button
+                class="nav-item"
+                data-section="card-section"
             >
 
-                <span>
-                    💳
-                </span>
+                💳
 
-                Cartes
+                <span>
+                    Cartes
+                </span>
 
             </button>
 
@@ -437,16 +873,16 @@
 
 
 
-            <button 
-                class="nav-link"
-                data-page="profile"
+            <button
+                class="nav-item"
+                data-section="profile-section"
             >
 
-                <span>
-                    👤
-                </span>
+                👤
 
-                Profil
+                <span>
+                    Profil
+                </span>
 
             </button>
 
@@ -458,8 +894,6 @@
 
 
     </section>
-
-
 
 
 
