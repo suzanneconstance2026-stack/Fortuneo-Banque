@@ -1,53 +1,73 @@
-/* =====================================
-   CONFIGURATION GENERALE
-===================================== */
+/* ==========================
+   BASE GENERALE
+========================== */
 
 
 * {
-
-    box-sizing:border-box;
-
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
-    Roboto,
     Arial,
     sans-serif;
-
 }
-
 
 
 body {
 
-    margin:0;
-
-    min-height:100vh;
-
-    background:#f1f5f9;
-
-    color:#0f172a;
+    background: #f3f6f9;
+    color: #1e293b;
+    min-height: 100vh;
 
 }
-
-
-
 
 
 button {
 
-    cursor:pointer;
-
-    border:none;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
 
 }
-
 
 
 input {
 
-    outline:none;
+    outline: none;
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   UTILITAIRE
+========================== */
+
+
+.hidden {
+
+    display: none !important;
+
+}
+
+
+.website-page {
+
+    display: none;
+
+}
+
+
+.active-page {
+
+    display: block;
 
 }
 
@@ -58,55 +78,49 @@ input {
 
 
 
-/* =====================================
-   APPLICATION
-===================================== */
 
-
-.app {
-
-    min-height:100vh;
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
+/* ==========================
    CONNEXION
-===================================== */
+========================== */
 
 
-.login-screen {
+#login-page {
 
+    min-height: 100vh;
 
-    min-height:100vh;
+    display: flex;
 
+    justify-content: center;
 
-    display:flex;
-
-
-    justify-content:center;
-
-
-    align-items:center;
-
+    align-items: center;
 
     background:
-
-
     linear-gradient(
         135deg,
         #064e3b,
-        #22c55e
+        #16a34a
     );
 
+}
 
-    padding:20px;
+
+
+
+
+.login-container {
+
+
+    width: 400px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:
+    0 20px 50px
+    rgba(0,0,0,.15);
 
 
 }
@@ -115,29 +129,456 @@ input {
 
 
 
+.brand-area {
 
-.login-card {
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.brand-area h1 {
+
+    color:#0f7a36;
+
+    font-size:32px;
+
+}
+
+
+
+.brand-area p {
+
+    color:#64748b;
+
+    margin-top:8px;
+
+}
+
+
+
+
+
+
+
+
+
+.field {
+
+    margin-bottom:18px;
+
+}
+
+
+
+.field label {
+
+    display:block;
+
+    font-size:14px;
+
+    color:#475569;
+
+    margin-bottom:6px;
+
+}
+
+
+
+.field input {
 
 
     width:100%;
 
+    padding:14px;
 
-    max-width:400px;
+    border-radius:10px;
+
+    border:
+    1px solid #cbd5e1;
+
+    font-size:15px;
+
+
+}
+
+
+
+
+
+.remember {
+
+    display:flex;
+
+    gap:8px;
+
+    margin-bottom:20px;
+
+}
+
+
+
+
+#login-button,
+#transfer-button {
+
+
+    width:100%;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    background:#15803d;
+
+    color:white;
+
+    font-size:16px;
+
+
+}
+
+
+
+#login-message {
+
+    margin-top:15px;
+
+    color:#dc2626;
+
+    text-align:center;
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   HEADER
+========================== */
+
+
+.site-header {
+
+
+    height:75px;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 25px;
+
+    border-bottom:
+    1px solid #e2e8f0;
+
+
+}
+
+
+
+
+.client-profile {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+}
+
+
+
+.avatar {
+
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+
+    background:#15803d;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+
+}
+
+
+
+.avatar.large {
+
+    width:70px;
+
+    height:70px;
+
+    font-size:22px;
+
+}
+
+
+
+.client-profile p {
+
+    color:#64748b;
+
+    font-size:13px;
+
+}
+
+
+
+
+
+.header-buttons {
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+
+
+.header-buttons button {
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    background:#f1f5f9;
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   CONTENU
+========================== */
+
+
+.content-area {
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:25px;
+
+    padding-bottom:100px;
+
+
+}
+
+
+
+
+.balance-box {
+
+
+    background:
+    linear-gradient(
+        135deg,
+        #0f172a,
+        #334155
+    );
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+.balance-box h1 {
+
+    font-size:38px;
+
+    margin:15px 0;
+
+}
+
+
+
+
+
+
+
+.shortcut-grid {
+
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:15px;
+
+    margin-bottom:25px;
+
+
+}
+
+
+
+
+.shortcut-grid button {
 
 
     background:white;
 
+    padding:20px;
 
-    padding:35px;
+    border-radius:15px;
+
+    box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.06);
 
 
-    border-radius:25px;
+}
 
+
+
+
+
+
+
+
+
+/* ==========================
+   CARTES CONTENU
+========================== */
+
+
+.content-card {
+
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    margin-bottom:20px;
 
     box-shadow:
 
+    0 5px 20px
+    rgba(0,0,0,.05);
 
-    0 25px 50px
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   HISTORIQUE
+========================== */
+
+
+.operation {
+
+
+    padding:15px;
+
+    border-bottom:
+    1px solid #e2e8f0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    cursor:pointer;
+
+
+}
+
+
+
+.operation:hover {
+
+    background:#f8fafc;
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+   CARTE BANCAIRE VISUELLE
+========================== */
+
+
+.bank-card {
+
+
+    width:350px;
+
+    height:210px;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    color:white;
+
+    background:
+
+    linear-gradient(
+    135deg,
+    #111827,
+    #2563eb
+    );
+
+
+    box-shadow:
+    0 15px 30px
     rgba(0,0,0,.2);
 
 
@@ -145,840 +586,19 @@ input {
 
 
 
-
-
-
-
-.logo {
-
-
-    text-align:center;
-
-
-    margin-bottom:30px;
-
-
-}
-
-
-
-.logo h1 {
-
-
-    color:#16a34a;
-
-
-    margin:0;
-
-
-    font-size:2rem;
-
-
-}
-
-
-
-.logo p {
-
-
-    color:#64748b;
-
-
-    font-size:.85rem;
-
-
-}
-
-
-
-
-
-
-
-.login-card label {
-
-
-    display:block;
-
-
-    margin-top:15px;
-
-
-    margin-bottom:6px;
-
-
-    font-size:.8rem;
-
-
-    font-weight:700;
-
-
-    color:#475569;
-
-
-}
-
-
-
-
-
-
-.login-card input {
-
-
-    width:100%;
-
-
-    padding:14px;
-
-
-    border-radius:12px;
-
-
-    border:1px solid #cbd5e1;
-
-
-    background:#f8fafc;
-
-
-    font-size:1rem;
-
-
-}
-
-
-
-
-
-
-
-#login-btn {
-
-
-    width:100%;
-
-
-    margin-top:25px;
-
-
-    padding:15px;
-
-
-    border-radius:30px;
-
-
-    background:#16a34a;
-
-
-    color:white;
-
-
-    font-weight:700;
-
-
-    font-size:1rem;
-
-
-}
-
-
-
-#login-btn:hover {
-
-
-    background:#15803d;
-
-
-}
-
-
-
-
-
-
-
-.error {
-
-
-    color:#dc2626;
-
-
-    text-align:center;
-
-
-    margin-top:15px;
-
-
-    font-size:.9rem;
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   ESPACE CLIENT
-===================================== */
-
-
-.bank-screen {
-
-
-    max-width:480px;
-
-
-    margin:auto;
-
-
-    min-height:100vh;
-
-
-    background:#f8fafc;
-
-
-    position:relative;
-
-
-    padding-bottom:80px;
-
-
-}
-
-
-
-
-
-
-
-
-/* =====================================
-   HEADER
-===================================== */
-
-
-.header {
-
-
-    background:white;
-
-
-    padding:20px;
-
-
-    display:flex;
-
-
-    justify-content:space-between;
-
-
-    align-items:center;
-
-
-    border-bottom:1px solid #e2e8f0;
-
-
-}
-
-
-
-.header h2 {
-
-
-    margin:0;
-
-
-    color:#16a34a;
-
-
-}
-
-
-
-.header p {
-
-
-    margin:5px 0 0;
-
-
-    color:#64748b;
-
-
-}
-
-
-
-
-
-
-#logout-btn {
-
-
-    background:#fee2e2;
-
-
-    color:#dc2626;
-
-
-    padding:10px 15px;
-
-
-    border-radius:20px;
-
-
-    font-weight:700;
-
-
-}/* =====================================
-   CARTE SOLDE
-===================================== */
-
-
-.balance-card {
-
-    margin:20px;
-
-    padding:25px;
-
-    border-radius:25px;
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #064e3b,
-        #16a34a
-    );
-
-    color:white;
-
-    box-shadow:
-
-    0 20px 35px
-    rgba(22,163,74,.25);
-
-}
-
-
-
-.balance-card p {
-
-    margin:0;
-
-    opacity:.8;
-
-    font-size:.9rem;
-
-}
-
-
-
-.balance-card h1 {
-
-    margin:15px 0;
-
-    font-size:2.3rem;
-
-}
-
-
-
-#account-status {
-
-    display:inline-block;
-
-    background:rgba(255,255,255,.2);
-
-    padding:8px 12px;
-
-    border-radius:20px;
-
-    font-size:.8rem;
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   MENUS
-===================================== */
-
-
-.menu {
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:8px;
-
-    padding:0 20px 20px;
-
-}
-
-
-
-.menu button {
-
-    background:white;
-
-    border-radius:14px;
-
-    padding:12px 5px;
-
-    color:#475569;
-
-    font-weight:700;
-
-    border:1px solid #e2e8f0;
-
-}
-
-
-
-.menu button:hover {
-
-    color:#16a34a;
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   PAGES
-===================================== */
-
-
-.page {
-
-    display:none;
-
-    padding:20px;
-
-}
-
-
-
-.page.active {
-
-    display:block;
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   PANNEAUX
-===================================== */
-
-
-.panel {
-
-    background:white;
-
-    padding:20px;
-
-    border-radius:20px;
-
-    margin-bottom:20px;
-
-    border:1px solid #e2e8f0;
-
-    box-shadow:
-
-    0 5px 15px
-    rgba(15,23,42,.05);
-
-}
-
-
-
-.panel h3 {
-
-    margin-top:0;
-
-    font-size:1.1rem;
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   INFORMATIONS COMPTE
-===================================== */
-
-
-.info-row {
-
-    display:flex;
-
-    justify-content:space-between;
-
-    padding:14px 0;
-
-    border-bottom:
-
-    1px solid #f1f5f9;
-
-}
-
-
-
-.info-row:last-child {
-
-    border:none;
-
-}
-
-
-
-.info-row span {
-
-    color:#64748b;
-
-}
-
-
-
-.blocked {
-
-    color:#dc2626;
-
-    font-weight:700;
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   HISTORIQUE
-===================================== */
-
-
-.operation-item {
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:15px 0;
-
-    border-bottom:
-
-    1px solid #f1f5f9;
-
-}
-
-
-
-.operation-item:last-child {
-
-    border:none;
-
-}
-
-
-
-.operation-item strong {
-
-    display:block;
-
-    font-size:.95rem;
-
-}
-
-
-
-.operation-item small {
-
-    color:#94a3b8;
-
-}
-
-
-
-.operation-item span {
-
-    font-weight:700;
-
-    color:#16a34a;
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   FORMULAIRE VIREMENT
-===================================== */
-
-
-#transfer label {
-
-    display:block;
-
-    margin-top:15px;
-
-    margin-bottom:6px;
-
-    color:#475569;
-
-    font-weight:700;
-
-    font-size:.8rem;
-
-}
-
-
-
-#transfer input {
-
-    width:100%;
-
-    padding:13px;
-
-    border-radius:12px;
-
-    border:1px solid #cbd5e1;
-
-    background:#f8fafc;
-
-}
-
-
-
-
-
-
-#transfer-btn {
-
-    width:100%;
-
-    margin-top:25px;
-
-    padding:15px;
-
-    border-radius:15px;
-
-    background:#16a34a;
-
-    color:white;
-
-    font-weight:700;
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   RESULTAT VIREMENT
-===================================== */
-
-
-.transfer-result {
-
-    margin-top:20px;
-
-    padding:20px;
-
-    border-radius:18px;
-
-    background:#fef2f2;
-
-    border:1px solid #fecaca;
-
-    color:#991b1b;
-
-}
-
-
-
-.transfer-result h3 {
-
-    color:#dc2626;
-
-}/* =====================================
-   CARTE BANCAIRE VIRTUELLE
-===================================== */
-
-
-.bank-card {
-
-    height:220px;
-
-    border-radius:25px;
-
-    padding:25px;
-
-    color:white;
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #111827,
-        #334155,
-        #16a34a
-    );
-
-
-    box-shadow:
-
-    0 25px 45px
-    rgba(15,23,42,.35);
-
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:space-between;
-
-    overflow:hidden;
-
-    position:relative;
-
-}
-
-
-
-
-.bank-card::after {
-
-    content:"";
-
-    position:absolute;
-
-    width:250px;
-
-    height:250px;
-
-    right:-100px;
-
-    top:-100px;
-
-    background:
-
-    radial-gradient(
-        circle,
-        rgba(255,255,255,.25),
-        transparent
-    );
-
-}
-
-
-
-
-
-.card-brand {
-
-    font-size:1.3rem;
-
-    font-weight:800;
-
-}
-
-
-
-
-
 .chip {
+
 
     width:45px;
 
     height:32px;
 
-    background:
-
-    linear-gradient(
-        135deg,
-        #fde68a,
-        #b45309
-    );
+    background:#facc15;
 
     border-radius:6px;
 
-}
+    margin:25px 0;
 
-
-
-
-
-.card-number {
-
-    font-size:1.4rem;
-
-    letter-spacing:3px;
-
-}
-
-
-
-
-
-.card-footer {
-
-    display:flex;
-
-    justify-content:space-between;
-
-    font-size:.75rem;
-
-}
-
-
-
-.card-footer span {
-
-    display:flex;
-
-    flex-direction:column;
-
-    opacity:.8;
-
-}
-
-
-
-.card-footer strong {
-
-    color:white;
-
-    margin-top:4px;
 
 }
 
@@ -988,48 +608,34 @@ input {
 
 
 
-/* =====================================
+
+
+/* ==========================
    NAVIGATION BASSE
-===================================== */
+========================== */
 
 
-.bottom-nav {
+.bottom-navigation {
 
 
     position:fixed;
 
-
     bottom:0;
 
+    left:0;
 
-    left:50%;
+    right:0;
 
-
-    transform:translateX(-50%);
-
-
-    width:100%;
-
-
-    max-width:480px;
-
-
-    height:75px;
-
+    height:70px;
 
     background:white;
 
-
     border-top:
-
     1px solid #e2e8f0;
-
 
     display:flex;
 
-
     justify-content:space-around;
-
 
     align-items:center;
 
@@ -1038,101 +644,87 @@ input {
 
 
 
-.bottom-nav button {
+
+.bottom-navigation button {
 
 
     background:none;
 
+    color:#475569;
 
-    color:#64748b;
 
+}
+
+
+.bottom-navigation span {
+
+
+    display:block;
+
+    font-size:12px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ==========================
+   MODALE
+========================== */
+
+
+.modal {
+
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(0,0,0,.45);
 
     display:flex;
 
-
-    flex-direction:column;
-
-
     align-items:center;
 
-
-    gap:5px;
-
-
-    font-size:.75rem;
-
-
-    font-weight:700;
+    justify-content:center;
 
 
 }
 
 
 
-.bottom-nav button.nav-active {
+.modal-content {
 
 
-    color:#16a34a;
+    background:white;
 
+    width:90%;
 
-}
+    max-width:400px;
 
+    border-radius:18px;
 
-
-.bottom-nav span {
-
-
-    font-size:.7rem;
-
-
-}
-
-
-
-
-
-
-
-/* =====================================
-   ANIMATIONS
-===================================== */
-
-
-.page.active {
-
-
-    animation:
-
-    fade .25s ease;
+    padding:25px;
 
 
 }
 
 
 
+.close-modal {
 
+    float:right;
 
-@keyframes fade {
+    background:none;
 
-
-    from {
-
-        opacity:0;
-
-        transform:translateY(10px);
-
-    }
-
-
-
-    to {
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
+    font-size:25px;
 
 }
 
@@ -1142,104 +734,45 @@ input {
 
 
 
-button {
 
 
-    transition:
-
-    transform .15s ease,
-    opacity .15s ease;
-
-
-}
+/* ==========================
+   MOBILE
+========================== */
 
 
-
-button:active {
-
-
-    transform:scale(.96);
+@media(max-width:700px){
 
 
-}
-
-
-
-
-
-
-
-/* =====================================
-   RESPONSIVE MOBILE
-===================================== */
-
-
-@media(max-width:480px){
-
-
-
-    .balance-card h1 {
-
-
-        font-size:1.8rem;
-
-
-    }
-
-
-
-
-    .menu {
-
+    .shortcut-grid {
 
         grid-template-columns:
         repeat(2,1fr);
 
+    }
+
+
+    .content-area {
+
+        padding:15px;
 
     }
 
 
+    .login-container {
 
+        width:90%;
+
+        padding:25px;
+
+    }
 
 
     .bank-card {
 
-
-        height:200px;
-
-
-        padding:20px;
-
+        width:100%;
 
     }
-
-
-
-
-
-    .card-number {
-
-
-        font-size:1.1rem;
-
-
-    }
-
-
-
-
-
-    .header {
-
-
-        padding:15px;
-
-
-    }
-
-
 
 
 }
-
-
