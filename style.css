@@ -1,42 +1,40 @@
-/* ==========================
-   BASE GENERALE
-========================== */
+/* =====================================
+   STYLE GENERAL - FORTUNEO BANQUE
+===================================== */
 
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+
+    background:#f1f5f9;
+
+    color:#0f172a;
+
     font-family:
-    -apple-system,
-    BlinkMacSystemFont,
     "Segoe UI",
     Arial,
     sans-serif;
-}
-
-
-body {
-
-    background: #f3f6f9;
-    color: #1e293b;
-    min-height: 100vh;
 
 }
 
 
-button {
 
-    cursor: pointer;
-    border: none;
-    font-weight: 600;
+button{
+
+    transition:.2s ease;
 
 }
 
 
-input {
+button:hover{
 
-    outline: none;
+    transform:translateY(-2px);
 
 }
 
@@ -46,28 +44,24 @@ input {
 
 
 
-/* ==========================
-   UTILITAIRE
-========================== */
 
+.hidden{
 
-.hidden {
-
-    display: none !important;
+    display:none!important;
 
 }
 
 
-.website-page {
+.website-page{
 
-    display: none;
+    display:none;
 
 }
 
 
-.active-page {
+.active-page{
 
-    display: block;
+    display:block;
 
 }
 
@@ -79,82 +73,88 @@ input {
 
 
 
-/* ==========================
+/* =====================================
    CONNEXION
-========================== */
+===================================== */
 
 
-#login-page {
+#login-page{
 
-    min-height: 100vh;
 
-    display: flex;
+    min-height:100vh;
 
-    justify-content: center;
+    display:flex;
 
-    align-items: center;
+    justify-content:center;
+
+    align-items:center;
+
 
     background:
+
     linear-gradient(
         135deg,
         #064e3b,
         #16a34a
     );
 
+
 }
 
 
 
+.login-container{
 
 
-.login-container {
-
-
-    width: 400px;
+    width:420px;
 
     background:white;
 
-    border-radius:20px;
+    border-radius:24px;
 
     padding:40px;
 
+
     box-shadow:
-    0 20px 50px
-    rgba(0,0,0,.15);
+
+    0 25px 60px
+    rgba(0,0,0,.20);
 
 
 }
 
 
 
+.brand-area{
 
-
-.brand-area {
 
     text-align:center;
 
     margin-bottom:35px;
 
-}
-
-
-
-.brand-area h1 {
-
-    color:#0f7a36;
-
-    font-size:32px;
 
 }
 
 
 
-.brand-area p {
+.brand-area h1{
+
+
+    color:#15803d;
+
+    font-size:34px;
+
+    margin-bottom:8px;
+
+
+}
+
+
+
+.brand-area p{
 
     color:#64748b;
 
-    margin-top:8px;
-
 }
 
 
@@ -165,64 +165,7 @@ input {
 
 
 
-.field {
-
-    margin-bottom:18px;
-
-}
-
-
-
-.field label {
-
-    display:block;
-
-    font-size:14px;
-
-    color:#475569;
-
-    margin-bottom:6px;
-
-}
-
-
-
-.field input {
-
-
-    width:100%;
-
-    padding:14px;
-
-    border-radius:10px;
-
-    border:
-    1px solid #cbd5e1;
-
-    font-size:15px;
-
-
-}
-
-
-
-
-
-.remember {
-
-    display:flex;
-
-    gap:8px;
-
-    margin-bottom:20px;
-
-}
-
-
-
-
-#login-button,
-#transfer-button {
+.field input{
 
 
     width:100%;
@@ -231,9 +174,42 @@ input {
 
     border-radius:12px;
 
+    border:1px solid #cbd5e1;
+
+
+}
+
+
+
+.field label{
+
+
+    display:block;
+
+    margin-bottom:7px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+
+
+
+#login-button{
+
+
+    width:100%;
+
+    padding:16px;
+
     background:#15803d;
 
     color:white;
+
+    border-radius:30px;
 
     font-size:16px;
 
@@ -242,43 +218,43 @@ input {
 
 
 
-#login-message {
 
-    margin-top:15px;
 
-    color:#dc2626;
 
-    text-align:center;
+
+
+
+/* =====================================
+   ESPACE CLIENT
+===================================== */
+
+
+#client-space{
+
+
+    min-height:100vh;
+
 
 }
 
 
 
+.site-header{
 
 
-
-
-
-
-/* ==========================
-   HEADER
-========================== */
-
-
-.site-header {
-
-
-    height:75px;
+    height:80px;
 
     background:white;
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
 
-    padding:0 25px;
+    align-items:center;
+
+
+    padding:0 30px;
+
 
     border-bottom:
     1px solid #e2e8f0;
@@ -288,27 +264,25 @@ input {
 
 
 
+.client-profile{
 
-.client-profile {
 
     display:flex;
 
     align-items:center;
 
-    gap:12px;
-
-    cursor:pointer;
+    gap:15px;
 
 }
 
 
 
-.avatar {
+.avatar{
 
 
-    width:45px;
+    width:48px;
 
-    height:45px;
+    height:48px;
 
     border-radius:50%;
 
@@ -316,11 +290,13 @@ input {
 
     color:white;
 
+
     display:flex;
+
+    align-items:center;
 
     justify-content:center;
 
-    align-items:center;
 
     font-weight:bold;
 
@@ -329,72 +305,18 @@ input {
 
 
 
-.avatar.large {
-
-    width:70px;
-
-    height:70px;
-
-    font-size:22px;
-
-}
-
-
-
-.client-profile p {
-
-    color:#64748b;
-
-    font-size:13px;
-
-}
 
 
 
 
-
-.header-buttons {
-
-    display:flex;
-
-    gap:10px;
-
-}
+.content-area{
 
 
-
-.header-buttons button {
-
-    padding:10px 15px;
-
-    border-radius:10px;
-
-    background:#f1f5f9;
-
-}
-
-
-
-
-
-
-
-
-
-/* ==========================
-   CONTENU
-========================== */
-
-
-.content-area {
-
-    max-width:900px;
+    max-width:1000px;
 
     margin:auto;
 
-    padding:25px;
-
-    padding-bottom:100px;
+    padding:30px;
 
 
 }
@@ -402,35 +324,60 @@ input {
 
 
 
-.balance-box {
+
+
+
+
+
+/* =====================================
+   SOLDE
+===================================== */
+
+
+.balance-box{
 
 
     background:
+
     linear-gradient(
         135deg,
         #0f172a,
         #334155
     );
 
+
     color:white;
 
-    padding:30px;
+    padding:35px;
 
-    border-radius:20px;
+    border-radius:25px;
 
-    margin-bottom:25px;
+
+    box-shadow:
+
+    0 15px 30px
+    rgba(0,0,0,.18);
 
 
 }
 
 
 
-.balance-box h1 {
+.balance-box p{
 
-    font-size:38px;
+    opacity:.7;
+
+}
+
+
+.balance-box h1{
+
+
+    font-size:42px;
 
     margin:15px 0;
 
+
 }
 
 
@@ -439,7 +386,14 @@ input {
 
 
 
-.shortcut-grid {
+
+
+/* =====================================
+   RACCOURCIS
+===================================== */
+
+
+.shortcut-grid{
 
 
     display:grid;
@@ -449,25 +403,27 @@ input {
 
     gap:15px;
 
-    margin-bottom:25px;
+    margin:25px 0;
 
 
 }
 
 
 
-
-.shortcut-grid button {
+.shortcut-grid button{
 
 
     background:white;
 
-    padding:20px;
+    padding:22px;
 
-    border-radius:15px;
+
+    border-radius:18px;
+
 
     box-shadow:
-    0 5px 15px
+
+    0 5px 20px
     rgba(0,0,0,.06);
 
 
@@ -481,26 +437,31 @@ input {
 
 
 
-/* ==========================
+/* =====================================
    CARTES CONTENU
-========================== */
+===================================== */
 
 
-.content-card {
+.content-card{
 
 
     background:white;
 
-    border-radius:18px;
 
-    padding:22px;
+    border-radius:20px;
 
-    margin-bottom:20px;
+
+    padding:25px;
+
+
+    margin-bottom:25px;
+
 
     box-shadow:
 
-    0 5px 20px
-    rgba(0,0,0,.05);
+
+    0 8px 25px
+    rgba(0,0,0,.06);
 
 
 }
@@ -512,32 +473,35 @@ input {
 
 
 
-
-/* ==========================
-   HISTORIQUE
-========================== */
-
-
-.operation {
+/* =====================================
+   OPERATIONS
+===================================== */
 
 
-    padding:15px;
+.operation{
 
-    border-bottom:
-    1px solid #e2e8f0;
 
     display:flex;
 
     justify-content:space-between;
 
-    cursor:pointer;
+    align-items:center;
+
+
+    padding:18px 10px;
+
+
+    border-bottom:
+
+    1px solid #e2e8f0;
 
 
 }
 
 
 
-.operation:hover {
+.operation:hover{
+
 
     background:#f8fafc;
 
@@ -547,57 +511,88 @@ input {
 
 
 
+.operation b{
+
+
+    color:#15803d;
+
+
+}
 
 
 
-/* ==========================
-   CARTE BANCAIRE VISUELLE
-========================== */
 
 
-.bank-card {
 
 
-    width:350px;
 
-    height:210px;
 
-    border-radius:20px;
+/* =====================================
+   CARTE BANCAIRE
+===================================== */
 
-    padding:25px;
+
+.bank-card{
+
+
+    width:380px;
+
+    height:230px;
+
+
+    border-radius:24px;
+
+
+    padding:28px;
+
 
     color:white;
 
+
     background:
 
+
     linear-gradient(
-    135deg,
-    #111827,
-    #2563eb
+        135deg,
+        #111827,
+        #15803d
     );
 
 
     box-shadow:
-    0 15px 30px
-    rgba(0,0,0,.2);
+
+    0 20px 40px
+    rgba(0,0,0,.25);
 
 
 }
 
 
 
-.chip {
+.bank-card h2{
 
 
-    width:45px;
+    letter-spacing:3px;
 
-    height:32px;
+    margin-top:30px;
+
+
+}
+
+
+
+.chip{
+
+
+    width:48px;
+
+    height:34px;
+
 
     background:#facc15;
 
-    border-radius:6px;
 
-    margin:25px 0;
+    border-radius:8px;
 
 
 }
@@ -610,12 +605,52 @@ input {
 
 
 
-/* ==========================
-   NAVIGATION BASSE
-========================== */
+/* =====================================
+   INFORMATIONS BANCAIRES
+===================================== */
 
 
-.bottom-navigation {
+.bank-details div{
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+
+    padding:15px 0;
+
+
+    border-bottom:
+
+    1px solid #e2e8f0;
+
+
+}
+
+
+
+.bank-details span{
+
+
+    color:#64748b;
+
+}
+
+
+
+
+
+
+
+
+
+/* =====================================
+   MENU BAS
+===================================== */
+
+
+.bottom-navigation{
 
 
     position:fixed;
@@ -626,12 +661,12 @@ input {
 
     right:0;
 
-    height:70px;
+
+    height:75px;
+
 
     background:white;
 
-    border-top:
-    1px solid #e2e8f0;
 
     display:flex;
 
@@ -640,12 +675,16 @@ input {
     align-items:center;
 
 
+    border-top:
+
+    1px solid #e2e8f0;
+
+
 }
 
 
 
-
-.bottom-navigation button {
+.bottom-navigation button{
 
 
     background:none;
@@ -656,7 +695,7 @@ input {
 }
 
 
-.bottom-navigation span {
+.bottom-navigation span{
 
 
     display:block;
@@ -674,105 +713,118 @@ input {
 
 
 
-/* ==========================
+/* =====================================
    MODALE
-========================== */
+===================================== */
 
 
-.modal {
+.modal{
 
 
     position:fixed;
 
     inset:0;
 
+
     background:
-    rgba(0,0,0,.45);
+
+    rgba(15,23,42,.55);
+
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
+
+    align-items:center;
 
 
 }
 
 
 
-.modal-content {
+.modal-content{
 
 
     background:white;
 
+
+    padding:30px;
+
+
+    border-radius:22px;
+
+
     width:90%;
 
-    max-width:400px;
-
-    border-radius:18px;
-
-    padding:25px;
+    max-width:420px;
 
 
 }
 
 
 
-.close-modal {
-
-    float:right;
-
-    background:none;
-
-    font-size:25px;
-
-}
 
 
 
 
 
 
-
-
-
-/* ==========================
+/* =====================================
    MOBILE
-========================== */
+===================================== */
 
 
-@media(max-width:700px){
+@media(max-width:750px){
 
 
-    .shortcut-grid {
 
-        grid-template-columns:
-        repeat(2,1fr);
+.content-area{
 
-    }
+    padding:15px;
 
-
-    .content-area {
-
-        padding:15px;
-
-    }
+}
 
 
-    .login-container {
 
-        width:90%;
-
-        padding:25px;
-
-    }
+.shortcut-grid{
 
 
-    .bank-card {
+    grid-template-columns:
 
-        width:100%;
+    repeat(2,1fr);
 
-    }
+
+}
+
+
+
+.bank-card{
+
+
+    width:100%;
+
+
+}
+
+
+
+.balance-box h1{
+
+
+    font-size:32px;
+
+
+}
+
+
+
+.login-container{
+
+
+    width:90%;
+
+
+}
 
 
 }
