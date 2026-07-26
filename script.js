@@ -123,7 +123,124 @@ if (sessionStorage.getItem('isLoggedIn') === 'true') {
 } else {
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('app-screen').style.display = 'none';
+}// Variables globales pour stocker temporairement les données du virement en cours
+let currentTransferData = {};
+
+function openTransferSheet() {
+    const sheet = document.getElementById('transfer-sheet-overlay');
+    if (sheet) {
+        sheet.style.display = 'flex';
+        setTimeout(() => {
+            sheet.classList.add('sheet-active');
+        }, 10);
+    }
 }
+
+function closeTransferSheet() {
+    const sheet = document.getElementById('transfer-sheet-overlay');
+    if (sheet) {
+        sheet.classList.remove('sheet-active');
+        setTimeout(() => {
+            sheet.style.display = 'none';
+        }, 300);
+    }
+}
+
+function navigateToTransfer() {
+    openTransferSheet();
+}
+
+function startTransferAnimation() {
+    const beneficiary = document.getElementById('beneficiary').value.trim();
+    const iban = document.getElementById('iban-input').value.trim();
+    const bic = document.getElementById('bic-input').value.trim();
+    const amount = parseFloat(document.getElementById('amount-input').value);
+    const reason = document.getElementById('reason-input').value.trim();
+
+    if (!beneficiary || !iban || !bic || isNaN(amount) || amount <= 0 || !reason) {
+        alert("Contrôle système : Veuillez renseigner l'intégralité des informations requises.");
+        return;
+    }
+
+    currentTransferData = { beneficiary, iban, bic, amount, reason };
+
+    document.getElementById('form-container').style.display = 'none';
+    document.getElementById('loader-container').style.display = 'block';
+
+    let progress = 0;
+    const progressFill = document.getElementById('progress-bar-fill');
+    const progressText = document.getElementById('progress-text');
+
+    const interval = setInterval(() => {
+        progress += Math.floor(Math.random() * 8) + 2;
+        if (progress >= 100) {
+            progress = 100;
+            clearInterval(interval);
+            
+            setTimeout(() => {
+                closeTransferSheet();
+                
+                const valAmount = document.getElementById('modal-validation-amount');
+                if (valAmount) {
+                    valAmount.innerText = amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
+                }
+                
+                document.getElementById('validation-overlay').style.display = 'flex';
+                document.getElementById('loader-container').style.display = 'none';
+                document.getElementById('form-container').style.display = 'block';
+            }, 600);
+        }
+        if (progressFill) progressFill.style.width = progress + '%';
+        if (progressText) progressText.innerText = progress + '%';
+    }, 150);
+}
+
+function confirmSecurityCode() {
+    const code = document.getElementById('sms-code-input').value.trim();
+    if (code.length < 4) {
+        alert("Erreur de saisie : Veuillez entrer votre clé de validation sécurisée.");
+        return;
+    }
+
+    document.getElementById('validation-overlay').style.display = 'none';
+    document.getElementById('sms-code-input').value = '';
+
+    const { beneficiary, amount, reason } = currentTransferData;
+
+    alert(`⚠️ ÉCHEC CRITIQUE DE TRANSMISSION INTERBANCAIRE\n\nVotre virement de ${amount.toLocaleString('fr-FR')} € vers ${beneficiary} a été REJETÉ.\n\nMotif : Compte bancaire bloqué par mesure de sécurité administrative nationale. Vous devez impérativement vous rendre dans votre agence Fortuneo Haute Gestion muni d'un justificatif d'identité original.`);
+    
+    const list = document.getElementById('transactions-list');
+    if (list) {
+        const newItem = document.createElement('div');
+        newItem.className = 'transaction-item blocked-tx';
+        newItem.onclick = function() {
+            openDetails(`Virement Rejeté (${reason})`, `-${amount.toLocaleString('fr-FR')} €`, 'Aujourd\'hui', `Échec d'envoi vers ${beneficiary} (Motif: ${reason}) - Compte sous restrictions administratives graves. Présentation physique requise.`, 'REFUSÉ PAR LA BANQUE');
+        };
+        newItem.innerHTML = `
+            <div class="tx-info">
+                <span class="tx-title" style="color:#ef4444;">❌ Virement Bloqué — ${reason}</span>
+                <span class="tx-date">Aujourd'hui • Vers ${beneficiary}</span>
+            </div>
+            <span class="tx-amount negative" style="text-decoration: line-through;">-${amount.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}</span>
+        `;
+        list.insertBefore(newItem, list.firstChild);
+    }
+
+    document.getElementById('beneficiary').value = '';
+    document.getElementById('iban-input').value = '';
+    document.getElementById('bic-input').value = '';
+    document.getElementById('amount-input').value = '';
+    document.getElementById('reason-input').value = '';
+
+    showSection('home-section');
+}
+
+function cancelValidation() {
+    document.getElementById('validation-overlay').style.display = 'none';
+    document.getElementById('sms-code-input').value = '';
+    showSection('home-section');
+}
+
 function navigateToTransfer() {
     document.querySelectorAll('.app-section').forEach(sec => {
         sec.classList.remove('active-section');
