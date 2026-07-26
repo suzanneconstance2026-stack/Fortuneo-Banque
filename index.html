@@ -1,32 +1,55 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>NovaBank Demo - Espace Client</title>
+    <title>NovaBank - Espace Client</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
-<div class="app">
 
-    <!-- ÉCRAN DE CONNEXION -->
+<div class="app-container">
+
+
+    <!-- =========================
+         CONNEXION
+    ========================== -->
+
     <section id="login-screen" class="login-screen">
 
-        <div class="login-card">
 
-            <div class="brand">
-                <h1>NovaBank</h1>
-                <p>Application de démonstration</p>
+        <div class="login-box">
+
+
+            <div class="logo">
+
+                <h1>
+                    NovaBank
+                </h1>
+
+                <p>
+                    Espace client
+                </p>
+
             </div>
 
-            <h2>Connexion</h2>
 
-            <div class="form-group">
-                <label for="username">
+
+            <h2>
+                Connexion
+            </h2>
+
+
+
+            <div class="input-group">
+
+                <label>
                     Identifiant
                 </label>
 
@@ -34,14 +57,16 @@
                     id="username"
                     type="text"
                     placeholder="Votre identifiant"
-                    autocomplete="username"
                 >
+
             </div>
 
 
-            <div class="form-group">
 
-                <label for="password">
+
+            <div class="input-group">
+
+                <label>
                     Mot de passe
                 </label>
 
@@ -49,61 +74,74 @@
                     id="password"
                     type="password"
                     placeholder="Votre mot de passe"
-                    autocomplete="current-password"
                 >
 
             </div>
 
 
-            <label class="checkbox">
+
+            <div class="remember">
 
                 <input 
-                    type="checkbox"
                     id="remember"
+                    type="checkbox"
                 >
 
-                <span>
-                    Mémoriser l'identifiant
-                </span>
+                <label for="remember">
+                    Se souvenir de moi
+                </label>
 
-            </label>
+            </div>
+
 
 
             <button 
-                id="login-button"
-                class="primary-button"
+                id="login-btn"
+                class="main-btn"
             >
                 Se connecter
             </button>
 
 
+
             <p 
-                id="login-message"
-                class="message"
+                id="login-error"
+                class="error-message"
             ></p>
 
 
+
         </div>
+
 
     </section>
 
 
 
 
-    <!-- APPLICATION PRINCIPALE -->
+
+
+
+    <!-- =========================
+         APPLICATION
+    ========================== -->
+
 
     <section 
-        id="app-screen"
-        class="dashboard"
+        id="bank-app"
+        class="bank-app"
         hidden
     >
 
 
+
         <!-- HEADER -->
 
-        <header class="top-header">
+        <header class="header">
 
-            <div class="profile">
+
+            <div class="user-info">
+
 
                 <div class="avatar">
                     NG
@@ -116,21 +154,23 @@
                         Nicolas Garnier
                     </strong>
 
-                    <small>
-                        Client Premium Démo
-                    </small>
+                    <span>
+                        Client Premium
+                    </span>
 
                 </div>
+
 
             </div>
 
 
 
+
             <button 
-                id="logout-button"
-                class="secondary-button"
+                id="logout-btn"
+                class="logout"
             >
-                Déconnexion
+                Sortir
             </button>
 
 
@@ -140,384 +180,91 @@
 
 
 
-        <!-- CONTENU PRINCIPAL -->
+        <!-- CONTENU -->
 
-        <main class="content">
+        <main class="main-content">
 
 
-            <!-- ACCUEIL -->
+
+            <!-- PAGE ACCUEIL -->
 
             <section 
-                id="home-page"
+                id="dashboard"
                 class="page active"
             >
 
 
                 <h2>
-                    Tableau de bord
+                    Vue d'ensemble
                 </h2>
+
 
 
 
                 <div class="balance-card">
 
-                    <span>
-                        Solde disponible
-                    </span>
-
-
-                    <h3 id="main-balance">
-                        0,00 €
-                    </h3>
-
 
                     <p>
-                        Compte principal de démonstration
+                        Solde disponible
                     </p>
 
 
-                </div>
+                    <h1 id="balance">
+                        0,00 €
+                    </h1>
 
 
-
-
-                <div class="quick-actions">
-
-
-                    <button 
-                        class="action-button"
-                        data-page="transfer-page"
-                    >
-                        Effectuer une opération
-                    </button>
-
-
-                    <button 
-                        class="action-button"
-                        data-page="history-page"
-                    >
-                        Voir l'historique
-                    </button>
+                    <small>
+                        Compte principal
+                    </small>
 
 
                 </div>
 
 
 
-                <div class="card-section">
+
+
+                <div class="quick-menu">
+
+
+                    <button data-page="operations">
+                        Nouvelle opération
+                    </button>
+
+
+                    <button data-page="transactions">
+                        Historique
+                    </button>
+
+
+                    <button data-page="cards">
+                        Mes cartes
+                    </button>
+
+
+                </div>
+
+
+
+
+
+                <div class="section-card">
+
 
                     <h3>
-                        Dernières opérations
+                        Dernières activités
                     </h3>
 
 
-                    <div id="recent-transactions">
+
+                    <div id="recent-list">
 
                     </div>
 
 
                 </div>
 
-
-            </section> 
-                        <!-- PAGE OPERATIONS -->
-
-            <section 
-                id="transfer-page"
-                class="page"
-            >
-
-                <h2>
-                    Nouvelle opération
-                </h2>
-
-
-                <div class="panel">
-
-                    <div class="form-group">
-
-                        <label for="operation-name">
-                            Libellé
-                        </label>
-
-                        <input 
-                            id="operation-name"
-                            type="text"
-                            placeholder="Exemple : Paiement"
-                        >
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="operation-amount">
-                            Montant
-                        </label>
-
-                        <input 
-                            id="operation-amount"
-                            type="number"
-                            placeholder="0,00"
-                        >
-
-                    </div>
-
-
-
-                    <div class="form-group">
-
-                        <label for="operation-category">
-                            Catégorie
-                        </label>
-
-
-                        <select id="operation-category">
-
-                            <option value="Autre">
-                                Autre
-                            </option>
-
-                            <option value="Alimentation">
-                                Alimentation
-                            </option>
-
-                            <option value="Transport">
-                                Transport
-                            </option>
-
-                            <option value="Loisirs">
-                                Loisirs
-                            </option>
-
-                        </select>
-
-
-                    </div>
-
-
-
-                    <button 
-                        id="add-operation"
-                        class="primary-button"
-                    >
-                        Ajouter l'opération
-                    </button>
-
-
-                </div>
 
 
             </section>
-
-
-
-
-
-
-            <!-- HISTORIQUE -->
-
-            <section 
-                id="history-page"
-                class="page"
-            >
-
-                <h2>
-                    Historique
-                </h2>
-
-
-                <div class="panel">
-
-
-                    <input 
-                        id="search-history"
-                        type="search"
-                        placeholder="Rechercher une opération..."
-                    >
-
-
-
-                    <div 
-                        id="all-transactions"
-                        class="transaction-list"
-                    >
-
-                    </div>
-
-
-                </div>
-
-
-            </section>
-
-
-
-
-
-
-
-
-            <!-- PROFIL -->
-
-            <section 
-                id="profile-page"
-                class="page"
-            >
-
-                <h2>
-                    Profil
-                </h2>
-
-
-
-                <div class="panel profile-card">
-
-
-                    <div class="profile-line">
-
-                        <span>
-                            Nom
-                        </span>
-
-                        <strong>
-                            Nicolas Garnier
-                        </strong>
-
-                    </div>
-
-
-
-                    <div class="profile-line">
-
-                        <span>
-                            Type de compte
-                        </span>
-
-                        <strong>
-                            Démonstration
-                        </strong>
-
-                    </div>
-
-
-
-
-                    <div class="profile-line">
-
-                        <span>
-                            Statut
-                        </span>
-
-                        <strong class="status-online">
-                            Actif
-                        </strong>
-
-                    </div>
-
-
-
-                </div>
-
-
-            </section>
-
-
-
-
-
-        </main>
-
-
-
-
-
-        <!-- NAVIGATION BASSE -->
-
-        <nav class="bottom-navigation">
-
-
-            <button 
-                class="nav-button active"
-                data-page="home-page"
-            >
-
-                <span>
-                    🏠
-                </span>
-
-                Accueil
-
-            </button>
-
-
-
-
-
-            <button 
-                class="nav-button"
-                data-page="transfer-page"
-            >
-
-                <span>
-                    ➕
-                </span>
-
-                Opération
-
-            </button>
-
-
-
-
-
-            <button 
-                class="nav-button"
-                data-page="history-page"
-            >
-
-                <span>
-                    📄
-                </span>
-
-                Historique
-
-            </button>
-
-
-
-
-
-            <button 
-                class="nav-button"
-                data-page="profile-page"
-            >
-
-                <span>
-                    👤
-                </span>
-
-                Profil
-
-            </button>
-
-
-
-        </nav>
-
-
-
-    </section>
-
-
-
-</div>
-
-
-
-<script src="script.js"></script>
-
-</body>
-
-</html>
