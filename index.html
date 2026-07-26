@@ -1,6 +1,902 @@
-<!-- ==========================
-     STATISTIQUES DU COMPTE
-========================== -->
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fortuneo Banque - Espace Client</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     PAGE CONNEXION
+================================= -->
+
+
+<div id="login-page">
+
+
+    <div class="login-card">
+
+
+        <div class="logo-zone">
+
+
+            <h1>
+                Fortuneo Banque
+            </h1>
+
+
+            <p>
+                Accès à votre espace client
+            </p>
+
+
+        </div>
+
+
+
+
+
+        <form id="login-form">
+
+
+
+            <div class="form-group">
+
+
+                <label>
+                    Identifiant
+                </label>
+
+
+                <input
+                id="username"
+                type="text"
+                placeholder="Votre identifiant">
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="form-group">
+
+
+                <label>
+                    Mot de passe
+                </label>
+
+
+                <input
+                id="password"
+                type="password"
+                placeholder="Votre mot de passe">
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="remember-line">
+
+
+                <input
+                type="checkbox"
+                id="remember">
+
+
+                <label>
+                    Mémoriser mon identifiant
+                </label>
+
+
+            </div>
+
+
+
+
+
+
+
+            <button
+            type="submit"
+            class="primary-button">
+
+
+                Se connecter
+
+
+            </button>
+
+
+
+
+
+
+            <p id="login-message"></p>
+
+
+
+        </form>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =================================
+     ESPACE CLIENT
+================================= -->
+
+
+<div id="client-space" class="hidden">
+
+
+
+
+
+<header class="main-header">
+
+
+
+<div class="user-area"
+onclick="showPage('profile-page')">
+
+
+<div class="avatar">
+
+EG
+
+</div>
+
+
+
+
+<div>
+
+
+<h3 id="client-name">
+
+Client
+
+</h3>
+
+
+<p>
+Espace personnel
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="header-actions">
+
+
+<button onclick="showPage('notifications-page')">
+
+🔔
+
+</button>
+
+
+
+<button id="logout-button">
+
+Déconnexion
+
+</button>
+
+
+</div>
+
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<main class="site-content">
+
+
+
+
+
+
+
+<!-- =================================
+     TABLEAU DE BORD
+================================= -->
+
+
+<section
+id="dashboard-page"
+class="website-page active-page">
+
+
+
+
+
+<div class="account-summary">
+
+
+
+<p>
+Solde disponible
+</p>
+
+
+
+<h1 id="account-balance">
+
+0,00 €
+
+</h1>
+
+
+
+
+<span id="account-status">
+
+Statut du compte
+
+</span>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="quick-actions">
+
+
+
+<button onclick="showPage('accounts-page')">
+
+💳
+
+Mes comptes
+
+</button>
+
+
+
+
+
+<button onclick="showPage('history-page')">
+
+📄
+
+Opérations
+
+</button>
+
+
+
+
+
+<button onclick="showPage('transfer-page')">
+
+↔️
+
+Virement
+
+</button>
+
+
+
+
+
+<button onclick="showPage('cards-page')">
+
+💳
+
+Cartes
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="content-box">
+
+
+<h2>
+Dernières opérations
+</h2>
+
+
+
+<div id="dashboard-history">
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+</section><!-- =================================
+     PAGE COMPTES
+================================= -->
+
+
+<section
+id="accounts-page"
+class="website-page">
+
+
+<h2>
+Mes comptes
+</h2>
+
+
+
+
+
+<div
+id="accounts-container"
+class="content-box">
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="content-box">
+
+
+<h2>
+Informations du compte
+</h2>
+
+
+
+
+<div class="bank-information">
+
+
+<div>
+
+<span>
+Titulaire
+</span>
+
+<strong id="rib-holder">
+
+</strong>
+
+</div>
+
+
+
+
+<div>
+
+<span>
+IBAN
+</span>
+
+<strong id="rib-iban">
+
+</strong>
+
+</div>
+
+
+
+
+
+<div>
+
+<span>
+BIC
+</span>
+
+<strong id="rib-bic">
+
+</strong>
+
+</div>
+
+
+
+
+
+<div>
+
+<span>
+Numéro de compte
+</span>
+
+<strong id="rib-number">
+
+</strong>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =================================
+     PAGE HISTORIQUE
+================================= -->
+
+
+<section
+id="history-page"
+class="website-page">
+
+
+<h2>
+Historique des opérations
+</h2>
+
+
+
+
+
+<div class="search-container">
+
+
+<input
+id="history-search"
+type="text"
+placeholder="Rechercher une opération">
+
+
+</div>
+
+
+
+
+
+<div
+id="history-container"
+class="content-box">
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =================================
+     PAGE VIREMENT
+================================= -->
+
+
+<section
+id="transfer-page"
+class="website-page">
+
+
+<h2>
+Effectuer un virement
+</h2>
+
+
+
+
+
+<div class="content-box transfer-box">
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Bénéficiaire
+</label>
+
+
+<input
+id="beneficiary-name"
+placeholder="Nom du bénéficiaire">
+
+
+</div>
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+IBAN
+</label>
+
+
+<input
+id="beneficiary-iban"
+placeholder="IBAN du bénéficiaire">
+
+
+</div>
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Montant
+</label>
+
+
+<input
+id="transfer-amount"
+type="number"
+placeholder="Montant en euros">
+
+
+</div>
+
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Motif
+</label>
+
+
+<input
+id="transfer-reason"
+placeholder="Motif du virement">
+
+
+</div>
+
+
+
+
+
+
+
+<button
+id="transfer-button"
+class="primary-button">
+
+
+Continuer
+
+
+</button>
+
+
+
+
+
+<div
+id="transfer-result">
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =================================
+     PAGE CARTES
+================================= -->
+
+
+<section
+id="cards-page"
+class="website-page">
+
+
+<h2>
+Mes cartes bancaires
+</h2>
+
+
+
+
+
+<div
+id="cards-container">
+
+
+</div>
+
+
+
+</section><!-- =================================
+     PAGE PROFIL
+================================= -->
+
+
+<section
+id="profile-page"
+class="website-page">
+
+
+<h2>
+Mon profil
+</h2>
+
+
+
+
+
+<div class="content-box">
+
+
+
+<div class="profile-header">
+
+
+<div class="avatar large">
+
+EG
+
+</div>
+
+
+
+<div>
+
+
+<h3 id="profile-full-name">
+
+</h3>
+
+
+<p>
+Informations personnelles
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="information-row">
+
+
+<span>
+Identifiant
+</span>
+
+
+<strong id="profile-login">
+
+</strong>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="information-row">
+
+
+<span>
+Email
+</span>
+
+
+<strong id="profile-email">
+
+</strong>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="information-row">
+
+
+<span>
+Téléphone
+</span>
+
+
+<strong id="profile-phone">
+
+</strong>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =================================
+     PAGE NOTIFICATIONS
+================================= -->
+
+
+<section
+id="notifications-page"
+class="website-page">
+
+
+<h2>
+Notifications
+</h2>
+
+
+
+
+
+<div
+id="notifications-container"
+class="content-box">
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- =================================
+     PAGE STATISTIQUES
+================================= -->
 
 
 <section
@@ -14,18 +910,20 @@ Analyse du compte
 
 
 
-<div class="content-card">
 
 
-<div class="stats-grid">
+<div class="statistics-grid">
 
 
-<div class="stat-box">
 
 
-<span>
-Opérations récentes
-</span>
+
+<div class="stat-card">
+
+
+<p>
+Nombre d'opérations
+</p>
 
 
 <strong id="operation-count">
@@ -39,12 +937,14 @@ Opérations récentes
 
 
 
-<div class="stat-box">
 
 
-<span>
+<div class="stat-card">
+
+
+<p>
 Entrées
-</span>
+</p>
 
 
 <strong id="income-total">
@@ -59,12 +959,14 @@ Entrées
 
 
 
-<div class="stat-box">
 
 
-<span>
+<div class="stat-card">
+
+
+<p>
 Sorties
-</span>
+</p>
 
 
 <strong id="expense-total">
@@ -77,7 +979,6 @@ Sorties
 
 
 
-</div>
 
 
 </div>
@@ -94,9 +995,9 @@ Sorties
 
 
 
-<!-- ==========================
-     DOCUMENTS
-========================== -->
+<!-- =================================
+     PAGE DOCUMENTS
+================================= -->
 
 
 <section
@@ -110,40 +1011,66 @@ Documents
 
 
 
-<div class="content-card">
+
+
+<div class="content-box document-list">
+
 
 
 <div class="document-item">
 
+
+<span>
 📄 Relevé de compte
+</span>
+
 
 <button>
-Consulter
+Ouvrir
 </button>
+
 
 </div>
 
 
 
+
+
+
+
 <div class="document-item">
 
+
+<span>
 📄 Informations du compte
+</span>
+
 
 <button>
-Consulter
+Ouvrir
 </button>
+
 
 </div>
 
 
 
+
+
+
+
 <div class="document-item">
 
+
+<span>
 📄 Historique des opérations
+</span>
+
 
 <button>
-Consulter
+Ouvrir
 </button>
+
 
 </div>
 
@@ -163,9 +1090,9 @@ Consulter
 
 
 
-<!-- ==========================
-     SECURITE
-========================== -->
+<!-- =================================
+     PAGE SECURITE
+================================= -->
 
 
 <section
@@ -179,41 +1106,63 @@ Sécurité
 
 
 
-<div class="content-card">
 
 
-<div class="security-line">
+<div class="content-box">
 
-Authentification
+
+
+<div class="security-row">
+
+
+<span>
+Protection du compte
+</span>
+
 
 <strong>
 Active
 </strong>
 
-</div>
-
-
-
-<div class="security-line">
-
-Dernière connexion
-
-<strong>
-Aujourd'hui
-</strong>
 
 </div>
 
 
 
-<div class="security-line">
 
+
+<div class="security-row">
+
+
+<span>
 Notifications de sécurité
+</span>
+
 
 <strong>
 Activées
 </strong>
 
+
+</div>
+
+
+
+
+
+<div class="security-row">
+
+
+<span>
+Dernière connexion
+</span>
+
+
+<strong>
+Aujourd'hui
+</strong>
+
+
 </div>
 
 
@@ -232,48 +1181,60 @@ Activées
 
 
 
-<!-- ==========================
-     PREFERENCES
-========================== -->
+<!-- =================================
+     PAGE PARAMETRES
+================================= -->
 
 
 <section
-id="preferences-page"
+id="settings-page"
 class="website-page">
 
 
 <h2>
-Préférences
+Paramètres
 </h2>
 
 
 
 
-<div class="content-card">
+
+<div class="content-box settings-menu">
 
 
-<label class="switch-line">
 
-Recevoir les notifications
+<button onclick="showPage('profile-page')">
 
-<input 
-type="checkbox"
-checked>
+👤 Profil
 
-</label>
+</button>
 
 
 
 
-<label class="switch-line">
+<button onclick="showPage('statistics-page')">
 
-Afficher les informations détaillées
+📊 Analyse
 
-<input 
-type="checkbox"
-checked>
+</button>
 
-</label>
+
+
+
+<button onclick="showPage('documents-page')">
+
+📄 Documents
+
+</button>
+
+
+
+
+<button onclick="showPage('security-page')">
+
+🔐 Sécurité
+
+</button>
 
 
 
@@ -281,4 +1242,181 @@ checked>
 
 
 
-</section>
+</section><!-- =================================
+     FENETRE DETAIL OPERATION
+================================= -->
+
+
+<div
+id="operation-modal"
+class="modal hidden">
+
+
+
+<div class="modal-content">
+
+
+
+<button
+id="close-modal"
+class="close-button">
+
+×
+
+</button>
+
+
+
+
+
+<h2>
+Détail de l'opération
+</h2>
+
+
+
+
+
+<div
+id="operation-details">
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =================================
+     NAVIGATION PRINCIPALE
+================================= -->
+
+
+<nav class="bottom-navigation">
+
+
+
+
+
+<button onclick="showPage('dashboard-page')">
+
+
+🏠
+
+<span>
+Accueil
+</span>
+
+
+</button>
+
+
+
+
+
+
+
+<button onclick="showPage('accounts-page')">
+
+
+💳
+
+<span>
+Comptes
+</span>
+
+
+</button>
+
+
+
+
+
+
+
+<button onclick="showPage('history-page')">
+
+
+📄
+
+<span>
+Opérations
+</span>
+
+
+</button>
+
+
+
+
+
+
+
+<button onclick="showPage('settings-page')">
+
+
+⚙️
+
+<span>
+Paramètres
+</span>
+
+
+</button>
+
+
+
+
+
+
+</nav>
+
+
+
+
+
+
+
+
+</main>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =================================
+     SCRIPTS
+================================= -->
+
+
+<script src="database.js"></script>
+
+<script src="script.js"></script>
+
+
+
+
+</body>
+
+
+</html>
