@@ -132,6 +132,20 @@ function navigateToTransfer() {
     if (transferSec) {
         transferSec.classList.add('active-section');
     }
+    function showSection(sectionId) {
+    document.querySelectorAll('.app-section').forEach(sec => {
+        sec.classList.remove('active-section');
+    });
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active-section');
+    }
+    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active-nav'));
+    if (window.event && window.event.currentTarget && window.event.currentTarget.classList.contains('nav-item')) {
+        window.event.currentTarget.classList.add('active-nav');
+    }
+}
+
     document.querySelectorAll('.nav-item').forEach(item => {
         item.classList.remove('active-nav');
         if (item.getAttribute('onclick') && item.getAttribute('onclick').includes('transfer-section')) {
